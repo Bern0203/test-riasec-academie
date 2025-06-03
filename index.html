@@ -962,7 +962,7 @@
             });
             
             careersContainer.innerHTML = '';
-            allCareers.forEach(career => {
+            allCareers.slice(0, 8).forEach(career => {
                 const tensionColor = career.tension === 'high' ? 'tension-high' : 
                                    career.tension === 'medium' ? 'tension-medium' : 'tension-low';
                 const tensionHeight = career.tension === 'high' ? '80%' : 
