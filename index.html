@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test RIASEC - Decouvre ton profil professionnel</title>
+    <title>Test RIASEC - Découvre ton profil professionnel</title>
     <style>
         * {
             margin: 0;
@@ -326,6 +326,10 @@
             color: #E3CB7D;
         }
 
+        .careers-section {
+            margin-top: 30px;
+        }
+
         .careers-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -428,51 +432,51 @@
         <div class="card">
             <div class="header">
                 <h1>🎯 Test RIASEC</h1>
-                <p>Decouvre ton profil professionnel et les metiers qui te correspondent !</p>
+                <p>Découvre ton profil professionnel et les métiers qui te correspondent !</p>
             </div>
 
-            <!-- Ecran de saisie de l'age -->
+            <!-- Écran de saisie de l'âge -->
             <div id="age-screen" class="intro-screen">
                 <h2>Pour commencer...</h2>
                 <div class="age-selection">
-                    <div class="age-label">Quel age as-tu ?</div>
+                    <div class="age-label">Quel âge as-tu ?</div>
                     <input type="number" id="user-age" class="age-input" placeholder="18" min="13" max="35">
-                    <div class="age-note">Cela nous permet d'adapter les questions a ton profil</div>
+                    <div class="age-note">Cela nous permet d'adapter les questions à ton profil</div>
                 </div>
                 <button class="btn" onclick="setAgeAndContinue()" style="width: 200px; margin-top: 20px;">
                     Continuer 🚀
                 </button>
             </div>
 
-            <!-- Ecran d'introduction personnalise -->
+            <!-- Écran d'introduction personnalisé -->
             <div id="intro" class="intro-screen" style="display: none;">
                 <div id="age-indicator" class="age-group-indicator"></div>
-                <h2>Comment ca marche ?</h2>
+                <h2>Comment ça marche ?</h2>
                 <div class="intro-features">
                     <div class="feature">
                         <div class="feature-icon">📝</div>
                         <h3 id="questions-count">50 questions</h3>
-                        <p>Des situations concretes adaptees a ton age</p>
+                        <p>Des situations concrètes adaptées à ton âge</p>
                     </div>
                     <div class="feature">
                         <div class="feature-icon">⚡</div>
                         <h3 id="time-estimate">8 minutes</h3>
-                        <p>Rapide et facile a completer</p>
+                        <p>Rapide et facile à compléter</p>
                     </div>
                     <div class="feature">
                         <div class="feature-icon">🎨</div>
                         <h3>6 profils</h3>
-                        <p>Decouvre tes preferences professionnelles</p>
+                        <p>Découvre tes préférences professionnelles</p>
                     </div>
                     <div class="feature">
                         <div class="feature-icon">💼</div>
-                        <h3>Metiers 2025</h3>
-                        <p>Metiers emergents et tension du marche</p>
+                        <h3>Métiers 2025</h3>
+                        <p>Métiers émergents et tension du marché</p>
                     </div>
                 </div>
                 <p style="margin: 20px 0; color: #666; line-height: 1.6;">
-                    Le test RIASEC t'aide a identifier tes preferences professionnelles selon 6 profils : 
-                    <strong>Realiste, Investigateur, Artistique, Social, Entreprenant, Conventionnel</strong>
+                    Le test RIASEC t'aide à identifier tes préférences professionnelles selon 6 profils : 
+                    <strong>Réaliste, Investigateur, Artistique, Social, Entreprenant, Conventionnel</strong>
                 </p>
                 <button class="btn" onclick="startTest()" style="width: 200px;">
                     <span id="start-btn-text">Commencer le test 🚀</span>
@@ -495,7 +499,7 @@
                 
                 <div class="navigation">
                     <button class="btn btn-secondary" id="prev-btn" onclick="previousQuestion()" disabled>
-                        ← Precedent
+                        ← Précédent
                     </button>
                     <button class="btn" id="next-btn" onclick="nextQuestion()" disabled>
                         Suivant →
@@ -503,21 +507,21 @@
                 </div>
             </div>
 
-            <!-- Resultats -->
+            <!-- Résultats -->
             <div id="results" class="results">
                 <div class="header">
-                    <h2>🎉 Tes resultats RIASEC</h2>
-                    <p>Voici ton profil professionnel personnalise !</p>
+                    <h2>🎉 Tes résultats RIASEC</h2>
+                    <p>Voici ton profil professionnel personnalisé !</p>
                 </div>
                 
                 <div id="riasec-chart" class="riasec-chart"></div>
                 
                 <div id="profile-summary" class="profile-summary"></div>
                 
-                <div id="careers-section">
-                    <h3>💼 Metiers qui pourraient t'interesser en 2025</h3>
+                <div class="careers-section">
+                    <h3>💼 Métiers qui pourraient t'intéresser en 2025</h3>
                     <p style="margin-bottom: 20px; color: #666;">
-                        Decouvre les metiers emergents et traditionnels avec leur niveau de tension sur le marche francais
+                        Découvre les métiers émergents et traditionnels avec leur niveau de tension sur le marché français
                     </p>
                     <div id="careers-grid" class="careers-grid"></div>
                 </div>
@@ -527,201 +531,235 @@
                 </button>
                 
                 <button class="btn" onclick="exportResults()" style="width: 100%; margin-top: 15px;">
-                    📊 Exporter les resultats
+                    📊 Exporter les résultats
                 </button>
             </div>
         </div>
     </div>
 
     <script>
-        // Questions pour 15-21 ans (48 questions - 8 par profil)
+        // Questions RIASEC pour 15-21 ans (50 questions équilibrées)
         const questionsYoung = [
-            // Realiste
-            { text: "Tu preferes faire des trucs avec tes mains plutot que rester dans ta tete", type: "R" },
-            { text: "Quand quelque chose est casse chez toi, tu essaies de le reparer toi-meme", type: "R" },
-            { text: "Tu te sens plus a l'aise avec des outils qu'avec des theories", type: "R" },
-            { text: "Tu preferes les activites concretes aux discussions abstraites", type: "R" },
-            { text: "Tu aimerais bosser dehors plutot qu'enferme dans un bureau", type: "R" },
-            { text: "Tu es doue pour construire ou bricoler des trucs", type: "R" },
-            { text: "Le sport et les activites physiques, c'est ton truc", type: "R" },
-            { text: "Tu aimes quand on te donne des consignes claires plutot que de devoir improviser", type: "R" },
+            // Réaliste (8 questions)
+            { text: "Tu préfères faire des trucs avec tes mains plutôt qu'avec des théories", type: "R", reverse: false },
+            { text: "Tu évites les activités qui demandent seulement de la réflexion", type: "R", reverse: false },
+            { text: "Quand quelque chose est cassé chez toi, tu essaies de le réparer toi-même", type: "R", reverse: false },
+            { text: "Tu détestes travailler dans un bureau toute la journée", type: "R", reverse: false },
+            { text: "Tu n'aimes pas les discussions trop abstraites", type: "R", reverse: false },
+            { text: "Tu es doué(e) pour construire ou bricoler des trucs", type: "R", reverse: false },
+            { text: "Tu préfères les consignes claires aux projets flous", type: "R", reverse: false },
+            { text: "Le sport et les activités physiques, c'est important pour toi", type: "R", reverse: false },
 
-            // Investigateur
-            { text: "Tu adores resoudre des enigmes et des casse-tetes", type: "I" },
-            { text: "Tu es le genre de personne qui veut toujours savoir comment ca marche", type: "I" },
-            { text: "Tu preferes analyser une situation plutot que convaincre les autres", type: "I" },
-            { text: "Tu passes du temps a chercher des infos sur des sujets qui t'interessent", type: "I" },
-            { text: "Les matieres scientifiques (maths, physique, bio) te passionnent", type: "I" },
-            { text: "Tu preferes bosser seul pour te concentrer a fond", type: "I" },
-            { text: "Tu poses souvent des questions pour comprendre le pourquoi du comment", type: "I" },
-            { text: "Les nouvelles technos et innovations te fascinent", type: "I" },
+            // Investigateur (8 questions)
+            { text: "Tu adores résoudre des énigmes et des casse-têtes", type: "I", reverse: false },
+            { text: "Tu évites les sujets trop compliqués à comprendre", type: "I", reverse: true },
+            { text: "Tu es le genre de personne qui veut toujours savoir comment ça marche", type: "I", reverse: false },
+            { text: "Tu n'aimes pas perdre du temps à faire des recherches", type: "I", reverse: true },
+            { text: "Les matières scientifiques (maths, physique, bio) te passionnent", type: "I", reverse: false },
+            { text: "Tu préfères bosser seul(e) pour te concentrer à fond", type: "I", reverse: false },
+            { text: "Tu détestes quand on ne t'explique pas le pourquoi des choses", type: "I", reverse: false },
+            { text: "Les nouvelles technos et innovations te fascinent", type: "I", reverse: false },
 
-            // Artistique
-            { text: "Tu aimes creer des trucs originaux (dessins, videos, musique...)", type: "A" },
-            { text: "L'art, la beaute et l'esthetique, ca te parle vraiment", type: "A" },
-            { text: "Tu preferes exprimer tes idees de facon creative", type: "A" },
-            { text: "Tu aimes inventer plutot que copier ce qui existe deja", type: "A" },
-            { text: "Tu assumes ton cote different et original", type: "A" },
-            { text: "Tu kiffes les ambiances artistiques (musees, concerts, spectacles)", type: "A" },
-            { text: "Tu preferes que ton quotidien soit varie plutot que routinier", type: "A" },
-            { text: "Tu passes du temps a customiser ton espace (chambre, profils...)", type: "A" },
+            // Artistique (8 questions)
+            { text: "Tu aimes créer des trucs originaux (dessins, vidéos, musique...)", type: "A", reverse: false },
+            { text: "Tu évites les activités trop créatives", type: "A", reverse: true },
+            { text: "L'art, la beauté et l'esthétique, ça te parle vraiment", type: "A", reverse: false },
+            { text: "Tu n'aimes pas quand tout doit être fait de manière standard", type: "A", reverse: false },
+            { text: "Tu assumes ton côté différent et original", type: "A", reverse: false },
+            { text: "Tu détestes la routine et les trucs répétitifs", type: "A", reverse: false },
+            { text: "Tu passes du temps à customiser ton espace (chambre, profils...)", type: "A", reverse: false },
+            { text: "Tu kiffes les ambiances artistiques (musées, concerts, spectacles)", type: "A", reverse: false },
 
-            // Social
-            { text: "Tu aimes aider les gens et te rendre utile", type: "S" },
-            { text: "Tu te sens bien quand tu travailles en groupe", type: "S" },
-            { text: "Tes amis viennent souvent te parler de leurs problemes", type: "S" },
-            { text: "Tu preferes collaborer plutot que rivaliser", type: "S" },
-            { text: "Le bien-etre de tes proches te preoccupe vraiment", type: "S" },
-            { text: "Tu aimes expliquer des choses aux autres ou les aider a comprendre", type: "S" },
-            { text: "Tu captes facilement les emotions et humeurs des gens", type: "S" },
-            { text: "Tu as envie de faire quelque chose d'utile pour la societe", type: "S" },
+            // Social (8 questions)
+            { text: "Tu aimes aider les gens et te rendre utile", type: "S", reverse: false },
+            { text: "Tu évites de t'occuper des problèmes des autres", type: "S", reverse: true },
+            { text: "Tes amis viennent souvent te parler de leurs problèmes", type: "S", reverse: false },
+            { text: "Tu n'aimes pas travailler en groupe", type: "S", reverse: true },
+            { text: "Le bien-être de tes proches te préoccupe vraiment", type: "S", reverse: false },
+            { text: "Tu détestes expliquer des choses aux autres", type: "S", reverse: true },
+            { text: "Tu captes facilement les émotions et humeurs des gens", type: "S", reverse: false },
+            { text: "Tu as envie de faire quelque chose d'utile pour la société", type: "S", reverse: false },
 
-            // Entreprenant
-            { text: "Tu aimes convaincre les autres et les influencer", type: "E" },
-            { text: "Tu n'as pas peur de prendre des risques reflechis", type: "E" },
-            { text: "Tu kiffes organiser des evenements ou diriger des projets", type: "E" },
-            { text: "La reussite et la reconnaissance te motivent", type: "E" },
-            { text: "Tu es doue pour negocier et trouver des compromis", type: "E" },
-            { text: "Tu te vois bien creer ta propre boite un jour", type: "E" },
-            { text: "La competition et les defis t'excitent", type: "E" },
-            { text: "Tu arrives bien a vendre tes idees aux autres", type: "E" },
+            // Entreprenant (8 questions)
+            { text: "Tu aimes convaincre les autres et les influencer", type: "E", reverse: false },
+            { text: "Tu évites de prendre des responsabilités", type: "E", reverse: true },
+            { text: "Tu kiffes organiser des événements ou diriger des projets", type: "E", reverse: false },
+            { text: "La compétition et les défis, ça ne t'intéresse pas", type: "E", reverse: true },
+            { text: "La réussite et la reconnaissance te motivent", type: "E", reverse: false },
+            { text: "Tu te vois bien créer ta propre boîte un jour", type: "E", reverse: false },
+            { text: "Tu n'aimes pas être le leader dans un groupe", type: "E", reverse: true },
+            { text: "Tu arrives bien à vendre tes idées aux autres", type: "E", reverse: false },
 
-            // Conventionnel
-            { text: "Tu aimes que les choses soient bien organisees et planifiees", type: "C" },
-            { text: "Tu es plutot doue avec les chiffres et les calculs", type: "C" },
-            { text: "Tu preferes suivre des regles claires plutot qu'improviser", type: "C" },
-            { text: "Tu aimes les taches precises avec des resultats qu'on peut mesurer", type: "C" },
-            { text: "Tu fais attention aux details et tu es minutieux", type: "C" },
-            { text: "Tu preferes les environnements stables et previsibles", type: "C" },
-            { text: "Tu aimes classer, ranger et organiser tes affaires", type: "C" },
-            { text: "On peut compter sur toi, tu es fiable", type: "C" }
+            // Conventionnel (8 questions)
+            { text: "Tu aimes que les choses soient bien organisées et planifiées", type: "C", reverse: false },
+            { text: "Tu détestes les environnements trop désorganisés", type: "C", reverse: false },
+            { text: "Tu es plutôt doué(e) avec les chiffres et les calculs", type: "C", reverse: false },
+            { text: "Tu n'aimes pas suivre des règles strictes", type: "C", reverse: true },
+            { text: "Tu fais attention aux détails et tu es minutieux/se", type: "C", reverse: false },
+            { text: "Tu évites les situations trop imprévisibles", type: "C", reverse: false },
+            { text: "Tu aimes classer, ranger et organiser tes affaires", type: "C", reverse: false },
+            { text: "On peut compter sur toi, tu es fiable", type: "C", reverse: false }
         ];
 
-        // Questions pour 22-28 ans (60 questions - 10 par profil)
+        // Questions RIASEC pour 22-28 ans (60 questions équilibrées)
         const questionsAdult = [
-            // Realiste (10)
-            { text: "Tu preferes travailler avec tes mains plutot qu'avec des concepts abstraits", type: "R" },
-            { text: "Tu aimes reparer ou demonter des objets pour comprendre leur fonctionnement", type: "R" },
-            { text: "Tu te sens a l'aise avec les outils techniques et les machines", type: "R" },
-            { text: "Tu preferes les activites concretes aux discussions theoriques", type: "R" },
-            { text: "Tu aimerais exercer un metier en exterieur plutot qu'en bureau", type: "R" },
-            { text: "Tu es doue pour construire, assembler ou fabriquer", type: "R" },
-            { text: "Les activites physiques et sportives font partie de tes priorites", type: "R" },
-            { text: "Tu preferes suivre des procedures claires plutot qu'improviser", type: "R" },
-            { text: "Tu es motive par des resultats tangibles et visibles", type: "R" },
-            { text: "Tu aimerais acquerir des competences techniques specialisees", type: "R" },
+            // Réaliste (10 questions)
+            { text: "Tu préfères travailler avec tes mains plutôt qu'avec des concepts abstraits", type: "R", reverse: false },
+            { text: "Tu évites les emplois qui demandent uniquement de la réflexion théorique", type: "R", reverse: false },
+            { text: "Tu aimes réparer ou démonter des objets pour comprendre leur fonctionnement", type: "R", reverse: false },
+            { text: "Tu n'apprécies pas les environnements de bureau traditionnels", type: "R", reverse: false },
+            { text: "Tu te sens à l'aise avec les outils techniques et les machines", type: "R", reverse: false },
+            { text: "Tu évites les discussions trop philosophiques ou abstraites", type: "R", reverse: false },
+            { text: "Tu aimerais exercer un métier en extérieur plutôt qu'en bureau", type: "R", reverse: false },
+            { text: "Tu n'aimes pas les tâches qui manquent de structure claire", type: "R", reverse: false },
+            { text: "Tu es motivé(e) par des résultats tangibles et visibles", type: "R", reverse: false },
+            { text: "Tu préfères les procédures établies aux méthodes improvisées", type: "R", reverse: false },
 
-            // Investigateur (10)
-            { text: "Tu prends plaisir a resoudre des problemes complexes", type: "I" },
-            { text: "Tu es naturellement curieux de comprendre le fonctionnement des choses", type: "I" },
-            { text: "Tu preferes analyser les faits plutot que convaincre par l'emotion", type: "I" },
-            { text: "Tu aimes mener des recherches approfondies sur tes sujets d'interet", type: "I" },
-            { text: "Les domaines scientifiques et techniques t'attirent", type: "I" },
-            { text: "Tu es plus productif en travaillant en autonomie", type: "I" },
-            { text: "Tu poses naturellement des questions pour approfondir ta comprehension", type: "I" },
-            { text: "Les innovations technologiques et scientifiques te passionnent", type: "I" },
-            { text: "Tu aimes observer et analyser les comportements ou phenomenes", type: "I" },
-            { text: "Tu cherches toujours a comprendre le 'pourquoi' avant d'agir", type: "I" },
+            // Investigateur (10 questions)
+            { text: "Tu prends plaisir à résoudre des problèmes complexes", type: "I", reverse: false },
+            { text: "Tu évites les sujets qui demandent trop d'analyse", type: "I", reverse: true },
+            { text: "Tu es naturellement curieux de comprendre le fonctionnement des choses", type: "I", reverse: false },
+            { text: "Tu n'aimes pas passer du temps sur des recherches approfondies", type: "I", reverse: true },
+            { text: "Tu préfères analyser les faits plutôt que convaincre par l'émotion", type: "I", reverse: false },
+            { text: "Les domaines scientifiques et techniques t'attirent", type: "I", reverse: false },
+            { text: "Tu évites les activités qui demandent trop de concentration", type: "I", reverse: true },
+            { text: "Tu es plus productif en travaillant en autonomie", type: "I", reverse: false },
+            { text: "Tu détestes quand les explications manquent de logique", type: "I", reverse: false },
+            { text: "Les innovations technologiques et scientifiques te passionnent", type: "I", reverse: false },
 
-            // Artistique (10)
-            { text: "Tu aimes creer des oeuvres originales dans differents domaines", type: "A" },
-            { text: "L'esthetique et la beaute sont importantes dans tes choix", type: "A" },
-            { text: "Tu preferes exprimer tes idees de maniere creative et innovante", type: "A" },
-            { text: "Tu aimes concevoir et inventer plutot que reproduire l'existant", type: "A" },
-            { text: "Tu assumes et cultives ton originalite", type: "A" },
-            { text: "Tu apprecies les environnements culturels et artistiques", type: "A" },
-            { text: "Tu preferes la variete a la routine dans ton travail", type: "A" },
-            { text: "Tu aimes personnaliser et customiser ton environnement", type: "A" },
-            { text: "Tu es sensible aux formes, couleurs et harmonies", type: "A" },
-            { text: "Tu souhaiterais que ton travail soit une forme d'expression personnelle", type: "A" },
+            // Artistique (10 questions)
+            { text: "Tu aimes créer des œuvres originales dans différents domaines", type: "A", reverse: false },
+            { text: "Tu évites les activités créatives et artistiques", type: "A", reverse: true },
+            { text: "L'esthétique et la beauté sont importantes dans tes choix", type: "A", reverse: false },
+            { text: "Tu n'aimes pas sortir des sentiers battus", type: "A", reverse: true },
+            { text: "Tu préfères exprimer tes idées de manière créative et innovante", type: "A", reverse: false },
+            { text: "Tu assumes et cultives ton originalité", type: "A", reverse: false },
+            { text: "Tu détestes la routine et la répétition dans le travail", type: "A", reverse: false },
+            { text: "Tu évites les environnements trop conventionnels", type: "A", reverse: false },
+            { text: "Tu es sensible aux formes, couleurs et harmonies", type: "A", reverse: false },
+            { text: "Tu souhaiterais que ton travail soit une forme d'expression personnelle", type: "A", reverse: false },
 
-            // Social (10)
-            { text: "Tu trouves de la satisfaction a aider les autres", type: "S" },
-            { text: "Tu t'epanouis dans le travail collaboratif", type: "S" },
-            { text: "Les gens se confient naturellement a toi", type: "S" },
-            { text: "Tu preferes la cooperation a la competition", type: "S" },
-            { text: "Le bien-etre des autres te preoccupe genuinement", type: "S" },
-            { text: "Tu aimes transmettre tes connaissances et accompagner", type: "S" },
-            { text: "Tu perçois facilement les emotions et besoins des autres", type: "S" },
-            { text: "Tu souhaites contribuer positivement a la societe", type: "S" },
-            { text: "Tu privilegie les environnements humains et bienveillants", type: "S" },
-            { text: "Tu veux avoir un impact positif sur la vie des gens", type: "S" },
+            // Social (10 questions)
+            { text: "Tu trouves de la satisfaction à aider les autres", type: "S", reverse: false },
+            { text: "Tu évites de t'impliquer dans les problèmes personnels d'autrui", type: "S", reverse: true },
+            { text: "Tu t'épanouis dans le travail collaboratif", type: "S", reverse: false },
+            { text: "Tu n'aimes pas les environnements trop centrés sur l'humain", type: "S", reverse: true },
+            { text: "Les gens se confient naturellement à toi", type: "S", reverse: false },
+            { text: "Tu évites les responsabilités d'accompagnement ou de formation", type: "S", reverse: true },
+            { text: "Le bien-être des autres te préoccupe genuinement", type: "S", reverse: false },
+            { text: "Tu n'apprécies pas devoir gérer les émotions des autres", type: "S", reverse: true },
+            { text: "Tu privilégies les environnements humains et bienveillants", type: "S", reverse: false },
+            { text: "Tu veux avoir un impact positif sur la vie des gens", type: "S", reverse: false },
 
-            // Entreprenant (10)
-            { text: "Tu aimes persuader et influencer positivement les autres", type: "E" },
-            { text: "Tu es pret a prendre des risques calcules pour avancer", type: "E" },
-            { text: "Tu aimes diriger des projets et coordonner des equipes", type: "E" },
-            { text: "La reussite professionnelle et la reconnaissance te motivent", type: "E" },
-            { text: "Tu es doue pour negocier et trouver des solutions gagnant-gagnant", type: "E" },
-            { text: "L'entrepreneuriat et la creation d'entreprise t'interessent", type: "E" },
-            { text: "Tu apprecies la competition et les defis professionnels", type: "E" },
-            { text: "Tu sais bien presenter et vendre tes idees", type: "E" },
-            { text: "Tu preferes etre dans un role de leadership", type: "E" },
-            { text: "Tu aimes prendre des decisions strategiques importantes", type: "E" },
+            // Entreprenant (10 questions)
+            { text: "Tu aimes persuader et influencer positivement les autres", type: "E", reverse: false },
+            { text: "Tu évites les situations où tu dois prendre des risques", type: "E", reverse: true },
+            { text: "Tu aimes diriger des projets et coordonner des équipes", type: "E", reverse: false },
+            { text: "Tu n'aimes pas avoir des responsabilités de management", type: "E", reverse: true },
+            { text: "La réussite professionnelle et la reconnaissance te motivent", type: "E", reverse: false },
+            { text: "L'entrepreneuriat et la création d'entreprise t'intéressent", type: "E", reverse: false },
+            { text: "Tu évites la compétition et les défis professionnels", type: "E", reverse: true },
+            { text: "Tu sais bien présenter et vendre tes idées", type: "E", reverse: false },
+            { text: "Tu n'aimes pas être dans des rôles de leadership", type: "E", reverse: true },
+            { text: "Tu aimes prendre des décisions stratégiques importantes", type: "E", reverse: false },
 
-            // Conventionnel (10)
-            { text: "Tu apprecies l'organisation et la planification rigoureuse", type: "C" },
-            { text: "Tu es competent dans le maniement des chiffres et analyses", type: "C" },
-            { text: "Tu preferes des cadres de travail structures avec des regles claires", type: "C" },
-            { text: "Tu aimes les taches precises avec des indicateurs de performance", type: "C" },
-            { text: "Tu es naturellement minutieux et attentif aux details", type: "C" },
-            { text: "Tu preferes les environnements professionnels stables", type: "C" },
-            { text: "Tu excelles dans l'organisation et la systematisation de l'information", type: "C" },
-            { text: "On peut compter sur ta fiabilite et ton serieux", type: "C" },
-            { text: "Tu preferes des consignes precises aux directives floues", type: "C" },
-            { text: "Tu aimes mener tes projets jusqu'au bout avec succes", type: "C" }
+            // Conventionnel (10 questions)
+            { text: "Tu apprécies l'organisation et la planification rigoureuse", type: "C", reverse: false },
+            { text: "Tu n'aimes pas les environnements trop structurés", type: "C", reverse: true },
+            { text: "Tu es compétent dans le maniement des chiffres et analyses", type: "C", reverse: false },
+            { text: "Tu évites les tâches qui demandent trop de précision", type: "C", reverse: true },
+            { text: "Tu préfères des cadres de travail structurés avec des règles claires", type: "C", reverse: false },
+            { text: "Tu es naturellement minutieux et attentif aux détails", type: "C", reverse: false },
+            { text: "Tu n'aimes pas les changements fréquents de procédures", type: "C", reverse: false },
+            { text: "Tu évites les situations trop imprévisibles", type: "C", reverse: false },
+            { text: "On peut compter sur ta fiabilité et ton sérieux", type: "C", reverse: false },
+            { text: "Tu aimes mener tes projets jusqu'au bout avec succès", type: "C", reverse: false }
         ];
 
-        // Profils RIASEC
+        // Profils RIASEC complets avec métiers 2025
         const riasecProfiles = {
             R: {
-                name: "Realiste",
-                description: "Tu aimes le concret, travailler avec tes mains et voir des resultats tangibles.",
+                name: "Réaliste",
+                description: "Tu aimes le concret, travailler avec tes mains et voir des résultats tangibles. Tu préfères l'action à la théorie.",
                 careers: [
-                    { name: "Data Scientist", type: "Emergent", tension: "high", description: "Analyse de donnees massives et IA" },
-                    { name: "Cybersecurite", type: "Emergent", tension: "high", description: "Protection des systemes informatiques" },
-                    { name: "Medecin", type: "Traditionnel", tension: "high", description: "Diagnostic et soins aux patients" },
-                    { name: "Ingenieur", type: "Traditionnel", tension: "high", description: "Conception et innovation technique" }
+                    { name: "Technicien énergies renouvelables", type: "Émergent", tension: "high", description: "Installation et maintenance d'équipements solaires, éoliens" },
+                    { name: "Pilote ligne batteries électriques", type: "Émergent", tension: "high", description: "Production de composants pour véhicules électriques" },
+                    { name: "Mécanicien automobile", type: "Traditionnel", tension: "medium", description: "Entretien et réparation de véhicules" },
+                    { name: "Électricien", type: "Traditionnel", tension: "high", description: "Installation et maintenance électrique" },
+                    { name: "Contrôleur technique énergies décarbonées", type: "Émergent", tension: "high", description: "Vérification sécurité installations vertes" },
+                    { name: "Chef cuisinier", type: "Traditionnel", tension: "high", description: "Création et préparation culinaire" },
+                    { name: "Kinésithérapeute", type: "Traditionnel", tension: "medium", description: "Rééducation et soins du corps" },
+                    { name: "Technicien bioproduction", type: "Émergent", tension: "medium", description: "Fabrication de médicaments biotechnologiques" }
+                ]
+            },
+            I: {
+                name: "Investigateur",
+                description: "Tu es curieux et analytique. Tu aimes comprendre, rechercher, analyser et résoudre des problèmes complexes.",
+                careers: [
+                    { name: "Data Scientist", type: "Émergent", tension: "high", description: "Analyse de données massives et IA" },
+                    { name: "Cybersécurité", type: "Émergent", tension: "high", description: "Protection des systèmes informatiques" },
+                    { name: "Développeur blockchain", type: "Émergent", tension: "medium", description: "Création d'applications décentralisées" },
+                    { name: "Chercheur en IA", type: "Émergent", tension: "high", description: "Développement intelligence artificielle" },
+                    { name: "Médecin", type: "Traditionnel", tension: "high", description: "Diagnostic et soins aux patients" },
+                    { name: "Ingénieur", type: "Traditionnel", tension: "high", description: "Conception et innovation technique" },
+                    { name: "Vétérinaire", type: "Traditionnel", tension: "medium", description: "Soins aux animaux" },
+                    { name: "Analyste financier", type: "Traditionnel", tension: "low", description: "Évaluation investissements et risques" }
                 ]
             },
             A: {
                 name: "Artistique",
-                description: "Tu es creatif et original. Tu aimes exprimer tes idees de facon artistique.",
+                description: "Tu es créatif et original. Tu aimes exprimer tes idées de façon artistique et créer quelque chose d'unique.",
                 careers: [
-                    { name: "Designer UX/UI", type: "Emergent", tension: "high", description: "Conception d'experiences numeriques" },
-                    { name: "Createur de contenu", type: "Emergent", tension: "medium", description: "Production multimedia pour reseaux sociaux" },
-                    { name: "Architecte", type: "Traditionnel", tension: "low", description: "Conception d'espaces et batiments" },
-                    { name: "Graphiste", type: "Traditionnel", tension: "low", description: "Creation visuelle et communication" }
+                    { name: "Designer UX/UI", type: "Émergent", tension: "high", description: "Conception d'expériences numériques" },
+                    { name: "Créateur de contenu", type: "Émergent", tension: "medium", description: "Production multimédia pour réseaux sociaux" },
+                    { name: "Coordinateur d'intimité", type: "Émergent", tension: "low", description: "Sécurisation tournages scènes intimes" },
+                    { name: "Game Designer", type: "Émergent", tension: "medium", description: "Conception de jeux vidéo" },
+                    { name: "Architecte", type: "Traditionnel", tension: "low", description: "Conception d'espaces et bâtiments" },
+                    { name: "Graphiste", type: "Traditionnel", tension: "low", description: "Création visuelle et communication" },
+                    { name: "Photographe", type: "Traditionnel", tension: "low", description: "Capture d'images artistiques/commerciales" },
+                    { name: "Musicien", type: "Traditionnel", tension: "low", description: "Composition et interprétation musicale" }
                 ]
             },
             S: {
                 name: "Social",
-                description: "Tu aimes aider les autres et travailler en equipe. Les relations humaines sont importantes.",
+                description: "Tu aimes aider les autres et travailler en équipe. Le bien-être des gens et les relations humaines sont importants pour toi.",
                 careers: [
-                    { name: "Coach bien-etre digital", type: "Emergent", tension: "medium", description: "Accompagnement sante mentale en ligne" },
+                    { name: "Coach bien-être digital", type: "Émergent", tension: "medium", description: "Accompagnement santé mentale en ligne" },
+                    { name: "Médiateur numérique", type: "Émergent", tension: "medium", description: "Formation aux outils numériques" },
                     { name: "Infirmier", type: "Traditionnel", tension: "high", description: "Soins et accompagnement patients" },
+                    { name: "Aide-soignant", type: "Traditionnel", tension: "high", description: "Assistance quotidienne aux personnes" },
                     { name: "Professeur", type: "Traditionnel", tension: "medium", description: "Transmission des connaissances" },
-                    { name: "Travailleur social", type: "Traditionnel", tension: "high", description: "Accompagnement social et familial" }
+                    { name: "Travailleur social", type: "Traditionnel", tension: "high", description: "Accompagnement social et familial" },
+                    { name: "Psychologue", type: "Traditionnel", tension: "medium", description: "Soutien psychologique et thérapie" },
+                    { name: "Éducateur spécialisé", type: "Traditionnel", tension: "high", description: "Accompagnement personnes en difficulté" }
                 ]
             },
             E: {
                 name: "Entreprenant",
-                description: "Tu aimes diriger, convaincre et relever des defis. Tu es motive par le succes.",
+                description: "Tu aimes diriger, convaincre et relever des défis. Tu es motivé par le succès et tu n'as pas peur de prendre des initiatives.",
                 careers: [
-                    { name: "Growth Hacker", type: "Emergent", tension: "high", description: "Developpement rapide d'entreprises" },
-                    { name: "Entrepreneur tech", type: "Emergent", tension: "medium", description: "Creation de startups technologiques" },
+                    { name: "Growth Hacker", type: "Émergent", tension: "high", description: "Développement rapide d'entreprises" },
+                    { name: "Chief Happiness Officer", type: "Émergent", tension: "medium", description: "Bien-être et culture d'entreprise" },
+                    { name: "Entrepreneur tech", type: "Émergent", tension: "medium", description: "Création de startups technologiques" },
+                    { name: "Influenceur digital", type: "Émergent", tension: "low", description: "Marketing d'influence sur réseaux" },
                     { name: "Commercial B2B", type: "Traditionnel", tension: "high", description: "Vente aux entreprises" },
-                    { name: "Manager", type: "Traditionnel", tension: "medium", description: "Direction d'equipes et projets" }
+                    { name: "Manager", type: "Traditionnel", tension: "medium", description: "Direction d'équipes et projets" },
+                    { name: "Consultant", type: "Traditionnel", tension: "low", description: "Conseil stratégique aux entreprises" },
+                    { name: "Agent immobilier", type: "Traditionnel", tension: "medium", description: "Transaction et conseil immobilier" }
                 ]
             },
             C: {
                 name: "Conventionnel",
-                description: "Tu aimes l'ordre, la precision et la planification. Tu preferes des environnements structures.",
+                description: "Tu aimes l'ordre, la précision et la planification. Tu es fiable et tu préfères des environnements structurés.",
                 careers: [
-                    { name: "Analyste cybersecurite", type: "Emergent", tension: "high", description: "Surveillance et protection donnees" },
-                    { name: "Gestionnaire donnees", type: "Emergent", tension: "high", description: "Organisation et conformite RGPD" },
-                    { name: "Comptable", type: "Traditionnel", tension: "low", description: "Gestion financiere et fiscale" },
-                    { name: "Controleur de gestion", type: "Traditionnel", tension: "low", description: "Pilotage performance economique" }
+                    { name: "Analyste cybersécurité", type: "Émergent", tension: "high", description: "Surveillance et protection données" },
+                    { name: "Gestionnaire données", type: "Émergent", tension: "high", description: "Organisation et conformité RGPD" },
+                    { name: "Assistant virtuel IA", type: "Émergent", tension: "medium", description: "Support administratif automatisé" },
+                    { name: "Clerc de notaire", type: "Traditionnel", tension: "medium", description: "Assistance juridique et administrative" },
+                    { name: "Comptable", type: "Traditionnel", tension: "low", description: "Gestion financière et fiscale" },
+                    { name: "Contrôleur de gestion", type: "Traditionnel", tension: "low", description: "Pilotage performance économique" },
+                    { name: "Assistant administratif", type: "Traditionnel", tension: "low", description: "Support organisationnel" },
+                    { name: "Gestionnaire de paie", type: "Traditionnel", tension: "medium", description: "Administration salaires et charges" }
                 ]
             }
         };
@@ -739,7 +777,7 @@
             const age = parseInt(ageInput.value);
             
             if (!age || age < 13 || age > 35) {
-                alert('Merci de saisir un age entre 13 et 35 ans');
+                alert('Merci de saisir un âge entre 13 et 35 ans');
                 return;
             }
             
@@ -756,13 +794,13 @@
             if (age >= 15 && age <= 21) {
                 ageGroup = "15-21 ans";
                 currentQuestions = shuffleArray([...questionsYoung]);
-                questionsText = "48 questions";
+                questionsText = "50 questions";
                 timeText = "8 minutes";
                 startText = "C'est parti ! 🚀";
             } else {
-                ageGroup = age < 15 ? "13-14 ans (version adaptee)" : 
+                ageGroup = age < 15 ? "13-14 ans (version adaptée)" : 
                           age >= 22 && age <= 28 ? "22-28 ans" : 
-                          "28+ ans (version complete)";
+                          "28+ ans (version complète)";
                           
                 currentQuestions = shuffleArray([...questionsAdult]);
                 questionsText = "60 questions";
@@ -806,7 +844,7 @@
                     </div>
                     <div class="option" onclick="selectAnswer(2)">
                         <div class="option-number">2</div>
-                        <div>Plutot pas d'accord</div>
+                        <div>Plutôt pas d'accord</div>
                     </div>
                     <div class="option" onclick="selectAnswer(3)">
                         <div class="option-number">3</div>
@@ -814,11 +852,11 @@
                     </div>
                     <div class="option" onclick="selectAnswer(4)">
                         <div class="option-number">4</div>
-                        <div>Plutot d'accord</div>
+                        <div>Plutôt d'accord</div>
                     </div>
                     <div class="option" onclick="selectAnswer(5)">
                         <div class="option-number">5</div>
-                        <div>Tout a fait d'accord</div>
+                        <div>Tout à fait d'accord</div>
                     </div>
                 </div>
             `;
@@ -839,11 +877,17 @@
             
             if (saveAnswer) {
                 if (userAnswers[currentQuestion]) {
-                    answers[currentQuestions[currentQuestion].type] -= userAnswers[currentQuestion];
+                    // Retirer l'ancienne réponse
+                    const oldQuestion = currentQuestions[currentQuestion];
+                    const oldValue = userAnswers[currentQuestion];
+                    const oldScore = oldQuestion.reverse ? (6 - oldValue) : oldValue;
+                    answers[oldQuestion.type] -= oldScore;
                 }
                 
                 userAnswers[currentQuestion] = value;
-                answers[currentQuestions[currentQuestion].type] += value;
+                const question = currentQuestions[currentQuestion];
+                const score = question.reverse ? (6 - value) : value;
+                answers[question.type] += score;
             }
             
             document.getElementById('next-btn').disabled = false;
@@ -877,7 +921,7 @@
             document.getElementById('next-btn').disabled = !userAnswers[currentQuestion];
             
             if (currentQuestion === currentQuestions.length - 1) {
-                document.getElementById('next-btn').textContent = 'Voir mes resultats 🎉';
+                document.getElementById('next-btn').textContent = 'Voir mes résultats 🎉';
             } else {
                 document.getElementById('next-btn').textContent = 'Suivant →';
             }
@@ -892,7 +936,8 @@
         }
 
         function generateResults() {
-            const maxScore = currentQuestions.length * 5;
+            const questionsPerType = userAge >= 15 && userAge <= 21 ? 8 : 10;
+            const maxScore = questionsPerType * 5;
             const percentages = {};
             
             Object.keys(answers).forEach(key => {
@@ -961,14 +1006,16 @@
                 allCareers = allCareers.concat(riasecProfiles[type].careers);
             });
             
+            const shuffledCareers = allCareers.sort(() => 0.5 - Math.random()).slice(0, 8);
+            
             careersContainer.innerHTML = '';
-            allCareers.slice(0, 8).forEach(career => {
+            shuffledCareers.forEach(career => {
                 const tensionColor = career.tension === 'high' ? 'tension-high' : 
                                    career.tension === 'medium' ? 'tension-medium' : 'tension-low';
                 const tensionHeight = career.tension === 'high' ? '80%' : 
                                      career.tension === 'medium' ? '50%' : '20%';
                 const tensionText = career.tension === 'high' ? 'Forte demande' : 
-                                   career.tension === 'medium' ? 'Demande moderee' : 'Demande faible';
+                                   career.tension === 'medium' ? 'Demande modérée' : 'Demande faible';
                 
                 const careerItem = document.createElement('div');
                 careerItem.className = 'career-item';
@@ -1020,13 +1067,13 @@
             link.download = `riasec_${exportData.age}ans_${exportData.date}_${userName.replace(/\s+/g, '_')}.json`;
             link.click();
             
-            alert(`📊 Resultats exportes !
+            alert(`📊 Résultats exportés !
 
 Profil : ${exportData.profil_dominant}
-Age : ${exportData.age} ans
+Âge : ${exportData.age} ans
 Questions : ${exportData.nb_questions}
 
-Le fichier JSON est pret pour ton suivi !`);
+Le fichier JSON est prêt pour ton suivi !`);
         }
 
         function restartTest() {
@@ -1047,14 +1094,4 @@ Le fichier JSON est pret pour ton suivi !`);
         }
     </script>
 </body>
-</html>Technicien energies renouvelables", type: "Emergent", tension: "high", description: "Installation et maintenance d'equipements solaires, eoliens" },
-                    { name: "Mecanicien automobile", type: "Traditionnel", tension: "medium", description: "Entretien et reparation de vehicules" },
-                    { name: "Electricien", type: "Traditionnel", tension: "high", description: "Installation et maintenance electrique" },
-                    { name: "Chef cuisinier", type: "Traditionnel", tension: "high", description: "Creation et preparation culinaire" }
-                ]
-            },
-            I: {
-                name: "Investigateur",
-                description: "Tu es curieux et analytique. Tu aimes comprendre, rechercher et resoudre des problemes.",
-                careers: [
-                    { name: "
+</html>
