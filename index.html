@@ -60,6 +60,44 @@
             font-family: 'Roboto', sans-serif;
         }
 
+        .age-selection {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .age-input {
+            font-size: 1.2em;
+            padding: 15px 20px;
+            border: 3px solid #31555B;
+            border-radius: 15px;
+            width: 120px;
+            text-align: center;
+            margin: 0 10px;
+            background: #E4E2DD;
+            color: #0C2234;
+            font-weight: bold;
+        }
+
+        .age-input:focus {
+            outline: none;
+            border-color: #E3CB7D;
+            background: white;
+        }
+
+        .age-label {
+            font-size: 1.3em;
+            font-weight: 600;
+            color: #0C2234;
+            margin-bottom: 15px;
+        }
+
+        .age-note {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 10px;
+            font-style: italic;
+        }
+
         .progress-container {
             background: #f0f0f0;
             border-radius: 15px;
@@ -447,6 +485,17 @@
             margin-left: 5px;
         }
 
+        .age-group-indicator {
+            background: #E3CB7D;
+            color: #0C2234;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: bold;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
         @media (max-width: 768px) {
             .container {
                 padding: 15px;
@@ -478,18 +527,32 @@
                 <p>Decouvre ton profil professionnel et les metiers qui te correspondent !</p>
             </div>
 
-            <!-- Ecran d'introduction -->
-            <div id="intro" class="intro-screen">
-                <h2>Comment ca marche ?</h2>
+            <!-- Ecran de saisie de l'age -->
+            <div id="age-screen" class="intro-screen">
+                <h2>Pour commencer...</h2>
+                <div class="age-selection">
+                    <div class="age-label">Quel age as-tu ?</div>
+                    <input type="number" id="user-age" class="age-input" placeholder="18" min="13" max="35">
+                    <div class="age-note">Cela nous permet d'adapter les questions a ton profil</div>
+                </div>
+                <button class="btn btn-primary" onclick="setAgeAndContinue()" style="width: 200px; margin-top: 20px;">
+                    Continuer 🚀
+                </button>
+            </div>
+
+            <!-- Ecran d'introduction personnalise -->
+            <div id="intro" class="intro-screen" style="display: none;">
+                <div id="age-indicator" class="age-group-indicator"></div>
+                <h2 id="intro-title">Comment ca marche ?</h2>
                 <div class="intro-features">
                     <div class="feature">
                         <div class="feature-icon">📝</div>
-                        <h3>60 questions</h3>
-                        <p>Des situations concretes adaptees a ton age</p>
+                        <h3 id="questions-count">50 questions</h3>
+                        <p id="questions-desc">Des situations concretes adaptees a ton age</p>
                     </div>
                     <div class="feature">
                         <div class="feature-icon">⚡</div>
-                        <h3>10 minutes</h3>
+                        <h3 id="time-estimate">8 minutes</h3>
                         <p>Rapide et facile a completer</p>
                     </div>
                     <div class="feature">
@@ -503,19 +566,19 @@
                         <p>Metiers emergents et tension du marche</p>
                     </div>
                 </div>
-                <p style="margin: 20px 0; color: #666; line-height: 1.6;">
+                <p id="intro-description" style="margin: 20px 0; color: #666; line-height: 1.6;">
                     Le test RIASEC t'aide a identifier tes preferences professionnelles selon 6 profils : 
                     <strong>Realiste, Investigateur, Artistique, Social, Entreprenant, Conventionnel</strong>
                 </p>
                 <button class="btn btn-primary" onclick="startTest()" style="width: 200px;">
-                    Commencer le test 🚀
+                    <span id="start-btn-text">Commencer le test 🚀</span>
                 </button>
             </div>
 
             <!-- Barre de progression -->
             <div id="progress-section" style="display: none;">
                 <div class="question-counter">
-                    <span id="current-question">1</span> / <span id="total-questions">60</span>
+                    <span id="current-question">1</span> / <span id="total-questions">50</span>
                 </div>
                 <div class="progress-container">
                     <div class="progress-bar" id="progress-bar"></div>
@@ -567,82 +630,145 @@
     </div>
 
     <script>
-        // Base de donnees des questions RIASEC adaptees aux jeunes
-        const questions = [
-            // Questions Realiste (R)
-            { text: "Tu preferes travailler avec tes mains plutot qu'avec des idees", type: "R" },
-            { text: "Tu aimes reparer des objets casses ou demonter des appareils", type: "R" },
-            { text: "Tu te sens a l'aise avec les outils et les machines", type: "R" },
-            { text: "Tu preferes les activites concretes aux discussions theoriques", type: "R" },
-            { text: "Tu aimerais travailler en exterieur plutot qu'au bureau", type: "R" },
-            { text: "Tu es doue(e) pour construire ou assembler des choses", type: "R" },
-            { text: "Tu aimes les sports et les activites physiques", type: "R" },
-            { text: "Tu preferes suivre des instructions precises plutot qu'improviser", type: "R" },
-            { text: "Tu te sens motive(e) par des resultats concrets et visibles", type: "R" },
-            { text: "Tu aimerais apprendre un metier technique ou artisanal", type: "R" },
+        // Questions pour 15-21 ans (50 questions - ton jeune)
+        const questionsYoung = [
+            // Realiste (8 questions)
+            { text: "Tu preferes faire des trucs avec tes mains plutot que rester dans ta tete", type: "R" },
+            { text: "Quand quelque chose est casse chez toi, tu essaies de le reparer toi-meme", type: "R" },
+            { text: "Tu te sens plus a l'aise avec des outils qu'avec des theories", type: "R" },
+            { text: "Tu preferes les activites concretes aux discussions abstraites", type: "R" },
+            { text: "Tu aimerais bosser dehors plutot qu'enferme dans un bureau", type: "R" },
+            { text: "Tu es doue pour construire ou bricoler des trucs", type: "R" },
+            { text: "Le sport et les activites physiques, c'est ton truc", type: "R" },
+            { text: "Tu aimes quand on te donne des consignes claires plutot que de devoir improviser", type: "R" },
 
-            // Questions Investigateur (I)
-            { text: "Tu aimes resoudre des problemes complexes et des enigmes", type: "I" },
-            { text: "Tu es curieux/se de comprendre comment les choses fonctionnent", type: "I" },
-            { text: "Tu preferes analyser les faits plutot que convaincre les autres", type: "I" },
-            { text: "Tu aimes faire des recherches et approfondir tes connaissances", type: "I" },
-            { text: "Les matieres scientifiques t'interessent (maths, physique, biologie)", type: "I" },
-            { text: "Tu preferes travailler seul(e) pour te concentrer", type: "I" },
-            { text: "Tu aimes poser des questions et chercher des explications", type: "I" },
-            { text: "Tu es attire(e) par les nouvelles technologies et innovations", type: "I" },
-            { text: "Tu aimes observer et analyser le comportement des gens ou des animaux", type: "I" },
-            { text: "Tu preferes comprendre le 'pourquoi' plutot que juste appliquer", type: "I" },
+            // Investigateur (8 questions)
+            { text: "Tu adores resoudre des enigmes et des casse-tetes", type: "I" },
+            { text: "Tu es le genre de personne qui veut toujours savoir comment ca marche", type: "I" },
+            { text: "Tu preferes analyser une situation plutot que convaincre les autres", type: "I" },
+            { text: "Tu passes du temps a chercher des infos sur des sujets qui t'interessent", type: "I" },
+            { text: "Les matieres scientifiques (maths, physique, bio) te passionnent", type: "I" },
+            { text: "Tu preferes bosser seul pour te concentrer a fond", type: "I" },
+            { text: "Tu poses souvent des questions pour comprendre le pourquoi du comment", type: "I" },
+            { text: "Les nouvelles technos et innovations te fascinent", type: "I" },
 
-            // Questions Artistique (A)
-            { text: "Tu aimes creer des oeuvres originales (dessins, musique, textes)", type: "A" },
-            { text: "Tu te sens inspire(e) par l'art, la beaute et l'esthetique", type: "A" },
+            // Artistique (8 questions)
+            { text: "Tu aimes creer des trucs originaux (dessins, videos, musique...)", type: "A" },
+            { text: "L'art, la beaute et l'esthetique, ca te parle vraiment", type: "A" },
             { text: "Tu preferes exprimer tes idees de facon creative", type: "A" },
-            { text: "Tu aimes imaginer et inventer plutot que reproduire", type: "A" },
-            { text: "Tu te sens different(e) et tu assumes ton originalite", type: "A" },
-            { text: "Tu aimes les ambiances artistiques (musees, concerts, theatre)", type: "A" },
-            { text: "Tu preferes un travail varie plutot que routinier", type: "A" },
-            { text: "Tu aimes decorer et personnaliser ton espace", type: "A" },
-            { text: "Tu es sensible aux couleurs, aux formes et aux harmonies", type: "A" },
-            { text: "Tu aimerais que ton travail soit une forme d'expression personnelle", type: "A" },
+            { text: "Tu aimes inventer plutot que copier ce qui existe deja", type: "A" },
+            { text: "Tu assumes ton cote different et original", type: "A" },
+            { text: "Tu kiffes les ambiances artistiques (musees, concerts, spectacles)", type: "A" },
+            { text: "Tu preferes que ton quotidien soit varie plutot que routinier", type: "A" },
+            { text: "Tu passes du temps a customiser ton espace (chambre, profils...)", type: "A" },
 
-            // Questions Social (S)
-            { text: "Tu aimes aider les autres et te rendre utile", type: "S" },
-            { text: "Tu te sens bien quand tu travailles en equipe", type: "S" },
-            { text: "Tu aimes ecouter les problemes des autres et les conseiller", type: "S" },
+            // Social (8 questions)
+            { text: "Tu aimes aider les gens et te rendre utile", type: "S" },
+            { text: "Tu te sens bien quand tu travailles en groupe", type: "S" },
+            { text: "Tes amis viennent souvent te parler de leurs problemes", type: "S" },
             { text: "Tu preferes collaborer plutot que rivaliser", type: "S" },
-            { text: "Tu te soucies du bien-etre de tes amis et ta famille", type: "S" },
-            { text: "Tu aimes enseigner ou expliquer des choses aux autres", type: "S" },
-            { text: "Tu es doue(e) pour comprendre les emotions des autres", type: "S" },
-            { text: "Tu aimerais contribuer a ameliorer la societe", type: "S" },
-            { text: "Tu preferes les environnements chaleureux et bienveillants", type: "S" },
-            { text: "Tu as envie de faire une difference dans la vie des gens", type: "S" },
+            { text: "Le bien-etre de tes proches te preoccupe vraiment", type: "S" },
+            { text: "Tu aimes expliquer des choses aux autres ou les aider a comprendre", type: "S" },
+            { text: "Tu captes facilement les emotions et humeurs des gens", type: "S" },
+            { text: "Tu as envie de faire quelque chose d'utile pour la societe", type: "S" },
 
-            // Questions Entreprenant (E)
-            { text: "Tu aimes convaincre et influencer les autres", type: "E" },
-            { text: "Tu n'as pas peur de prendre des risques calcules", type: "E" },
-            { text: "Tu aimes diriger et organiser des projets ou des evenements", type: "E" },
-            { text: "Tu es motive(e) par la reussite et la reconnaissance", type: "E" },
-            { text: "Tu aimes negocier et trouver des compromis", type: "E" },
-            { text: "Tu te vois bien creer ta propre entreprise un jour", type: "E" },
-            { text: "Tu aimes les defis et la competition", type: "E" },
-            { text: "Tu es doue(e) pour vendre des idees ou des produits", type: "E" },
-            { text: "Tu preferes etre leader plutot que suiveur", type: "E" },
-            { text: "Tu aimes prendre des decisions importantes", type: "E" },
+            // Entreprenant (8 questions)
+            { text: "Tu aimes convaincre les autres et les influencer", type: "E" },
+            { text: "Tu n'as pas peur de prendre des risques reflechis", type: "E" },
+            { text: "Tu kiffes organiser des evenements ou diriger des projets", type: "E" },
+            { text: "La reussite et la reconnaissance te motivent", type: "E" },
+            { text: "Tu es doue pour negocier et trouver des compromis", type: "E" },
+            { text: "Tu te vois bien creer ta propre boite un jour", type: "E" },
+            { text: "La competition et les defis t'excitent", type: "E" },
+            { text: "Tu arrives bien a vendre tes idees aux autres", type: "E" },
 
-            // Questions Conventionnel (C)
+            // Conventionnel (8 questions)
             { text: "Tu aimes que les choses soient bien organisees et planifiees", type: "C" },
-            { text: "Tu es doue(e) avec les chiffres et les calculs", type: "C" },
+            { text: "Tu es plutot doue avec les chiffres et les calculs", type: "C" },
             { text: "Tu preferes suivre des regles claires plutot qu'improviser", type: "C" },
-            { text: "Tu aimes les taches precises avec des resultats mesurables", type: "C" },
-            { text: "Tu es minutieux/se et tu fais attention aux details", type: "C" },
+            { text: "Tu aimes les taches precises avec des resultats qu'on peut mesurer", type: "C" },
+            { text: "Tu fais attention aux details et tu es minutieux", type: "C" },
             { text: "Tu preferes les environnements stables et previsibles", type: "C" },
-            { text: "Tu aimes classer, trier et organiser l'information", type: "C" },
-            { text: "Tu es fiable et les autres peuvent compter sur toi", type: "C" },
-            { text: "Tu preferes des instructions claires plutot que des consignes vagues", type: "C" },
-            { text: "Tu aimes finir ce que tu commences", type: "C" }
+            { text: "Tu aimes classer, ranger et organiser tes affaires", type: "C" },
+            { text: "On peut compter sur toi, tu es fiable", type: "C" }
         ];
 
-        // Profils RIASEC avec metiers 2025 et niveaux de tension
+        // Questions pour 22-28 ans (60 questions - ton jeune adulte)
+        const questionsAdult = [
+            // Realiste (10 questions)
+            { text: "Tu preferes travailler avec tes mains plutot qu'avec des concepts abstraits", type: "R" },
+            { text: "Tu aimes reparer ou demonter des objets pour comprendre leur fonctionnement", type: "R" },
+            { text: "Tu te sens a l'aise avec les outils techniques et les machines", type: "R" },
+            { text: "Tu preferes les activites concretes aux discussions theoriques", type: "R" },
+            { text: "Tu aimerais exercer un metier en exterieur plutot qu'en bureau", type: "R" },
+            { text: "Tu es doue pour construire, assembler ou fabriquer", type: "R" },
+            { text: "Les activites physiques et sportives font partie de tes priorites", type: "R" },
+            { text: "Tu preferes suivre des procedures claires plutot qu'improviser", type: "R" },
+            { text: "Tu es motive par des resultats tangibles et visibles", type: "R" },
+            { text: "Tu aimerais acquerir des competences techniques specialisees", type: "R" },
+
+            // Investigateur (10 questions)
+            { text: "Tu prends plaisir a resoudre des problemes complexes", type: "I" },
+            { text: "Tu es naturellement curieux de comprendre le fonctionnement des choses", type: "I" },
+            { text: "Tu preferes analyser les faits plutot que convaincre par l'emotion", type: "I" },
+            { text: "Tu aimes mener des recherches approfondies sur tes sujets d'interet", type: "I" },
+            { text: "Les domaines scientifiques et techniques t'attirent", type: "I" },
+            { text: "Tu es plus productif en travaillant en autonomie", type: "I" },
+            { text: "Tu poses naturellement des questions pour approfondir ta comprehension", type: "I" },
+            { text: "Les innovations technologiques et scientifiques te passionnent", type: "I" },
+            { text: "Tu aimes observer et analyser les comportements ou phenomenes", type: "I" },
+            { text: "Tu cherches toujours a comprendre le 'pourquoi' avant d'agir", type: "I" },
+
+            // Artistique (10 questions)
+            { text: "Tu aimes creer des oeuvres originales dans differents domaines", type: "A" },
+            { text: "L'esthetique et la beaute sont importantes dans tes choix", type: "A" },
+            { text: "Tu preferes exprimer tes idees de maniere creative et innovante", type: "A" },
+            { text: "Tu aimes concevoir et inventer plutot que reproduire l'existant", type: "A" },
+            { text: "Tu assumes et cultives ton originalite", type: "A" },
+            { text: "Tu apprecies les environnements culturels et artistiques", type: "A" },
+            { text: "Tu preferes la variete a la routine dans ton travail", type: "A" },
+            { text: "Tu aimes personnaliser et customiser ton environnement", type: "A" },
+            { text: "Tu es sensible aux formes, couleurs et harmonies", type: "A" },
+            { text: "Tu souhaiterais que ton travail soit une forme d'expression personnelle", type: "A" },
+
+            // Social (10 questions)
+            { text: "Tu trouves de la satisfaction a aider les autres", type: "S" },
+            { text: "Tu t'epanouis dans le travail collaboratif", type: "S" },
+            { text: "Les gens se confient naturellement a toi", type: "S" },
+            { text: "Tu preferes la cooperation a la competition", type: "S" },
+            { text: "Le bien-etre des autres te preoccupe genuinement", type: "S" },
+            { text: "Tu aimes transmettre tes connaissances et accompagner", type: "S" },
+            { text: "Tu perçois facilement les emotions et besoins des autres", type: "S" },
+            { text: "Tu souhaites contribuer positivement a la societe", type: "S" },
+            { text: "Tu privilegie les environnements humains et bienveillants", type: "S" },
+            { text: "Tu veux avoir un impact positif sur la vie des gens", type: "S" },
+
+            // Entreprenant (10 questions)
+            { text: "Tu aimes persuader et influencer positivement les autres", type: "E" },
+            { text: "Tu es pret a prendre des risques calcules pour avancer", type: "E" },
+            { text: "Tu aimes diriger des projets et coordonner des equipes", type: "E" },
+            { text: "La reussite professionnelle et la reconnaissance te motivent", type: "E" },
+            { text: "Tu es doue pour negocier et trouver des solutions gagnant-gagnant", type: "E" },
+            { text: "L'entrepreneuriat et la creation d'entreprise t'interessent", type: "E" },
+            { text: "Tu apprecies la competition et les defis professionnels", type: "E" },
+            { text: "Tu sais bien presenter et vendre tes idees", type: "E" },
+            { text: "Tu preferes etre dans un role de leadership", type: "E" },
+            { text: "Tu aimes prendre des decisions strategiques importantes", type: "E" },
+
+            // Conventionnel (10 questions)
+            { text: "Tu apprecies l'organisation et la planification rigoureuse", type: "C" },
+            { text: "Tu es competent dans le maniement des chiffres et analyses", type: "C" },
+            { text: "Tu preferes des cadres de travail structures avec des regles claires", type: "C" },
+            { text: "Tu aimes les taches precises avec des indicateurs de performance", type: "C" },
+            { text: "Tu es naturellement minutieux et attentif aux details", type: "C" },
+            { text: "Tu preferes les environnements professionnels stables", type: "C" },
+            { text: "Tu excelles dans l'organisation et la systematisation de l'information", type: "C" },
+            { text: "On peut compter sur ta fiabilite et ton serieux", type: "C" },
+            { text: "Tu preferes des consignes precises aux directives floues", type: "C" },
+            { text: "Tu aimes mener tes projets jusqu'au bout avec succes", type: "C" }
+        ];
+
+        // Profils RIASEC avec metiers 2025
         const riasecProfiles = {
             R: {
                 name: "Realiste",
@@ -730,22 +856,79 @@
             }
         };
 
+        // Variables globales
+        let userAge = null;
+        let currentQuestions = [];
         let currentQuestion = 0;
         let answers = { R: 0, I: 0, A: 0, S: 0, E: 0, C: 0 };
         let userAnswers = [];
         let testResults = null;
 
+        function setAgeAndContinue() {
+            const ageInput = document.getElementById('user-age');
+            const age = parseInt(ageInput.value);
+            
+            if (!age || age < 13 || age > 35) {
+                alert('Merci de saisir un age entre 13 et 35 ans');
+                return;
+            }
+            
+            userAge = age;
+            setupTestForAge(age);
+            
+            document.getElementById('age-screen').style.display = 'none';
+            document.getElementById('intro').style.display = 'block';
+        }
+
+        function setupTestForAge(age) {
+            let ageGroup, questionsText, timeText, startText, descText;
+            
+            if (age >= 15 && age <= 21) {
+                ageGroup = "15-21 ans";
+                currentQuestions = shuffleArray([...questionsYoung]);
+                questionsText = "50 questions";
+                timeText = "8 minutes";
+                startText = "C'est parti ! 🚀";
+                descText = "Le test t'aide a decouvrir tes preferences selon 6 profils : Realiste, Investigateur, Artistique, Social, Entreprenant, Conventionnel";
+            } else {
+                ageGroup = age < 15 ? "13-14 ans (version adaptee)" : 
+                          age >= 22 && age <= 28 ? "22-28 ans" : 
+                          age > 28 ? "28+ ans (version complete)";
+                          
+                currentQuestions = shuffleArray([...questionsAdult]);
+                questionsText = "60 questions";
+                timeText = "10 minutes";
+                startText = "Commencer le test 🎯";
+                descText = "Le test RIASEC t'aide a identifier tes preferences professionnelles selon 6 profils : Realiste, Investigateur, Artistique, Social, Entreprenant, Conventionnel";
+            }
+            
+            document.getElementById('age-indicator').textContent = `Version ${ageGroup}`;
+            document.getElementById('questions-count').textContent = questionsText;
+            document.getElementById('time-estimate').textContent = timeText;
+            document.getElementById('start-btn-text').textContent = startText;
+            document.getElementById('intro-description').innerHTML = descText;
+        }
+
+        function shuffleArray(array) {
+            const shuffled = [...array];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            return shuffled;
+        }
+
         function startTest() {
             document.getElementById('intro').style.display = 'none';
             document.getElementById('progress-section').style.display = 'block';
             document.getElementById('questions-section').style.display = 'block';
-            document.getElementById('total-questions').textContent = questions.length;
+            document.getElementById('total-questions').textContent = currentQuestions.length;
             showQuestion();
         }
 
         function showQuestion() {
             const questionContainer = document.getElementById('question-container');
-            const question = questions[currentQuestion];
+            const question = currentQuestions[currentQuestion];
             
             questionContainer.innerHTML = `
                 <div class="question-container active">
@@ -791,11 +974,11 @@
             
             if (saveAnswer) {
                 if (userAnswers[currentQuestion]) {
-                    answers[questions[currentQuestion].type] -= userAnswers[currentQuestion];
+                    answers[currentQuestions[currentQuestion].type] -= userAnswers[currentQuestion];
                 }
                 
                 userAnswers[currentQuestion] = value;
-                answers[questions[currentQuestion].type] += value;
+                answers[currentQuestions[currentQuestion].type] += value;
             }
             
             document.getElementById('next-btn').disabled = false;
@@ -804,7 +987,7 @@
         function nextQuestion() {
             if (!userAnswers[currentQuestion]) return;
             
-            if (currentQuestion < questions.length - 1) {
+            if (currentQuestion < currentQuestions.length - 1) {
                 currentQuestion++;
                 showQuestion();
             } else {
@@ -820,7 +1003,7 @@
         }
 
         function updateProgressBar() {
-            const progress = ((currentQuestion + 1) / questions.length) * 100;
+            const progress = ((currentQuestion + 1) / currentQuestions.length) * 100;
             document.getElementById('progress-bar').style.width = progress + '%';
         }
 
@@ -828,7 +1011,7 @@
             document.getElementById('prev-btn').disabled = currentQuestion === 0;
             document.getElementById('next-btn').disabled = !userAnswers[currentQuestion];
             
-            if (currentQuestion === questions.length - 1) {
+            if (currentQuestion === currentQuestions.length - 1) {
                 document.getElementById('next-btn').textContent = 'Voir mes resultats 🎉';
             } else {
                 document.getElementById('next-btn').textContent = 'Suivant →';
@@ -844,7 +1027,7 @@
         }
 
         function generateResults() {
-            const maxScore = questions.length * 5;
+            const maxScore = currentQuestions.length * 5;
             const percentages = {};
             
             Object.keys(answers).forEach(key => {
@@ -855,10 +1038,13 @@
                 .sort(([,a], [,b]) => b - a);
             
             testResults = {
+                age: userAge,
+                ageGroup: userAge >= 15 && userAge <= 21 ? "15-21" : "22-28+",
                 scores: percentages,
                 dominantProfiles: sortedResults.slice(0, 2),
                 timestamp: new Date().toISOString(),
-                answers: userAnswers
+                answers: userAnswers,
+                totalQuestions: currentQuestions.length
             };
             
             generateChart(sortedResults);
@@ -944,22 +1130,25 @@
         function exportToNotion() {
             if (!testResults) return;
             
-            const userName = prompt("Votre nom :") || "Anonyme";
-            const userEmail = prompt("Votre email :") || "non-fourni@exemple.com";
+            const userName = prompt("Ton nom :") || "Anonyme";
+            const userEmail = prompt("Ton email :") || "non-fourni@exemple.com";
             
             const exportData = {
                 nom: userName,
                 email: userEmail,
+                age: testResults.age,
+                version_test: testResults.ageGroup,
                 date: new Date().toISOString().split('T')[0],
-                profil: riasecProfiles[testResults.dominantProfiles[0][0]].name + " + " + riasecProfiles[testResults.dominantProfiles[1][0]].name,
-                scoreR: testResults.scores.R,
-                scoreI: testResults.scores.I,
-                scoreA: testResults.scores.A,
-                scoreS: testResults.scores.S,
-                scoreE: testResults.scores.E,
-                scoreC: testResults.scores.C,
+                profil_dominant: riasecProfiles[testResults.dominantProfiles[0][0]].name + " + " + riasecProfiles[testResults.dominantProfiles[1][0]].name,
+                score_R: testResults.scores.R,
+                score_I: testResults.scores.I,
+                score_A: testResults.scores.A,
+                score_S: testResults.scores.S,
+                score_E: testResults.scores.E,
+                score_C: testResults.scores.C,
+                nb_questions: testResults.totalQuestions,
                 timestamp: testResults.timestamp,
-                reponses: testResults.answers
+                reponses_detaillees: testResults.answers
             };
             
             const dataStr = JSON.stringify(exportData, null, 2);
@@ -967,27 +1156,38 @@
             const url = URL.createObjectURL(dataBlob);
             const link = document.createElement('a');
             link.href = url;
-            link.download = 'riasec_' + exportData.date + '_' + userName.replace(/\s+/g, '_') + '.json';
+            link.download = `riasec_${exportData.age}ans_${exportData.date}_${userName.replace(/\s+/g, '_')}.json`;
             link.click();
             
+            const ageText = testResults.ageGroup === "15-21" ? "version jeune" : "version adulte";
             alert(`📊 Resultats exportes !
 
-Profil : ${exportData.profil}
-Scores principaux : ${exportData.scoreR}% (R) / ${exportData.scoreI}% (I)
+Profil : ${exportData.profil_dominant}
+Age : ${exportData.age} ans (${ageText})
+Questions : ${exportData.nb_questions}
+Scores : R:${exportData.score_R}% I:${exportData.score_I}% A:${exportData.score_A}%
 
-Le fichier JSON peut etre importe dans Notion ou utilise pour votre suivi personnalise.`);
+Le fichier JSON contient toutes les donnees pour ton suivi personnalise.`);
         }
 
         function restartTest() {
+            // Reinitialiser toutes les variables
+            userAge = null;
+            currentQuestions = [];
             currentQuestion = 0;
             answers = { R: 0, I: 0, A: 0, S: 0, E: 0, C: 0 };
             userAnswers = [];
             testResults = null;
             
+            // Retour a l'ecran de saisie d'age
             document.getElementById('results').classList.remove('active');
-            document.getElementById('intro').style.display = 'block';
+            document.getElementById('age-screen').style.display = 'block';
+            document.getElementById('intro').style.display = 'none';
             document.getElementById('progress-section').style.display = 'none';
             document.getElementById('questions-section').style.display = 'none';
+            
+            // Vider le champ age
+            document.getElementById('user-age').value = '';
         }
 
         // Animation au chargement
