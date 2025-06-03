@@ -541,22 +541,7 @@
         // Questions RIASEC pour 15-21 ans (48 questions équilibrées)
         const questionsYoung = [
             // Réaliste (8 questions)
-            { text: "Tu es convaincant(e) quand il faut défendre tes idées", type: "E", inverted: false },
-            { text: "Tu te sens bien dans un rôle de leader", type: "E", inverted: false },
-            { text: "Tu prends des décisions avec assurance", type: "E", inverted: false },
-
-            // Conventionnel (10 questions)
-            { text: "Tu apprécies organiser, planifier et structurer", type: "C", inverted: false },
-            { text: "Tu es à l'aise avec les chiffres ou les analyses", type: "C", inverted: false },
-            { text: "Tu préfères un environnement clair et bien organisé", type: "C", inverted: false },
-            { text: "Tu aimes les tâches précises et mesurables", type: "C", inverted: false },
-            { text: "Tu es méticuleux/se dans ce que tu fais", type: "C", inverted: false },
-            { text: "Tu recherches la stabilité professionnelle", type: "C", inverted: false },
-            { text: "Tu aimes structurer l'information pour la rendre lisible", type: "C", inverted: false },
-            { text: "On peut te faire confiance : tu es fiable", type: "C", inverted: false },
-            { text: "Tu préfères des consignes claires à des instructions floues", type: "C", inverted: false },
-            { text: "Tu vas toujours au bout de ce que tu entreprends", type: "C", inverted: false }
-        ]; text: "Tu aimes bricoler ou réparer des objets de tes mains", type: "R", inverted: false },
+            { text: "Tu aimes bricoler ou réparer des objets de tes mains", type: "R", inverted: false },
             { text: "Tu préfères les activités concrètes où tu vois vite un résultat", type: "R", inverted: false },
             { text: "Si tu dois choisir, tu préfères construire quelque chose plutôt que lire un livre", type: "R", inverted: false },
             { text: "Tu es plus à l'aise avec des outils qu'avec des concepts abstraits", type: "R", inverted: false },
@@ -674,4 +659,441 @@
             { text: "Tu sais trouver des compromis et négocier", type: "E", inverted: false },
             { text: "Tu t'intéresses à l'entrepreneuriat", type: "E", inverted: false },
             { text: "Les défis et la compétition te stimulent", type: "E", inverted: false },
-            {
+            { text: "Tu es convaincant(e) quand il faut défendre tes idées", type: "E", inverted: false },
+            { text: "Tu te sens bien dans un rôle de leader", type: "E", inverted: false },
+            { text: "Tu prends des décisions avec assurance", type: "E", inverted: false },
+
+            // Conventionnel (10 questions)
+            { text: "Tu apprécies organiser, planifier et structurer", type: "C", inverted: false },
+            { text: "Tu es à l'aise avec les chiffres ou les analyses", type: "C", inverted: false },
+            { text: "Tu préfères un environnement clair et bien organisé", type: "C", inverted: false },
+            { text: "Tu aimes les tâches précises et mesurables", type: "C", inverted: false },
+            { text: "Tu es méticuleux/se dans ce que tu fais", type: "C", inverted: false },
+            { text: "Tu recherches la stabilité professionnelle", type: "C", inverted: false },
+            { text: "Tu aimes structurer l'information pour la rendre lisible", type: "C", inverted: false },
+            { text: "On peut te faire confiance : tu es fiable", type: "C", inverted: false },
+            { text: "Tu préfères des consignes claires à des instructions floues", type: "C", inverted: false },
+            { text: "Tu vas toujours au bout de ce que tu entreprends", type: "C", inverted: false }
+        ];
+
+        // Profils RIASEC complets avec métiers 2025
+        const riasecProfiles = {
+            R: {
+                name: "Réaliste",
+                description: "Tu aimes le concret, travailler avec tes mains et voir des résultats tangibles. Tu préfères l'action à la théorie.",
+                careers: [
+                    { name: "Technicien énergies renouvelables", type: "Émergent", tension: "high", description: "Installation et maintenance d'équipements solaires, éoliens" },
+                    { name: "Pilote ligne batteries électriques", type: "Émergent", tension: "high", description: "Production de composants pour véhicules électriques" },
+                    { name: "Mécanicien automobile", type: "Traditionnel", tension: "medium", description: "Entretien et réparation de véhicules" },
+                    { name: "Électricien", type: "Traditionnel", tension: "high", description: "Installation et maintenance électrique" },
+                    { name: "Contrôleur technique énergies décarbonées", type: "Émergent", tension: "high", description: "Vérification sécurité installations vertes" },
+                    { name: "Chef cuisinier", type: "Traditionnel", tension: "high", description: "Création et préparation culinaire" },
+                    { name: "Kinésithérapeute", type: "Traditionnel", tension: "medium", description: "Rééducation et soins du corps" },
+                    { name: "Technicien bioproduction", type: "Émergent", tension: "medium", description: "Fabrication de médicaments biotechnologiques" }
+                ]
+            },
+            I: {
+                name: "Investigateur",
+                description: "Tu es curieux et analytique. Tu aimes comprendre, rechercher, analyser et résoudre des problèmes complexes.",
+                careers: [
+                    { name: "Data Scientist", type: "Émergent", tension: "high", description: "Analyse de données massives et IA" },
+                    { name: "Cybersécurité", type: "Émergent", tension: "high", description: "Protection des systèmes informatiques" },
+                    { name: "Développeur blockchain", type: "Émergent", tension: "medium", description: "Création d'applications décentralisées" },
+                    { name: "Chercheur en IA", type: "Émergent", tension: "high", description: "Développement intelligence artificielle" },
+                    { name: "Médecin", type: "Traditionnel", tension: "high", description: "Diagnostic et soins aux patients" },
+                    { name: "Ingénieur", type: "Traditionnel", tension: "high", description: "Conception et innovation technique" },
+                    { name: "Vétérinaire", type: "Traditionnel", tension: "medium", description: "Soins aux animaux" },
+                    { name: "Analyste financier", type: "Traditionnel", tension: "low", description: "Évaluation investissements et risques" }
+                ]
+            },
+            A: {
+                name: "Artistique",
+                description: "Tu es créatif et original. Tu aimes exprimer tes idées de façon artistique et créer quelque chose d'unique.",
+                careers: [
+                    { name: "Designer UX/UI", type: "Émergent", tension: "high", description: "Conception d'expériences numériques" },
+                    { name: "Créateur de contenu", type: "Émergent", tension: "medium", description: "Production multimédia pour réseaux sociaux" },
+                    { name: "Coordinateur d'intimité", type: "Émergent", tension: "low", description: "Sécurisation tournages scènes intimes" },
+                    { name: "Game Designer", type: "Émergent", tension: "medium", description: "Conception de jeux vidéo" },
+                    { name: "Architecte", type: "Traditionnel", tension: "low", description: "Conception d'espaces et bâtiments" },
+                    { name: "Graphiste", type: "Traditionnel", tension: "low", description: "Création visuelle et communication" },
+                    { name: "Photographe", type: "Traditionnel", tension: "low", description: "Capture d'images artistiques/commerciales" },
+                    { name: "Musicien", type: "Traditionnel", tension: "low", description: "Composition et interprétation musicale" }
+                ]
+            },
+            S: {
+                name: "Social",
+                description: "Tu aimes aider les autres et travailler en équipe. Le bien-être des gens et les relations humaines sont importants pour toi.",
+                careers: [
+                    { name: "Coach bien-être digital", type: "Émergent", tension: "medium", description: "Accompagnement santé mentale en ligne" },
+                    { name: "Médiateur numérique", type: "Émergent", tension: "medium", description: "Formation aux outils numériques" },
+                    { name: "Infirmier", type: "Traditionnel", tension: "high", description: "Soins et accompagnement patients" },
+                    { name: "Aide-soignant", type: "Traditionnel", tension: "high", description: "Assistance quotidienne aux personnes" },
+                    { name: "Professeur", type: "Traditionnel", tension: "medium", description: "Transmission des connaissances" },
+                    { name: "Travailleur social", type: "Traditionnel", tension: "high", description: "Accompagnement social et familial" },
+                    { name: "Psychologue", type: "Traditionnel", tension: "medium", description: "Soutien psychologique et thérapie" },
+                    { name: "Éducateur spécialisé", type: "Traditionnel", tension: "high", description: "Accompagnement personnes en difficulté" }
+                ]
+            },
+            E: {
+                name: "Entreprenant",
+                description: "Tu aimes diriger, convaincre et relever des défis. Tu es motivé par le succès et tu n'as pas peur de prendre des initiatives.",
+                careers: [
+                    { name: "Growth Hacker", type: "Émergent", tension: "high", description: "Développement rapide d'entreprises" },
+                    { name: "Chief Happiness Officer", type: "Émergent", tension: "medium", description: "Bien-être et culture d'entreprise" },
+                    { name: "Entrepreneur tech", type: "Émergent", tension: "medium", description: "Création de startups technologiques" },
+                    { name: "Influenceur digital", type: "Émergent", tension: "low", description: "Marketing d'influence sur réseaux" },
+                    { name: "Commercial B2B", type: "Traditionnel", tension: "high", description: "Vente aux entreprises" },
+                    { name: "Manager", type: "Traditionnel", tension: "medium", description: "Direction d'équipes et projets" },
+                    { name: "Consultant", type: "Traditionnel", tension: "low", description: "Conseil stratégique aux entreprises" },
+                    { name: "Agent immobilier", type: "Traditionnel", tension: "medium", description: "Transaction et conseil immobilier" }
+                ]
+            },
+            C: {
+                name: "Conventionnel",
+                description: "Tu aimes l'ordre, la précision et la planification. Tu es fiable et tu préfères des environnements structurés.",
+                careers: [
+                    { name: "Analyste cybersécurité", type: "Émergent", tension: "high", description: "Surveillance et protection données" },
+                    { name: "Gestionnaire données", type: "Émergent", tension: "high", description: "Organisation et conformité RGPD" },
+                    { name: "Assistant virtuel IA", type: "Émergent", tension: "medium", description: "Support administratif automatisé" },
+                    { name: "Clerc de notaire", type: "Traditionnel", tension: "medium", description: "Assistance juridique et administrative" },
+                    { name: "Comptable", type: "Traditionnel", tension: "low", description: "Gestion financière et fiscale" },
+                    { name: "Contrôleur de gestion", type: "Traditionnel", tension: "low", description: "Pilotage performance économique" },
+                    { name: "Assistant administratif", type: "Traditionnel", tension: "low", description: "Support organisationnel" },
+                    { name: "Gestionnaire de paie", type: "Traditionnel", tension: "medium", description: "Administration salaires et charges" }
+                ]
+            }
+        };
+
+        // Variables globales
+        let userAge = null;
+        let currentQuestions = [];
+        let currentQuestion = 0;
+        let answers = { R: 0, I: 0, A: 0, S: 0, E: 0, C: 0 };
+        let userAnswers = [];
+        let testResults = null;
+
+        function setAgeAndContinue() {
+            const ageInput = document.getElementById('user-age');
+            const age = parseInt(ageInput.value);
+            
+            if (!age || age < 13 || age > 35) {
+                alert('Merci de saisir un âge entre 13 et 35 ans');
+                return;
+            }
+            
+            userAge = age;
+            setupTestForAge(age);
+            
+            document.getElementById('age-screen').style.display = 'none';
+            document.getElementById('intro').style.display = 'block';
+        }
+
+        function setupTestForAge(age) {
+            let ageGroup, questionsText, timeText, startText;
+            
+            if (age >= 15 && age <= 21) {
+                ageGroup = "15-21 ans";
+                currentQuestions = shuffleArray([...questionsYoung]);
+                questionsText = "48 questions";
+                timeText = "8 minutes";
+                startText = "C'est parti ! 🚀";
+            } else {
+                ageGroup = age < 15 ? "13-14 ans (version adaptée)" : 
+                          age >= 22 && age <= 28 ? "22-28 ans" : 
+                          "28+ ans (version complète)";
+                          
+                currentQuestions = shuffleArray([...questionsAdult]);
+                questionsText = "60 questions";
+                timeText = "10 minutes";
+                startText = "Commencer le test 🎯";
+            }
+            
+            document.getElementById('age-indicator').textContent = `Version ${ageGroup}`;
+            document.getElementById('questions-count').textContent = questionsText;
+            document.getElementById('time-estimate').textContent = timeText;
+            document.getElementById('start-btn-text').textContent = startText;
+        }
+
+        function shuffleArray(array) {
+            const shuffled = [...array];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            return shuffled;
+        }
+
+        function startTest() {
+            document.getElementById('intro').style.display = 'none';
+            document.getElementById('progress-section').style.display = 'block';
+            document.getElementById('questions-section').style.display = 'block';
+            document.getElementById('total-questions').textContent = currentQuestions.length;
+            showQuestion();
+        }
+
+        function showQuestion() {
+            const questionContainer = document.getElementById('question-container');
+            const question = currentQuestions[currentQuestion];
+            
+            questionContainer.innerHTML = `
+                <div class="question">${question.text}</div>
+                <div class="options">
+                    <div class="option" onclick="selectAnswer(1)">
+                        <div class="option-number">1</div>
+                        <div>Pas du tout d'accord</div>
+                    </div>
+                    <div class="option" onclick="selectAnswer(2)">
+                        <div class="option-number">2</div>
+                        <div>Plutôt pas d'accord</div>
+                    </div>
+                    <div class="option" onclick="selectAnswer(3)">
+                        <div class="option-number">3</div>
+                        <div>Neutre</div>
+                    </div>
+                    <div class="option" onclick="selectAnswer(4)">
+                        <div class="option-number">4</div>
+                        <div>Plutôt d'accord</div>
+                    </div>
+                    <div class="option" onclick="selectAnswer(5)">
+                        <div class="option-number">5</div>
+                        <div>Tout à fait d'accord</div>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('current-question').textContent = currentQuestion + 1;
+            updateProgressBar();
+            
+            if (userAnswers[currentQuestion]) {
+                selectAnswer(userAnswers[currentQuestion], false);
+            }
+            
+            updateNavigationButtons();
+        }
+
+        function selectAnswer(value, saveAnswer = true) {
+            document.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
+            document.querySelectorAll('.option')[value - 1].classList.add('selected');
+            
+            if (saveAnswer) {
+                const question = currentQuestions[currentQuestion];
+                
+                if (userAnswers[currentQuestion]) {
+                    // Retirer l'ancienne réponse (en tenant compte de l'inversion)
+                    const oldValue = userAnswers[currentQuestion];
+                    const oldScoreValue = question.inverted ? (6 - oldValue) : oldValue;
+                    answers[question.type] -= oldScoreValue;
+                }
+                
+                userAnswers[currentQuestion] = value;
+                
+                // Appliquer l'inversion si nécessaire
+                const scoreValue = question.inverted ? (6 - value) : value;
+                answers[question.type] += scoreValue;
+            }
+            
+            document.getElementById('next-btn').disabled = false;
+        }
+
+        function nextQuestion() {
+            if (!userAnswers[currentQuestion]) return;
+            
+            if (currentQuestion < currentQuestions.length - 1) {
+                currentQuestion++;
+                showQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function previousQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                showQuestion();
+            }
+        }
+
+        function updateProgressBar() {
+            const progress = ((currentQuestion + 1) / currentQuestions.length) * 100;
+            document.getElementById('progress-bar').style.width = progress + '%';
+        }
+
+        function updateNavigationButtons() {
+            document.getElementById('prev-btn').disabled = currentQuestion === 0;
+            document.getElementById('next-btn').disabled = !userAnswers[currentQuestion];
+            
+            if (currentQuestion === currentQuestions.length - 1) {
+                document.getElementById('next-btn').textContent = 'Voir mes résultats 🎉';
+            } else {
+                document.getElementById('next-btn').textContent = 'Suivant →';
+            }
+        }
+
+        function showResults() {
+            document.getElementById('progress-section').style.display = 'none';
+            document.getElementById('questions-section').style.display = 'none';
+            document.getElementById('results').classList.add('active');
+            
+            generateResults();
+        }
+
+        function generateResults() {
+            const questionsPerType = userAge >= 15 && userAge <= 21 ? 8 : 10;
+            const maxScore = questionsPerType * 5;
+            const percentages = {};
+            
+            Object.keys(answers).forEach(key => {
+                percentages[key] = Math.round((answers[key] / maxScore) * 100);
+            });
+            
+            const sortedResults = Object.entries(percentages)
+                .sort(([,a], [,b]) => b - a);
+            
+            testResults = {
+                age: userAge,
+                ageGroup: userAge >= 15 && userAge <= 21 ? "15-21" : "22-28+",
+                scores: percentages,
+                dominantProfiles: sortedResults.slice(0, 2),
+                timestamp: new Date().toISOString(),
+                answers: userAnswers,
+                totalQuestions: currentQuestions.length
+            };
+            
+            generateChart(sortedResults);
+            generateProfileSummary(sortedResults);
+            generateCareerSuggestions(sortedResults);
+        }
+
+        function generateChart(sortedResults) {
+            const chartContainer = document.getElementById('riasec-chart');
+            chartContainer.innerHTML = '';
+            
+            sortedResults.forEach(([type, percentage], index) => {
+                const profile = riasecProfiles[type];
+                const isDominant = index < 2;
+                
+                const item = document.createElement('div');
+                item.className = `riasec-item ${isDominant ? 'dominant' : ''}`;
+                item.innerHTML = `
+                    <div class="riasec-letter">${type}</div>
+                    <div class="riasec-name">${profile.name}</div>
+                    <div class="riasec-score">${percentage}%</div>
+                    <div class="riasec-bar">
+                        <div class="riasec-fill" style="width: ${percentage}%"></div>
+                    </div>
+                `;
+                
+                chartContainer.appendChild(item);
+            });
+        }
+
+        function generateProfileSummary(sortedResults) {
+            const summaryContainer = document.getElementById('profile-summary');
+            const dominantTypes = sortedResults.slice(0, 2);
+            
+            let summaryText = `<h3>Ton profil : ${dominantTypes.map(([type]) => riasecProfiles[type].name).join(' + ')}</h3>`;
+            summaryText += `<p>Tes deux profils dominants sont <strong>${riasecProfiles[dominantTypes[0][0]].name}</strong> (${dominantTypes[0][1]}%) et <strong>${riasecProfiles[dominantTypes[1][0]].name}</strong> (${dominantTypes[1][1]}%).</p>`;
+            summaryText += `<p><strong>${riasecProfiles[dominantTypes[0][0]].name} :</strong> ${riasecProfiles[dominantTypes[0][0]].description}</p>`;
+            summaryText += `<p><strong>${riasecProfiles[dominantTypes[1][0]].name} :</strong> ${riasecProfiles[dominantTypes[1][0]].description}</p>`;
+            
+            summaryContainer.innerHTML = summaryText;
+        }
+
+        function generateCareerSuggestions(sortedResults) {
+            const careersContainer = document.getElementById('careers-grid');
+            const dominantTypes = sortedResults.slice(0, 2);
+            
+            let allCareers = [];
+            dominantTypes.forEach(([type]) => {
+                allCareers = allCareers.concat(riasecProfiles[type].careers);
+            });
+            
+            const shuffledCareers = allCareers.sort(() => 0.5 - Math.random()).slice(0, 8);
+            
+            careersContainer.innerHTML = '';
+            shuffledCareers.forEach(career => {
+                const tensionColor = career.tension === 'high' ? 'tension-high' : 
+                                   career.tension === 'medium' ? 'tension-medium' : 'tension-low';
+                const tensionHeight = career.tension === 'high' ? '80%' : 
+                                     career.tension === 'medium' ? '50%' : '20%';
+                const tensionText = career.tension === 'high' ? 'Forte demande' : 
+                                   career.tension === 'medium' ? 'Demande modérée' : 'Demande faible';
+                
+                const careerItem = document.createElement('div');
+                careerItem.className = 'career-item';
+                careerItem.innerHTML = `
+                    <div class="career-title">
+                        ${career.name}
+                        <span class="career-type">${career.type}</span>
+                    </div>
+                    <div class="career-description">${career.description}</div>
+                    <div class="tension-meter">
+                        <div class="thermometer">
+                            <div class="thermometer-fill ${tensionColor}" style="height: ${tensionHeight}"></div>
+                        </div>
+                        <div class="tension-label">${tensionText}</div>
+                    </div>
+                `;
+                careersContainer.appendChild(careerItem);
+            });
+        }
+
+        function exportResults() {
+            if (!testResults) return;
+            
+            const userName = prompt("Ton nom :") || "Anonyme";
+            const userEmail = prompt("Ton email :") || "non-fourni@exemple.com";
+            
+            const exportData = {
+                nom: userName,
+                email: userEmail,
+                age: testResults.age,
+                version_test: testResults.ageGroup,
+                date: new Date().toISOString().split('T')[0],
+                profil_dominant: riasecProfiles[testResults.dominantProfiles[0][0]].name + " + " + riasecProfiles[testResults.dominantProfiles[1][0]].name,
+                score_R: testResults.scores.R,
+                score_I: testResults.scores.I,
+                score_A: testResults.scores.A,
+                score_S: testResults.scores.S,
+                score_E: testResults.scores.E,
+                score_C: testResults.scores.C,
+                nb_questions: testResults.totalQuestions,
+                timestamp: testResults.timestamp
+            };
+            
+            const dataStr = JSON.stringify(exportData, null, 2);
+            const dataBlob = new Blob([dataStr], {type: 'application/json'});
+            const url = URL.createObjectURL(dataBlob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `riasec_${exportData.age}ans_${exportData.date}_${userName.replace(/\s+/g, '_')}.json`;
+            link.click();
+            
+            alert(`📊 Résultats exportés !
+
+Profil : ${exportData.profil_dominant}
+Âge : ${exportData.age} ans
+Questions : ${exportData.nb_questions}
+
+Le fichier JSON est prêt pour ton suivi !`);
+        }
+
+        function restartTest() {
+            userAge = null;
+            currentQuestions = [];
+            currentQuestion = 0;
+            answers = { R: 0, I: 0, A: 0, S: 0, E: 0, C: 0 };
+            userAnswers = [];
+            testResults = null;
+            
+            document.getElementById('results').classList.remove('active');
+            document.getElementById('age-screen').style.display = 'block';
+            document.getElementById('intro').style.display = 'none';
+            document.getElementById('progress-section').style.display = 'none';
+            document.getElementById('questions-section').style.display = 'none';
+            
+            document.getElementById('user-age').value = '';
+        }
+    </script>
+</body>
+</html>
