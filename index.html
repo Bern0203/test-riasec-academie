@@ -530,8 +530,12 @@
                     🔄 Refaire le test
                 </button>
                 
-                <button class="btn" onclick="exportResults()" style="width: 100%; margin-top: 15px;">
-                    📊 Exporter les résultats
+                <button class="btn" onclick="sendResultsByEmail()" style="width: 100%; margin-top: 15px;">
+                    📧 Envoyer mes résultats
+                </button>
+                
+                <button class="btn btn-secondary" onclick="exportResults()" style="width: 100%; margin-top: 15px;">
+                    📊 Exporter en JSON (optionnel)
                 </button>
             </div>
         </div>
@@ -1035,6 +1039,109 @@
                     </div>
                 `;
                 careersContainer.appendChild(careerItem);
+            });
+        }
+
+        function sendResultsByEmail() {
+            if (!testResults) return;
+            
+            // Demander les informations à l'utilisateur
+            const userName = prompt("Votre nom complet :") || "Non renseigné";
+            const userEmail = prompt("Votre email :") || "non-renseigné@exemple.com";
+            
+            if (!userName || userName === "Non renseigné") {
+                alert("Merci de renseigner votre nom pour envoyer les résultats.");
+                return;
+            }
+            
+            // Préparer les données formatées pour l'email
+            const dominantProfile1 = riasecProfiles[testResults.dominantProfiles[0][0]].name;
+            const dominantProfile2 = riasecProfiles[testResults.dominantProfiles[1][0]].name;
+            const currentDate = new Date().toLocaleDateString('fr-FR');
+            
+            // Créer le contenu de l'email
+            const emailContent = `
+=== RÉSULTATS TEST RIASEC ===
+
+👤 PARTICIPANT :
+- Nom : ${userName}
+- Email : ${userEmail}
+- Âge : ${testResults.age} ans
+- Version : ${testResults.ageGroup}
+- Date : ${currentDate}
+
+🎯 PROFIL DOMINANT :
+${dominantProfile1} + ${dominantProfile2}
+
+📊 SCORES DÉTAILLÉS :
+- Réaliste (R) : ${testResults.scores.R}%
+- Investigateur (I) : ${testResults.scores.I}%
+- Artistique (A) : ${testResults.scores.A}%
+- Social (S) : ${testResults.scores.S}%
+- Entreprenant (E) : ${testResults.scores.E}%
+- Conventionnel (C) : ${testResults.scores.C}%
+
+📋 INFORMATIONS TECHNIQUES :
+- Nombre de questions : ${testResults.totalQuestions}
+- Timestamp : ${testResults.timestamp}
+
+💡 PROFILS PRINCIPAUX :
+1. ${dominantProfile1} (${testResults.dominantProfiles[0][1]}%) : ${riasecProfiles[testResults.dominantProfiles[0][0]].description}
+
+2. ${dominantProfile2} (${testResults.dominantProfiles[1][1]}%) : ${riasecProfiles[testResults.dominantProfiles[1][0]].description}
+            `.trim();
+            
+            // Préparer les données pour Formspree
+            const formData = new FormData();
+            formData.append('name', userName);
+            formData.append('email', userEmail);
+            formData.append('subject', `Résultats Test RIASEC - ${userName} - ${dominantProfile1} + ${dominantProfile2}`);
+            formData.append('message', emailContent);
+            formData.append('age', testResults.age);
+            formData.append('version', testResults.ageGroup);
+            formData.append('profil_dominant', `${dominantProfile1} + ${dominantProfile2}`);
+            formData.append('score_R', testResults.scores.R);
+            formData.append('score_I', testResults.scores.I);
+            formData.append('score_A', testResults.scores.A);
+            formData.append('score_S', testResults.scores.S);
+            formData.append('score_E', testResults.scores.E);
+            formData.append('score_C', testResults.scores.C);
+            
+            // Afficher un message de chargement
+            const originalText = event.target.textContent;
+            event.target.textContent = "📧 Envoi en cours...";
+            event.target.disabled = true;
+            
+            // Envoyer via Formspree
+            fetch('https://formspree.io/f/xdkopvvl', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert(`✅ Résultats envoyés avec succès !
+                    
+Vos résultats ont été transmis à l'Académie de l'Agentivité.
+Profil : ${dominantProfile1} + ${dominantProfile2}
+
+Vous pouvez fermer cette page.`);
+                } else {
+                    throw new Error('Erreur lors de l\'envoi');
+                }
+            })
+            .catch(error => {
+                alert(`❌ Erreur lors de l'envoi des résultats.
+                
+Veuillez utiliser le bouton "📊 Exporter en JSON" et envoyer le fichier par email à : contact@academie-agentivite.fr`);
+                console.error('Erreur:', error);
+            })
+            .finally(() => {
+                // Restaurer le bouton
+                event.target.textContent = originalText;
+                event.target.disabled = false;
             });
         }
 
