@@ -1,4 +1,12 @@
-<!DOCTYPE html>
+// Questions RIASEC pour 22-28+ ans (80 questions équilibrées)
+        const questionsAdult = [
+            // RÉALISTE (13 questions - 3 inversées)
+            { text: "Pour votre premier poste, vous préférez un environnement :", type: "R", inverted: false, answers: ["Bureau en open space avec écrans", "Bureau fermé climatisé", "Ça dépend des missions", "Atelier, laboratoire ou terrain", "Principalement à l'extérieur"] },
+            { text: "Dans vos stages, vous avez préféré :", type: "R", inverted: false, answers: ["Analyser des données et faire des rapports", "Participer aux réunions et présentations", "Un mix de tâches variées", "Utiliser des outils et équipements", "Manipuler, construire, réparer"] },
+            { text: "Quand votre ordi ou smartphone bugge :", type: "R", inverted: false, answers: ["Vous demandez de l'aide immédiatement", "Vous redémarrez et espérez que ça marche", "Vous cherchez la solution sur Google", "Vous testez plusieurs manipulations", "Vous voulez comprendre d'où vient le problème"] },
+            { text: "Pour apprendre quelque chose de nouveau :", type: "R", inverted: false, answers: ["Cours magistral puis exercices", "Lecture de documentation", "Formation mixte théorie/pratique", "Vidéos et démonstrations", "Apprentissage par la manipulation directe"] },
+            { text: "Vos matières préférées à l'université/école étaient :", type: "R", inverted: false, answers: ["Sciences humaines, littérature", "Économie, gestion, marketing", "Un peu de tout selon les profs", "Sciences, informatique, ingénierie", "Travaux pratiques, projets techniques"] },
+            { text: "Dans les projets de groupe à l'école :", type: "R", inverted: false, answers: ["Vous vous occupiez de la présentation", "Vous faisiez la recherche documentaire", "Vous preniez ce qu<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -544,39 +552,77 @@
     <script>
         // Questions RIASEC pour 15-21 ans (60 questions équilibrées)
         const questionsYoung = [
-            // QUESTIONS MIXÉES
+            // RÉALISTE (10 questions - 2 inversées)
             { text: "Un weekend libre, tu choisirais plutôt de :", type: "R", inverted: false, answers: ["Organiser tes photos numériques", "Lire un livre ou regarder une série", "Faire du shopping ou voir des amis", "Bricoler ou jardiner", "Construire ou réparer quelque chose"] },
-            { text: "Face à un problème technique (wifi qui bugge, app qui plante) :", type: "I", inverted: false, answers: ["Tu demandes de l'aide immédiatement", "Tu cherches une solution rapide", "Ça dépend du temps que tu as", "Tu explores plusieurs hypothèses", "Tu veux comprendre pourquoi ça a planté"] },
-            { text: "Pour décorer ta chambre/ton espace :", type: "A", inverted: false, answers: ["Tu laisses comme c'est", "Tu t'inspires de ce qui existe", "Tu mixes inspiration et création", "Tu crées ton propre style", "Tu inventes quelque chose d'unique"] },
-            { text: "Dans un jeu en équipe, tu préfères :", type: "S", inverted: false, answers: ["Que chacun joue pour soi", "Une saine compétition", "Un mix des deux", "Que tout le monde s'aide", "Qu'on gagne ou perde tous ensemble"] },
-            { text: "Quand ton groupe d'amis hésite sur le choix d'un resto :", type: "E", inverted: false, answers: ["Tu attends qu'ils se décident", "Tu donnes ton avis si on te le demande", "Tu participes à la discussion", "Tu proposes 2-3 options", "Tu tranches et tu réserves"] },
-            { text: "Pour organiser tes révisions ou tes projets :", type: "C", inverted: false, answers: ["Tu improvises au dernier moment", "Tu planifies vaguement", "Tu fais un planning de base", "Tu organises tout méticuleusement", "Tu détailles chaque étape à l'avance"] },
-            
-            // Continue with all 60 questions mixed...
             { text: "Quand quelque chose se casse chez toi :", type: "R", inverted: false, answers: ["Tu appelles quelqu'un pour réparer", "Tu demandes de l'aide à tes parents", "Ça dépend de ce que c'est", "Tu regardes des tutos pour apprendre", "Tu démontes pour voir comment ça marche"] },
-            { text: "Quand tu découvres une nouvelle technologie :", type: "I", inverted: false, answers: ["Tu l'utilises comme tout le monde", "Tu lis juste le mode d'emploi", "Tu testes les fonctions de base", "Tu explores toutes les possibilités", "Tu veux savoir comment c'est fait"] },
-            { text: "Dans tes stories ou posts sur les réseaux :", type: "A", inverted: false, answers: ["Tu postes des trucs classiques", "Tu suis les tendances", "Tu alternes selon l'humeur", "Tu cherches ton style perso", "Tu créés des contenus originaux"] },
-            { text: "Quand un ami va mal :", type: "S", inverted: false, answers: ["Tu attends qu'il vienne te voir", "Tu lui demandes ce qui va pas", "Tu restes disponible", "Tu vas vers lui pour l'aider", "Tu lâches tout pour être là"] },
-            
-            // Add remaining questions with mix of all types and inversions...
-            { text: "Passer des heures à analyser des théories ou des concepts abstraits", type: "R", inverted: true, answers: ["Ça m'ennuie vraiment", "Je préfère du concret", "Ça dépend du sujet", "J'aime bien réfléchir", "Ça me passionne"] },
-            { text: "Suivre une procédure sans chercher à comprendre pourquoi elle fonctionne", type: "I", inverted: true, answers: ["Impossible, j'ai besoin de comprendre", "Je pose au moins quelques questions", "Si ça marche, ça me va", "J'exécute ce qu'on me demande", "C'est plus simple comme ça"] },
-            { text: "Faire toujours les mêmes tâches dans le même ordre, ça te rassure", type: "A", inverted: true, answers: ["Ça m'ennuie profondément", "J'ai besoin de variété", "Ça dépend du contexte", "J'aime les habitudes", "J'ai besoin de routine"] },
-            { text: "Réussir un projet solo plutôt que d'aider quelqu'un avec le sien", type: "S", inverted: true, answers: ["J'aide toujours en priorité", "J'aide puis je fais le mien", "Ça dépend de qui et de quoi", "Mon projet passe d'abord", "Chacun se débrouille"] },
-            { text: "Éviter toute forme de compétition ou de concurrence", type: "E", inverted: true, answers: ["J'ai besoin d'émulation", "Un peu de compét', ça stimule", "Ça dépend du contexte", "Je préfère la collaboration", "La compétition me stresse"] },
-            { text: "Travailler sans planning précis et en improvisant au fur et à mesure", type: "C", inverted: true, answers: ["Ça me stresse énormément", "J'ai besoin d'un minimum de cadre", "Ça peut marcher selon le contexte", "J'aime cette liberté", "C'est comme ça que je fonctionne le mieux"] },
-            
-            // Continue adding the remaining 48 questions to reach 60 total...
-            // For brevity, I'll add a few more examples:
-            
             { text: "Pour apprendre quelque chose de nouveau :", type: "R", inverted: false, answers: ["Tu lis la théorie d'abord", "Tu regardes des explications", "Tu mixes théorie et pratique", "Tu essaies directement", "Tu apprends en manipulant"] },
+            { text: "Dans tes matières préférées au lycée :", type: "R", inverted: false, answers: ["Français, philo, langues", "Histoire, économie", "Un peu de tout", "Sciences, techno", "Travaux pratiques, sport"] },
+            { text: "Pour ton futur job, tu préfères :", type: "R", inverted: false, answers: ["Être dans un bureau climatisé", "Alterner bureau et extérieur", "Peu importe l'endroit", "Bouger, être sur le terrain", "Travailler dehors ou en atelier"] },
+            { text: "Tes amis te demandent souvent de :", type: "R", inverted: false, answers: ["Les conseiller sur leurs problèmes", "Les aider avec les devoirs", "Un peu de tout selon les cas", "Installer ou configurer leurs trucs", "Réparer ou monter quelque chose"] },
+            { text: "Dans un projet de groupe :", type: "R", inverted: false, answers: ["Tu t'occupes de la présentation", "Tu fais les recherches", "Tu prends ce qu'on te donne", "Tu t'occupes de la partie technique", "Tu fabriques ou construis le projet"] },
+            { text: "Ton environnement de travail idéal :", type: "R", inverted: false, answers: ["Un open space moderne", "Un bureau personnel", "Ça dépend du moment", "Un atelier ou labo", "Dehors ou en déplacement"] },
+            { text: "Passer des heures à analyser des théories ou des concepts abstraits :", type: "R", inverted: true, answers: ["Ça m'ennuie vraiment", "Je préfère du concret", "Ça dépend du sujet", "J'aime bien réfléchir", "Ça me passionne"] },
+            { text: "Travailler uniquement avec des concepts et des idées, sans jamais rien toucher :", type: "R", inverted: true, answers: ["Impossible, j'ai besoin de concret", "Ça me manquerait", "Je pourrais m'y habituer", "Ça me va bien", "C'est parfait pour moi"] },
+
+            // INVESTIGATEUR (10 questions - 2 inversées)
+            { text: "Face à un problème technique (wifi qui bugge, app qui plante) :", type: "I", inverted: false, answers: ["Tu demandes de l'aide immédiatement", "Tu cherches une solution rapide", "Ça dépend du temps que tu as", "Tu explores plusieurs hypothèses", "Tu veux comprendre pourquoi ça a planté"] },
+            { text: "Quand tu découvres une nouvelle technologie :", type: "I", inverted: false, answers: ["Tu l'utilises comme tout le monde", "Tu lis juste le mode d'emploi", "Tu testes les fonctions de base", "Tu explores toutes les possibilités", "Tu veux savoir comment c'est fait"] },
             { text: "Dans tes loisirs, tu aimes :", type: "I", inverted: false, answers: ["Faire la fête et sortir", "Le sport ou les activités de groupe", "Un mix d'activités", "Les jeux de réflexion", "Résoudre des énigmes complexes"] },
+            { text: "Pour tes projets perso :", type: "I", inverted: false, answers: ["Tu préfères être accompagné", "Tu aimes avoir des retours", "Seul ou accompagné, ça dépend", "Tu travailles mieux en autonomie", "Tu as besoin de solitude pour réfléchir"] },
+            { text: "Devant un phénomène que tu ne comprends pas :", type: "I", inverted: false, answers: ["Tu l'acceptes comme ça", "Tu cherches une explication simple", "Ça dépend si ça t'intéresse", "Tu fais des recherches approfondies", "Tu ne lâches pas tant que tu n'as pas compris"] },
+            { text: "Les matières scientifiques (maths, physique, bio, chimie) :", type: "I", inverted: false, answers: ["Te rebutent complètement", "Ne sont pas ton fort", "Ça peut aller selon les profs", "T'intéressent vraiment", "Te passionnent"] },
+            { text: "Quand tu regardes un documentaire :", type: "I", inverted: false, answers: ["Tu zappes rapidement", "Tu regardes distraitement", "Ça dépend du sujet", "Tu prends des notes mentales", "Tu veux creuser le sujet après"] },
+            { text: "Pour ton orientation :", type: "I", inverted: false, answers: ["Tu suis les conseils des autres", "Tu choisis ce qui a l'air facile", "Tu hésites entre plusieurs options", "Tu analyses les secteurs d'avenir", "Tu recherches les domaines en pointe"] },
+            { text: "Suivre une procédure sans chercher à comprendre pourquoi elle fonctionne :", type: "I", inverted: true, answers: ["Impossible, j'ai besoin de comprendre", "Je pose au moins quelques questions", "Si ça marche, ça me va", "J'exécute ce qu'on me demande", "C'est plus simple comme ça"] },
+            { text: "Prendre des décisions rapidement sans analyser tous les aspects :", type: "I", inverted: true, answers: ["Je dois tout étudier avant", "J'ai besoin d'un minimum d'infos", "Ça dépend de l'importance", "L'intuition suffit souvent", "Il faut savoir trancher vite"] },
+
+            // ARTISTIQUE (10 questions - 2 inversées)
+            { text: "Pour décorer ta chambre/ton espace :", type: "A", inverted: false, answers: ["Tu laisses comme c'est", "Tu t'inspires de ce qui existe", "Tu mixes inspiration et création", "Tu crées ton propre style", "Tu inventes quelque chose d'unique"] },
+            { text: "Dans tes stories ou posts sur les réseaux :", type: "A", inverted: false, answers: ["Tu postes des trucs classiques", "Tu suis les tendances", "Tu alternes selon l'humeur", "Tu cherches ton style perso", "Tu créés des contenus originaux"] },
             { text: "Quand tu as un projet créatif (vidéo, dessin, musique...) :", type: "A", inverted: false, answers: ["Tu préfères qu'on te donne les consignes", "Tu aimes avoir un cadre", "Libre ou cadré, ça marche", "Tu préfères inventer ton concept", "Tu détestes les contraintes imposées"] },
-            { text: "Dans tes projets d'études ou de boulot :", type: "S", inverted: false, answers: ["L'argent et le prestige comptent", "La réussite perso est importante", "Tu veux équilibrer les deux", "Aider les autres te motive", "Avoir un impact positif est essentiel"] },
+            { text: "Dans ton style vestimentaire :", type: "A", inverted: false, answers: ["Tu portes ce que tout le monde porte", "Tu suis la mode du moment", "Tu mixes tendances et goûts perso", "Tu affirmes ta personnalité", "Tu assumes ton originalité"] },
+            { text: "Pour exprimer une idée ou un sentiment :", type: "A", inverted: false, answers: ["Tu écris un message direct", "Tu expliques clairement", "Ça dépend du contexte", "Tu utilises des métaphores", "Tu préfères créer (dessin, musique, vidéo...)"] },
+            { text: "Les cours d'arts plastiques, musique, théâtre :", type: "A", inverted: false, answers: ["T'ennuient profondément", "Ne sont pas ton truc", "Ça peut être sympa", "Te plaisent beaucoup", "Sont tes préférés"] },
+            { text: "Quand tu visites un musée, une expo ou un concert :", type: "A", inverted: false, answers: ["Tu t'ennuies rapidement", "Tu regardes distraitement", "Ça dépend de ce qui est exposé", "Tu es inspiré par ce que tu vois", "Tu ressors avec plein d'idées"] },
+            { text: "Dans tes projets (scolaires, perso, créatifs) :", type: "A", inverted: false, answers: ["Tu veux des résultats mesurables", "L'efficacité est prioritaire", "Tu équilibres les deux", "Le processus créatif compte autant", "L'expression artistique prime sur tout"] },
+            { text: "Faire toujours les mêmes tâches dans le même ordre, ça te rassure :", type: "A", inverted: true, answers: ["Ça m'ennuie profondément", "J'ai besoin de variété", "Ça dépend du contexte", "J'aime les habitudes", "J'ai besoin de routine"] },
+            { text: "Sur les réseaux sociaux, pour tes publications :", type: "A", inverted: true, answers: ["Tu postes ce qui marche chez les autres", "Tu suis les tendances du moment", "Tu alternes selon l'inspiration", "Tu développes ton style personnel", "Tu crées tes propres codes visuels"] },
+
+            // SOCIAL (10 questions - 2 inversées)
+            { text: "Quand tu dois choisir entre deux activités :", type: "S", inverted: false, answers: ["Une compétition solo où tu peux briller", "Un défi personnel", "Ça dépend de ton humeur", "Un projet collaboratif", "Aider quelqu'un dans son projet"] },
+            { text: "Quand un ami va mal :", type: "S", inverted: false, answers: ["Tu attends qu'il vienne te voir", "Tu lui demandes ce qui va pas", "Tu restes disponible", "Tu vas vers lui pour l'aider", "Tu lâches tout pour être là"] },
+            { text: "Ce qui te motiverait le plus dans un job étudiant :", type: "S", inverted: false, answers: ["Un bon salaire horaire", "Développer tes compétences", "Un mix des deux", "Travailler avec une équipe sympa", "Sentir que tu rends service aux gens"] },
+            { text: "En cours, quand quelqu'un n'a pas compris :", type: "S", inverted: false, answers: ["C'est son problème", "Tu te concentres sur tes notes", "Tu aides si on te le demande", "Tu proposes spontanément ton aide", "Tu prends le temps de lui expliquer"] },
+            { text: "Dans tes loisirs, tu préfères :", type: "S", inverted: false, answers: ["Sport individuel ou loisirs solo", "Activités centrées sur tes performances", "Un mix selon tes envies", "Activités de groupe ou collectives", "Actions bénévoles ou solidaires"] },
+            { text: "Tes amis :", type: "S", inverted: false, answers: ["Te parlent rarement de leurs problèmes", "Gardent leurs soucis pour eux", "Se confient de temps en temps", "Viennent souvent te demander conseil", "Te considèrent comme leur confident(e)"] },
+            { text: "Dans un conflit entre amis :", type: "S", inverted: false, answers: ["Tu restes en dehors", "Tu choisis ton camp", "Tu évites de t'en mêler", "Tu essaies de les faire discuter", "Tu joues les médiateurs"] },
+            { text: "Ce qui te donne le plus de satisfaction :", type: "S", inverted: false, answers: ["Réussir un défi personnel", "Atteindre tes objectifs", "Les deux selon les moments", "Voir les autres progresser", "Savoir que tu as aidé quelqu'un"] },
+            { text: "Réussir un projet solo plutôt que d'aider quelqu'un avec le sien :", type: "S", inverted: true, answers: ["J'aide toujours en priorité", "J'aide puis je fais le mien", "Ça dépend de qui et de quoi", "Mon projet passe d'abord", "Chacun se débrouille"] },
+            { text: "Te concentrer uniquement sur tes résultats sans t'occuper des autres :", type: "S", inverted: true, answers: ["Je ne peux pas faire ça", "Ça me gênerait", "Si nécessaire, pourquoi pas", "Chacun sa route", "C'est la seule façon de réussir"] },
+
+            // ENTREPRENANT (10 questions - 2 inversées)
+            { text: "Quand ton groupe d'amis hésite sur le choix d'un resto :", type: "E", inverted: false, answers: ["Tu attends qu'ils se décident", "Tu donnes ton avis si on te le demande", "Tu participes à la discussion", "Tu proposes 2-3 options", "Tu tranches et tu réserves"] },
             { text: "Dans les jeux vidéo ou les jeux de société :", type: "E", inverted: false, answers: ["Tu joues pour le plaisir", "Tu aimes bien gagner", "Ça dépend de ton humeur", "Tu joues pour gagner", "Tu détestes perdre"] },
-            { text: "Dans ton espace de travail (bureau, chambre) :", type: "C", inverted: false, answers: ["C'est le bordel créatif", "C'est un peu en désordre", "Ça oscille entre ordre et désordre", "Tout a sa place", "C'est nickel et organisé"] }
-            
-            // Continue with remaining questions to reach 60 total...
+            { text: "Quand il faut organiser une sortie ou un événement :", type: "E", inverted: false, answers: ["Tu préfères qu'un autre s'en charge", "Tu aides mais sans coordonner", "Tu participes selon tes dispos", "Tu aimes bien prendre les rênes", "Tu te proposes spontanément"] },
+            { text: "Face à un désaccord dans ton groupe :", type: "E", inverted: false, answers: ["Tu évites le conflit", "Tu donnes discrètement ton avis", "Tu écoutes les différents points de vue", "Tu défends fermement ton opinion", "Tu convaincs les autres du bien-fondé de ta position"] },
+            { text: "Pour tes projets personnels :", type: "E", inverted: false, answers: ["Tu préfères suivre que diriger", "Tu aimes avoir un guide", "Ça dépend du projet", "Tu aimes avoir le contrôle", "Tu veux être le décideur"] },
+            { text: "Quand tu présentes quelque chose (exposé, projet...) :", type: "E", inverted: false, answers: ["Tu stresses à l'idée de parler", "Tu préfères rester en retrait", "Ça peut aller selon le contexte", "Tu es à l'aise devant le groupe", "Tu prends plaisir à convaincre"] },
+            { text: "Les risques et les défis :", type: "E", inverted: false, answers: ["Te font peur", "Tu préfères la sécurité", "Tu réfléchis avant de te lancer", "Te motivent", "Te dopent à l'adrénaline"] },
+            { text: "Pour ton avenir professionnel :", type: "E", inverted: false, answers: ["Tu veux un poste stable et tranquille", "Tu cherches la sécurité", "Tu veux équilibrer ambition et stabilité", "Tu vises des postes à responsabilités", "Tu rêves de créer ta propre boîte"] },
+            { text: "Éviter toute forme de compétition ou de concurrence :", type: "E", inverted: true, answers: ["J'ai besoin d'émulation", "Un peu de compét', ça stimule", "Ça dépend du contexte", "Je préfère la collaboration", "La compétition me stresse"] },
+            { text: "Laisser les autres prendre toutes les décisions importantes :", type: "E", inverted: true, answers: ["J'ai besoin d'avoir mon mot à dire", "Je veux au moins donner mon avis", "Ça dépend du sujet", "Je fais confiance aux autres", "C'est plus simple comme ça"] },
+
+            // CONVENTIONNEL (10 questions - 2 inversées)
+            { text: "Pour organiser tes révisions ou tes projets :", type: "C", inverted: false, answers: ["Tu improvises au dernier moment", "Tu planifies vaguement", "Tu fais un planning de base", "Tu organises tout méticuleusement", "Tu détailles chaque étape à l'avance"] },
+            { text: "Dans ton espace de travail (bureau, chambre) :", type: "C", inverted: false, answers: ["C'est le bordel créatif", "C'est un peu en désordre", "Ça oscille entre ordre et désordre", "Tout a sa place", "C'est nickel et organisé"] },
+            { text: "Les règlements et les consignes :", type: "C", inverted: false, answers: ["Te donnent envie de faire l'inverse", "T'agacent souvent", "Tu t'y conformes sans réfléchir", "Te rassurent", "Sont nécessaires pour bien fonctionner"] },
+            { text: "Dans tes matières préférées :", type: "C", inverted: false, answers: ["Arts, langues, philo", "Littérature, histoire", "Un peu de tout", "Maths, sciences", "Comptabilité, gestion, éco"] },
+            { text: "Tes amis te décrivent comme quelqu'un :", type: "C", inverted: false, answers: ["D'imprévisible et spontané", "Qui suit son instinct", "D'équilibré", "De fiable et ponctuel", "Sur qui on peut toujours compter"] },
+            { text: "Pour prendre une décision importante :", type: "C", inverted: false, answers: ["Tu suis ton instinct", "Tu écoutes ton ressenti", "Tu mixes logique et intuition", "Tu listes les pour et les contre", "Tu analyses tous les critères"] },
+            { text: "Les activités avec des chiffres, des stats, des tableaux :", type: "C", inverted: false, answers: ["T'ennuient profondément", "Ne sont pas ton fort", "Ça peut aller selon le contexte", "Te plaisent bien", "Te passionnent"] },
+            { text: "Pour ton futur job :", type: "C", inverted: false, answers: ["Tu veux de la variété et de l'imprévu", "Tu cherches de la nouveauté", "Tu veux un équilibre", "Tu préfères des tâches claires", "Tu veux de la stabilité et des procédures"] },
+            { text: "Travailler sans planning précis et en improvisant au fur et à mesure :", type: "C", inverted: true, answers: ["Ça me stresse énormément", "J'ai besoin d'un minimum de cadre", "Ça peut marcher selon le contexte", "J'aime cette liberté", "C'est comme ça que je fonctionne le mieux"] },
+            { text: "Changer constamment de méthode et remettre en question les façons de faire :", type: "C", inverted: true, answers: ["Il faut garder ce qui marche", "Trop de changements, ça déstabilise", "Un peu de nouveauté, c'est bien", "Il faut savoir évoluer", "C'est essentiel pour progresser"] }
         ];
 
         // Questions RIASEC pour 22-28+ ans (80 questions équilibrées)
@@ -595,16 +641,101 @@
             
             // Add remaining 72 questions to reach 80 total with proper mixing...
             { text: "Dans vos stages, vous avez préféré :", type: "R", inverted: false, answers: ["Analyser des données et faire des rapports", "Participer aux réunions et présentations", "Un mix de tâches variées", "Utiliser des outils et équipements", "Manipuler, construire, réparer"] },
-            { text: "Quand vous ne comprenez pas quelque chose en cours :", type: "I", inverted: false, answers: ["Vous laissez passer", "Vous demandez à un camarade", "Vous posez une question au prof", "Vous faites des recherches approfondies", "Vous ne lâchez pas tant que vous n'avez pas compris"] },
-            
-            // Continue avec toutes les 80 questions pour les adultes...
-            { text: "Pour personnaliser votre chambre/appartement étudiant :", type: "A", inverted: false, answers: ["Vous laissez tel quel", "Vous ajoutez juste quelques objets", "Vous faites quelques changements", "Vous créez votre propre ambiance", "Vous réinventez complètement l'espace"] },
-            { text: "Quand un ami traverse une période difficile :", type: "S", inverted: false, answers: ["Vous attendez qu'il vous en parle", "Vous lui demandez comment ça va", "Vous restez disponible", "Vous allez vers lui pour l'aider", "Vous vous libérez pour être là"] },
-            { text: "Dans les jeux (vidéo, société, sport) :", type: "E", inverted: false, answers: ["Vous jouez pour passer le temps", "Vous aimez bien gagner", "Ça dépend de votre humeur", "Vous jouez pour gagner", "Vous détestez perdre"] },
-            { text: "Dans votre espace de travail (bureau, chambre) :", type: "C", inverted: false, answers: ["C'est le bordel créatif", "C'est un peu en désordre", "Ça oscille entre ordre et désordre", "Tout a sa place", "C'est nickel et organisé"] },
-            
-            // Questions inversées pour la version adulte
+        // Questions RIASEC pour 22-28+ ans (80 questions équilibrées)
+        const questionsAdult = [
+            // RÉALISTE (13 questions - 3 inversées)
+            { text: "Pour votre premier poste, vous préférez un environnement :", type: "R", inverted: false, answers: ["Bureau en open space avec écrans", "Bureau fermé climatisé", "Ça dépend des missions", "Atelier, laboratoire ou terrain", "Principalement à l'extérieur"] },
+            { text: "Dans vos stages, vous avez préféré :", type: "R", inverted: false, answers: ["Analyser des données et faire des rapports", "Participer aux réunions et présentations", "Un mix de tâches variées", "Utiliser des outils et équipements", "Manipuler, construire, réparer"] },
+            { text: "Quand votre ordi ou smartphone bugge :", type: "R", inverted: false, answers: ["Vous demandez de l'aide immédiatement", "Vous redémarrez et espérez que ça marche", "Vous cherchez la solution sur Google", "Vous testez plusieurs manipulations", "Vous voulez comprendre d'où vient le problème"] },
+            { text: "Pour apprendre quelque chose de nouveau :", type: "R", inverted: false, answers: ["Cours magistral puis exercices", "Lecture de documentation", "Formation mixte théorie/pratique", "Vidéos et démonstrations", "Apprentissage par la manipulation directe"] },
+            { text: "Vos matières préférées à l'université/école étaient :", type: "R", inverted: false, answers: ["Sciences humaines, littérature", "Économie, gestion, marketing", "Un peu de tout selon les profs", "Sciences, informatique, ingénierie", "Travaux pratiques, projets techniques"] },
+            { text: "Dans les projets de groupe à l'école :", type: "R", inverted: false, answers: ["Vous vous occupiez de la présentation", "Vous faisiez la recherche documentaire", "Vous preniez ce qu'on vous donnait", "Vous gériez la partie technique", "Vous réalisiez les prototypes/maquettes"] },
+            { text: "Pour votre mémoire/projet de fin d'études :", type: "R", inverted: false, answers: ["Étude théorique et analyse conceptuelle", "Enquête et traitement de données", "Recherche appliquée", "Expérimentation et tests", "Conception et réalisation d'un prototype"] },
+            { text: "Ce qui vous donne le plus de satisfaction :", type: "R", inverted: false, answers: ["Réussir vos examens écrits", "Réussir un exposé ou une présentation", "Valider vos cours", "Voir fonctionner ce que vous avez créé", "Construire quelque chose de vos mains"] },
+            { text: "Dans vos loisirs, vous préférez :", type: "R", inverted: false, answers: ["Lecture, cinéma, musées", "Sorties entre amis, réseaux sociaux", "Ça dépend de votre humeur", "Sport, randonnée, activités outdoor", "Bricolage, jardinage, cuisine"] },
+            { text: "Face à un défi pratique (monter un meuble, réparer quelque chose) :", type: "R", inverted: false, answers: ["Vous payez quelqu'un pour le faire", "Vous demandez de l'aide à votre entourage", "Vous tentez avec des tutos", "Vous aimez relever le défi", "C'est votre domaine de prédilection"] },
             { text: "Passer vos journées à analyser des concepts abstraits sans application concrète :", type: "R", inverted: true, answers: ["Vous avez besoin de voir du concret", "Vous préférez l'application pratique", "Vous pourriez vous y habituer", "Cela vous convient", "C'est parfait pour vous"] },
+            { text: "Travailler uniquement sur ordinateur sans jamais manipuler d'objets physiques :", type: "R", inverted: true, answers: ["Vous avez besoin d'activité manuelle", "Cela vous manquerait", "Vous pourriez vous adapter", "Cela vous va bien", "C'est votre préférence"] },
+            { text: "Exercer un métier où vous ne voyez jamais le résultat concret de votre travail :", type: "R", inverted: true, answers: ["Vous avez besoin de résultats tangibles", "Cela vous frustrerait", "L'important est le sens du travail", "L'impact indirect vous suffit", "Vous cherchez autre chose dans le travail"] },
+
+            // INVESTIGATEUR (13 questions - 3 inversées)
+            { text: "Face à un nouveau logiciel ou application :", type: "I", inverted: false, answers: ["Vous utilisez juste les fonctions de base", "Vous suivez un tutoriel rapide", "Vous explorez progressivement", "Vous testez toutes les fonctionnalités", "Vous voulez comprendre comment c'est conçu"] },
+            { text: "Quand vous ne comprenez pas quelque chose en cours :", type: "I", inverted: false, answers: ["Vous laissez passer", "Vous demandez à un camarade", "Vous posez une question au prof", "Vous faites des recherches approfondies", "Vous ne lâchez pas tant que vous n'avez pas compris"] },
+            { text: "Pour vos révisions d'examens :", type: "I", inverted: false, answers: ["Vous apprenez par cœur", "Vous refaites les exercices types", "Vous relisez vos cours", "Vous creusez les liens entre concepts", "Vous cherchez à comprendre la logique profonde"] },
+            { text: "Pour vos projets étudiants :", type: "I", inverted: false, answers: ["Vous préférez travailler en groupe", "Vous aimez avoir des retours réguliers", "Ça dépend de la complexité", "Vous travaillez mieux en autonomie", "Vous avez besoin de calme pour réfléchir"] },
+            { text: "Quand vous cherchez des infos pour un dossier :", type: "I", inverted: false, answers: ["Vous prenez ce que vous trouvez en premier", "Vous consultez Wikipedia et quelques sites", "Vous vérifiez 2-3 sources", "Vous recoupez plusieurs sources fiables", "Vous remontez aux sources académiques"] },
+            { text: "Les matières scientifiques (maths, physique, bio, informatique) :", type: "I", inverted: false, answers: ["Vous ont toujours rebuté", "N'étaient pas votre fort", "Ça pouvait aller selon les profs", "Vous ont toujours intéressé", "Ont toujours été votre passion"] },
+            { text: "Dans les débats ou discussions :", type: "I", inverted: false, answers: ["Vous évitez de vous exprimer", "Vous donnez votre opinion", "Vous participez selon le sujet", "Vous posez des questions précises", "Vous voulez analyser tous les aspects"] },
+            { text: "Pour choisir votre orientation :", type: "I", inverted: false, answers: ["Vous avez suivi les conseils de votre entourage", "Vous avez choisi ce qui a l'air facile", "Vous avez pesé plusieurs critères", "Vous avez analysé les secteurs d'avenir", "Vous avez étudié les tendances technologiques"] },
+            { text: "Vous préférez les cours :", type: "I", inverted: false, answers: ["Magistraux avec prise de notes", "Interactifs avec beaucoup d'échanges", "Ça dépend de la matière", "Avec beaucoup de temps pour les questions", "Qui permettent d'approfondir et de débattre"] },
+            { text: "Face aux nouvelles technologies :", type: "I", inverted: false, answers: ["Vous attendez qu'elles soient bien établies", "Vous les adoptez quand nécessaire", "Vous suivez les évolutions", "Vous aimez tester les nouveautés", "Vous voulez comprendre leur fonctionnement"] },
+            { text: "Appliquer des méthodes sans chercher à comprendre pourquoi elles fonctionnent :", type: "I", inverted: true, answers: ["Vous devez comprendre le principe", "Vous posez au moins quelques questions", "Si ça marche, ça vous va", "Vous appliquez ce qu'on vous enseigne", "C'est plus efficace comme ça"] },
+            { text: "Prendre des décisions rapidement sur la base de votre première impression :", type: "I", inverted: true, answers: ["Vous devez analyser avant de décider", "Vous avez besoin d'un minimum d'infos", "Ça dépend de l'importance de la décision", "Votre intuition est souvent bonne", "Il faut savoir trancher vite"] },
+            { text: "Vous contenter d'explications superficielles sans creuser davantage :", type: "I", inverted: true, answers: ["Vous voulez toujours aller au fond", "Vous posez des questions complémentaires", "Ça dépend de votre niveau d'intérêt", "Si c'est suffisant pour comprendre", "Vous n'avez pas besoin de tout savoir"] },
+
+            // ARTISTIQUE (14 questions - 2 inversées)
+            { text: "Dans l'aménagement de votre espace de travail :", type: "A", inverted: false, answers: ["Vous gardez l'aménagement standard", "Vous vous adaptez à l'existant", "Vous faites quelques ajustements", "Vous personnalisez selon vos goûts", "Vous créez une ambiance unique"] },
+            { text: "Pour personnaliser votre chambre/appartement étudiant :", type: "A", inverted: false, answers: ["Vous laissez tel quel", "Vous ajoutez juste quelques objets", "Vous faites quelques changements", "Vous créez votre propre ambiance", "Vous réinventez complètement l'espace"] },
+            { text: "Pour vos présentations d'école :", type: "A", inverted: false, answers: ["Template PowerPoint standard", "Mise en page basique mais claire", "Quelques éléments visuels", "Design soigné et original", "Création graphique unique"] },
+            { text: "Dans les travaux créatifs (projets, exposés, mémoire) :", type: "A", inverted: false, answers: ["Vous préférez un cadre très précis", "Vous aimez avoir des consignes claires", "Un équilibre liberté/contraintes", "Vous préférez développer votre vision", "Vous voulez une liberté créative totale"] },
+            { text: "Votre style vestimentaire :", type: "A", inverted: false, answers: ["Basique et passe-partout", "Vous suivez les tendances", "Mix tendance et goûts personnels", "Vous affirmez votre personnalité", "Vous créez votre propre style"] },
+            { text: "Pour exprimer vos idées (rapports, projets, réseaux sociaux) :", type: "A", inverted: false, answers: ["Texte structuré et clair", "Présentation soignée standard", "Quelques visuels pour illustrer", "Supports visuels créatifs", "Création multimédia originale"] },
+            { text: "L'esthétique de votre environnement d'études :", type: "A", inverted: false, answers: ["N'a aucune importance", "Passe après l'efficacité", "Contribue à votre bien-être", "Influence votre concentration", "Est essentielle à votre productivité"] },
+            { text: "Vos activités de temps libre préférées :", type: "A", inverted: false, answers: ["Sport, associations étudiantes", "Sorties, voyages, festivals", "Un mix selon vos envies", "Ateliers créatifs, culture", "Création artistique personnelle"] },
+            { text: "Ce qui vous motive le plus dans la recherche d'emploi :", type: "A", inverted: false, answers: ["Sécurité financière et stabilité", "Prestige et évolution de carrière", "Équilibre entre plusieurs facteurs", "Épanouissement et expression personnelle", "Possibilité de créer et innover"] },
+            { text: "Face aux contraintes académiques (formats, normes, délais) :", type: "A", inverted: false, answers: ["Vous les respectez scrupuleusement", "Vous vous y conformez", "Vous les acceptez pragmatiquement", "Vous cherchez des marges de manœuvre", "Vous les trouvez trop rigides"] },
+            { text: "Vos sources d'inspiration :", type: "A", inverted: false, answers: ["Manuels scolaires et cours", "Internet et réseaux sociaux", "Mix de sources variées", "Art, design, culture", "Créations personnelles et expérimentation"] },
+            { text: "Dans vos projets de groupe :", type: "A", inverted: false, answers: ["Vous vous occupez de la logistique", "Vous gérez la recherche d'infos", "Vous participez à tout", "Vous vous chargez de la partie créative", "Vous portez la vision artistique du projet"] },
+            { text: "Pour votre premier emploi, vous souhaitez :", type: "A", inverted: false, answers: ["Des tâches bien définies et répétitives", "Un cadre structuré avec des objectifs clairs", "Un équilibre routine/nouveauté", "De la variété et des projets différents", "Liberté créative et innovation"] },
+            { text: "Respecter toujours les mêmes formats et méthodes sans jamais innover :", type: "A", inverted: true, answers: ["Vous avez besoin de créativité", "Vous préférez adapter", "Ça dépend du contexte", "C'est important de respecter les codes", "Il faut suivre ce qui marche"] },
+            { text: "Faire exactement les mêmes tâches tous les jours dans votre futur emploi :", type: "A", inverted: true, answers: ["Vous avez besoin de variété", "Cela vous ennuierait rapidement", "Vous pourriez vous y habituer", "Cela vous rassurerait", "C'est parfait pour vous"] },
+
+            // SOCIAL (14 questions - 3 inversées)
+            { text: "Quand vous devez choisir entre deux activités :", type: "S", inverted: false, answers: ["Une compétition où vous pouvez vous démarquer", "Un défi personnel", "Ça dépend de votre humeur", "Un projet collaboratif", "Aider quelqu'un dans son projet"] },
+            { text: "Quand un ami traverse une période difficile :", type: "S", inverted: false, answers: ["Vous attendez qu'il vous en parle", "Vous lui demandez comment ça va", "Vous restez disponible", "Vous allez vers lui pour l'aider", "Vous vous libérez pour être là"] },
+            { text: "Dans votre recherche d'emploi, ce qui vous motive le plus :", type: "S", inverted: false, answers: ["Gravir rapidement les échelons", "Développer votre expertise technique", "Un équilibre entre plusieurs facteurs", "L'ambiance et l'esprit d'équipe", "Avoir un impact positif sur les gens"] },
+            { text: "En cours, quand quelqu'un galère avec un exercice :", type: "S", inverted: false, answers: ["Vous vous concentrez sur votre travail", "Vous continuez ce que vous faites", "Vous aidez si on vous le demande", "Vous proposez spontanément votre aide", "Vous prenez le temps de lui expliquer"] },
+            { text: "Dans vos loisirs, vous préférez :", type: "S", inverted: false, answers: ["Activités solo ou performances individuelles", "Vous dépasser personnellement", "Un mix selon vos envies", "Activités de groupe ou collectives", "Actions bénévoles ou solidaires"] },
+            { text: "Vos amis :", type: "S", inverted: false, answers: ["Vous parlent rarement de leurs problèmes", "Gardent leurs soucis pour eux", "Se confient de temps en temps", "Viennent souvent vous demander conseil", "Vous considèrent comme leur confident"] },
+            { text: "Dans un conflit entre amis :", type: "S", inverted: false, answers: ["Vous restez en dehors", "Vous choisissez votre camp", "Vous évitez de vous en mêler", "Vous essayez de les faire discuter", "Vous jouez les médiateurs"] },
+            { text: "Ce qui vous donne le plus de satisfaction :", type: "S", inverted: false, answers: ["Réussir un défi personnel", "Atteindre vos objectifs", "Les deux selon les moments", "Voir les autres progresser", "Savoir que vous avez aidé quelqu'un"] },
+            { text: "Dans les projets de groupe :", type: "S", inverted: false, answers: ["Vous vous concentrez sur votre partie", "Vous faites ce qu'on vous demande", "Vous participez normalement", "Vous vous assurez que tout le monde suit", "Vous aidez ceux qui ont des difficultés"] },
+            { text: "Pour votre futur métier :", type: "S", inverted: false, answers: ["L'important est votre épanouissement personnel", "Vous cherchez surtout votre réussite", "Vous voulez équilibrer les deux", "Vous voulez contribuer au bien-être d'autrui", "Vous voulez améliorer la vie des gens"] },
+            { text: "Dans les situations de groupe (cours, soirées, événements) :", type: "S", inverted: false, answers: ["Vous restez avec vos proches", "Vous socialisez avec ceux que vous connaissez", "Vous participez sans plus", "Vous intégrez ceux qui sont seuls", "Vous veillez à ce que personne ne soit exclu"] },
+            { text: "Réussir votre projet personnel plutôt que d'aider quelqu'un avec le sien :", type: "S", inverted: true, answers: ["Vous aidez toujours en priorité", "Vous aidez puis vous vous occupez du vôtre", "Ça dépend de la personne et du contexte", "Votre projet passe d'abord", "Chacun se débrouille"] },
+            { text: "Vous concentrer uniquement sur vos résultats sans vous préoccuper des autres :", type: "S", inverted: true, answers: ["Vous ne pouvez pas faire ça", "Ça vous gênerait", "Si nécessaire, pourquoi pas", "Chacun sa route", "C'est la seule façon de réussir"] },
+            { text: "Éviter de vous impliquer dans les problèmes des autres :", type: "S", inverted: true, answers: ["Vous ne pouvez pas rester indifférent", "Vous aidez naturellement", "Ça dépend de votre relation avec la personne", "Vous préférez garder vos distances", "Chacun gère ses affaires"] },
+
+            // ENTREPRENANT (13 questions - 3 inversées)
+            { text: "Quand votre groupe d'amis hésite sur le choix d'un resto :", type: "E", inverted: false, answers: ["Vous attendez qu'ils se décident", "Vous donnez votre avis si on vous le demande", "Vous participez à la discussion", "Vous proposez 2-3 options", "Vous tranchez et vous réservez"] },
+            { text: "Dans les jeux (vidéo, société, sport) :", type: "E", inverted: false, answers: ["Vous jouez pour passer le temps", "Vous aimez bien gagner", "Ça dépend de votre humeur", "Vous jouez pour gagner", "Vous détestez perdre"] },
+            { text: "Quand il faut organiser une sortie ou un événement :", type: "E", inverted: false, answers: ["Vous préférez qu'un autre s'en charge", "Vous aidez mais sans coordonner", "Vous participez selon vos disponibilités", "Vous aimez bien prendre les devants", "Vous vous proposez spontanément"] },
+            { text: "Face à un désaccord dans votre groupe :", type: "E", inverted: false, answers: ["Vous évitez le conflit", "Vous donnez discrètement votre avis", "Vous écoutez les différents points de vue", "Vous défendez fermement votre opinion", "Vous convainquez les autres du bien-fondé de votre position"] },
+            { text: "Pour vos projets personnels :", type: "E", inverted: false, answers: ["Vous préférez suivre que diriger", "Vous aimez avoir un guide", "Ça dépend du projet", "Vous aimez avoir le contrôle", "Vous voulez être le décideur"] },
+            { text: "Quand vous présentez quelque chose (exposé, projet, idée) :", type: "E", inverted: false, answers: ["Vous stressez à l'idée de parler", "Vous préférez rester en retrait", "Ça peut aller selon le contexte", "Vous êtes à l'aise devant le groupe", "Vous prenez plaisir à convaincre"] },
+            { text: "Les risques et les défis :", type: "E", inverted: false, answers: ["Vous font peur", "Vous préférez la sécurité", "Vous réfléchissez avant de vous lancer", "Vous motivent", "Vous dopent à l'adrénaline"] },
+            { text: "Pour votre avenir professionnel :", type: "E", inverted: false, answers: ["Vous voulez un poste stable et tranquille", "Vous cherchez la sécurité", "Vous voulez équilibrer ambition et stabilité", "Vous visez des postes à responsabilités", "Vous rêvez de créer votre propre boîte"] },
+            { text: "Dans les négociations (prix, conditions, désaccords) :", type: "E", inverted: false, answers: ["Vous acceptez ce qu'on vous propose", "Vous vous adaptez facilement", "Vous tentez quelques ajustements", "Vous défendez vos intérêts", "Vous négociez jusqu'à obtenir satisfaction"] },
+            { text: "Votre attitude face à la compétition :", type: "E", inverted: false, answers: ["Vous l'évitez autant que possible", "Vous préférez la collaboration", "Ça dépend du contexte", "Elle vous stimule", "Elle révèle le meilleur de vous-même"] },
+            { text: "Laisser les autres prendre toutes les décisions importantes :", type: "E", inverted: true, answers: ["Vous avez besoin d'avoir votre mot à dire", "Vous voulez au moins donner votre avis", "Ça dépend du sujet", "Vous faites confiance aux autres", "C'est plus simple comme ça"] },
+            { text: "Rester toujours dans votre zone de confort sans prendre de risques :", type: "E", inverted: true, answers: ["Vous avez besoin de défis", "Vous aimez sortir de votre routine", "Un équilibre sécurité/nouveauté", "Vous préférez ce que vous maîtrisez", "Pourquoi changer une formule qui marche"] },
+            { text: "Éviter toute forme de compétition ou de concurrence :", type: "E", inverted: true, answers: ["Vous avez besoin d'émulation", "Un peu de compétition, ça stimule", "Ça dépend du contexte", "Vous préférez la collaboration", "La compétition vous stresse"] },
+
+            // CONVENTIONNEL (13 questions - 4 inversées)
+            { text: "Pour organiser vos révisions ou vos projets :", type: "C", inverted: false, answers: ["Vous improvisez au dernier moment", "Vous planifiez vaguement", "Vous faites un planning de base", "Vous organisez tout méticuleusement", "Vous détaillez chaque étape à l'avance"] },
+            { text: "Dans votre espace de travail (bureau, chambre) :", type: "C", inverted: false, answers: ["C'est le bordel créatif", "C'est un peu en désordre", "Ça oscille entre ordre et désordre", "Tout a sa place", "C'est nickel et organisé"] },
+            { text: "Les règlements et les consignes :", type: "C", inverted: false, answers: ["Vous donnent envie de faire l'inverse", "Vous agacent souvent", "Vous vous y conformez sans réfléchir", "Vous rassurent", "Sont nécessaires pour bien fonctionner"] },
+            { text: "Vos matières préférées à l'université/école étaient :", type: "C", inverted: false, answers: ["Littérature, philo, arts", "Sciences humaines, langues", "Un peu de tout selon les profs", "Maths, sciences, informatique", "Comptabilité, gestion, droit"] },
+            { text: "Vos amis vous décrivent comme quelqu'un :", type: "C", inverted: false, answers: ["D'imprévisible et spontané", "Qui suit son instinct", "D'équilibré", "De fiable et ponctuel", "Sur qui on peut toujours compter"] },
+            { text: "Pour prendre une décision importante :", type: "C", inverted: false, answers: ["Vous suivez votre instinct", "Vous écoutez votre ressenti", "Vous mixez logique et intuition", "Vous listez les pour et les contre", "Vous analysez tous les critères objectifs"] },
+            { text: "Les activités avec des chiffres, des stats, des tableaux :", type: "C", inverted: false, answers: ["Vous ennuient profondément", "Ne sont pas votre fort", "Ça peut aller selon le contexte", "Vous plaisent bien", "Vous passionnent"] },
+            { text: "Pour votre futur job :", type: "C", inverted: false, answers: ["Vous voulez de la variété et de l'imprévu", "Vous cherchez de la nouveauté", "Vous voulez un équilibre", "Vous préférez des tâches claires", "Vous voulez de la stabilité et des procédures"] },
+            { text: "Dans la gestion de vos finances personnelles :", type: "C", inverted: false, answers: ["Vous dépensez au feeling", "Vous gérez approximativement", "Vous faites attention sans plus", "Vous tenez vos comptes régulièrement", "Vous planifiez et budgétez tout"] },
+            { text: "Travailler sans planning précis et en improvisant au fur et à mesure :", type: "C", inverted: true, answers: ["Ça vous stresse énormément", "Vous avez besoin d'un minimum de cadre", "Ça peut marcher selon le contexte", "Vous aimez cette liberté", "C'est comme ça que vous fonctionnez le mieux"] },
+            { text: "Changer constamment de méthode et remettre en question les façons de faire :", type: "C", inverted: true, answers: ["Il faut garder ce qui marche", "Trop de changements, ça déstabilise", "Un peu de nouveauté, c'est bien", "Il faut savoir évoluer", "C'est essentiel pour progresser"] },
+            { text: "Accepter le désordre et l'imprévisibilité dans votre environnement de travail :", type: "C", inverted: true, answers: ["Vous avez besoin d'ordre et de structure", "Vous préférez un minimum d'organisation", "Vous vous adaptez", "Ça ne vous dérange pas", "Ça vous stimule"] },
+            { text: "Prendre des décisions importantes sur un coup de tête :", type: "C", inverted: true, answers: ["Vous devez analyser et planifier", "Vous avez besoin de réfléchir", "Ça dépend de la situation", "Parfois il faut savoir se lancer", "Vos intuitions sont souvent bonnes"] }
+        ]; ["Vous avez besoin de voir du concret", "Vous préférez l'application pratique", "Vous pourriez vous y habituer", "Cela vous convient", "C'est parfait pour vous"] },
             { text: "Appliquer des méthodes sans chercher à comprendre pourquoi elles fonctionnent :", type: "I", inverted: true, answers: ["Vous devez comprendre le principe", "Vous posez au moins quelques questions", "Si ça marche, ça vous va", "Vous appliquez ce qu'on vous enseigne", "C'est plus efficace comme ça"] },
             
             // Ajoutons encore plus de questions pour atteindre les 80
@@ -937,11 +1068,23 @@
         }
 
         function generateResults() {
-            const questionsPerType = userAge >= 15 && userAge <= 21 ? 10 : (userAge >= 22 ? 13 : 10);
-            const maxScore = questionsPerType * 5;
+            // Calcul adaptatif selon l'âge
+            let questionsPerType;
+            if (userAge >= 15 && userAge <= 21) {
+                questionsPerType = 10; // 60 questions / 6 profils = 10 par profil
+            } else {
+                // Pour les 22-28+ ans : 80 questions réparties inégalement
+                // R=13, I=13, A=14, S=14, E=13, C=13
+                questionsPerType = {
+                    R: 13, I: 13, A: 14, S: 14, E: 13, C: 13
+                };
+            }
+            
             const percentages = {};
             
             Object.keys(answers).forEach(key => {
+                const maxScore = (typeof questionsPerType === 'object') ? 
+                    questionsPerType[key] * 5 : questionsPerType * 5;
                 percentages[key] = Math.round((answers[key] / maxScore) * 100);
             });
             
@@ -955,7 +1098,8 @@
                 dominantProfiles: sortedResults.slice(0, 2),
                 timestamp: new Date().toISOString(),
                 answers: userAnswers,
-                totalQuestions: currentQuestions.length
+                totalQuestions: currentQuestions.length,
+                questionsPerType: questionsPerType
             };
             
             generateChart(sortedResults);
