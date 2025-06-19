@@ -1,1251 +1,707 @@
-{ text: "Laisser les autres prendre toutes les décisions importantes :", type: "E", inverted: true, answers: ["Vous avez besoin d'avoir votre mot à dire", "Vous voulez au moins donner votre avis", "Ça dépend du sujet", "Vous faites confiance aux autres", "C'est plus simple comme ça"] },
-            { text: "Rester toujours dans votre zone de confort sans prendre de risques :", type: "E", inverted: true, answers: ["Vous avez besoin de défis", "Vous aimez sortir de votre routine", "Un équilibre sécurité/nouveauté", "Vous préférez ce que vous maîtrisez", "Pourquoi changer une formule qui marche"] },
-            { text: "Éviter toute forme de compétition ou de concurrence :", type: "E", inverted: true, answers: ["Vous avez besoin d'émulation", "Un peu de compétition, ça stimule", "Ça dépend du contexte", "Vous préférez la collaboration", "La compétition vous stresse"] },
-
-            // CONVENTIONNEL (13 questions - 4 inversées)
-            { text: "Pour organiser vos révisions ou vos projets :", type: "C", inverted: false, answers: ["Vous improvisez au dernier moment", "Vous planifiez vaguement", "Vous faites un planning de base", "Vous organisez tout méticuleusement", "Vous détaillez chaque étape à l'avance"] },
-            { text: "Dans votre espace de travail (bureau, chambre) :", type: "C", inverted: false, answers: ["C'est le bordel créatif", "C'est un peu en désordre", "Ça oscille entre ordre et désordre", "Tout a sa place", "C'est nickel et organisé"] },
-            { text: "Les règlements et les consignes :", type: "C", inverted: false, answers: ["Vous donnent envie de faire l'inverse", "Vous agacent souvent", "Vous vous y conformez sans réfléchir", "Vous rassurent", "Sont nécessaires pour bien fonctionner"] },
-            { text: "Vos matières préférées à l'université/école étaient :", type: "C", inverted: false, answers: ["Littérature, philo, arts", "Sciences humaines, langues", "Un peu de tout selon les profs", "Maths, sciences, informatique", "Comptabilité, gestion, droit"] },
-            { text: "Vos amis vous décrivent comme quelqu'un :", type: "C", inverted: false, answers: ["D'imprévisible et spontané", "Qui suit son instinct", "D'équilibré", "De fiable et ponctuel", "Sur qui on peut toujours compter"] },
-            { text: "Pour prendre une décision importante :", type: "C", inverted: false, answers: ["Vous suivez votre instinct", "Vous écoutez votre ressenti", "Vous mixez logique et intuition", "Vous listez les pour et les contre", "Vous analysez tous les critères objectifs"] },
-            { text: "Les activités avec des chiffres, des stats, des tableaux :", type: "C", inverted: false, answers: ["Vous ennuient profondément", "Ne sont pas votre fort", "Ça peut aller selon le contexte", "Vous plaisent bien", "Vous passionnent"] },
-            { text: "Pour votre futur job :", type: "C", inverted: false, answers: ["Vous voulez de la variété et de l'imprévu", "Vous cherchez de la nouveauté", "Vous voulez un équilibre", "Vous préférez des tâches claires", "Vous voulez de la stabilité et des procédures"] },
-            { text: "Dans la gestion de vos finances personnelles :", type: "C", inverted: false, answers: ["Vous dépensez au feeling", "Vous gérez approximativement", "Vous faites attention sans plus", "Vous tenez vos comptes régulièrement", "Vous planifiez et budgétez tout"] },
-            { text: "Travailler sans planning précis et en improvisant au fur et à mesure :", type: "C", inverted: true, answers: ["Ça vous stresse énormément", "Vous avez besoin d'un minimum de cadre", "Ça peut marcher selon le contexte", "Vous aimez cette liberté", "C'est comme ça que vous fonctionnez le mieux"] },
-            { text: "Changer constamment de méthode et remettre en question les façons de faire :", type: "C", inverted: true, answers: ["Il faut garder ce qui marche", "Trop de changements, ça déstabilise", "Un peu de nouveauté, c'est bien", "Il faut savoir évoluer", "C'est essentiel pour progresser"] },
-            { text: "Accepter le désordre et l'imprévisibilité dans votre environnement de travail :", type: "C", inverted: true, answers: ["Vous avez besoin d'ordre et de structure", "Vous préférez un minimum d'organisation", "Vous vous adaptez", "Ça ne vous dérange pas", "Ça vous stimule"] },
-            { text: "Prendre des décisions importantes sur un coup de tête :", type: "C", inverted: true, answers: ["Vous devez analyser et planifier", "Vous avez besoin de réfléchir", "Ça dépend de la situation", "Parfois il faut savoir se lancer", "Vos intuitions sont souvent bonnes"] }
-        ];
-
-        // Profils RIASEC complets avec métiers 2025
-        const riasecProfiles = {
-            R: {
-                name: "Réaliste",
-                description: "Vous aimez le concret, travailler avec vos mains et voir des résultats tangibles. Vous préférez l'action à la théorie.",
-                careers: [
-                    { name: "Technicien énergies renouvelables", type: "Émergent", tension: "high", description: "Installation et maintenance d'équipements solaires, éoliens" },
-                    { name: "Pilote ligne batteries électriques", type: "Émergent", tension: "high", description: "Production de composants pour véhicules électriques" },
-                    { name: "Mécanicien automobile", type: "Traditionnel", tension: "medium", description: "Entretien et réparation de véhicules" },
-                    { name: "Électricien", type: "Traditionnel", tension: "high", description: "Installation et maintenance électrique" },
-                    { name: "Contrôleur technique énergies décarbonées", type: "Émergent", tension: "high", description: "Vérification sécurité installations vertes" },
-                    { name: "Chef cuisinier", type: "Traditionnel", tension: "high", description: "Création et préparation culinaire" },
-                    { name: "Kinésithérapeute", type: "Traditionnel", tension: "medium", description: "Rééducation et soins du corps" },
-                    { name: "Technicien bioproduction", type: "Émergent", tension: "medium", description: "Fabrication de médicaments biotechnologiques" }
-                ]
-            },
-            I: {
-                name: "Investigateur",
-                description: "Vous êtes curieux et analytique. Vous aimez comprendre, rechercher, analyser et résoudre des problèmes complexes.",
-                careers: [
-                    { name: "Data Scientist", type: "Émergent", tension: "high", description: "Analyse de données massives et IA" },
-                    { name: "Cybersécurité", type: "Émergent", tension: "high", description: "Protection des systèmes informatiques" },
-                    { name: "Développeur blockchain", type: "Émergent", tension: "medium", description: "Création d'applications décentralisées" },
-                    { name: "Chercheur en IA", type: "Émergent", tension: "high", description: "Développement intelligence artificielle" },
-                    { name: "Médecin", type: "Traditionnel", tension: "high", description: "Diagnostic et soins aux patients" },
-                    { name: "Ingénieur", type: "Traditionnel", tension: "high", description: "Conception et innovation technique" },
-                    { name: "Vétérinaire", type: "Traditionnel", tension: "medium", description: "Soins aux animaux" },
-                    { name: "Analyste financier", type: "Traditionnel", tension: "low", description: "Évaluation investissements et risques" }
-                ]
-            },
-            A: {
-                name: "Artistique",
-                description: "Vous êtes créatif et original. Vous aimez exprimer vos idées de façon artistique et créer quelque chose d'unique.",
-                careers: [
-                    { name: "Designer UX/UI", type: "Émergent", tension: "high", description: "Conception d'expériences numériques" },
-                    { name: "Créateur de contenu", type: "Émergent", tension: "medium", description: "Production multimédia pour réseaux sociaux" },
-                    { name: "Coordinateur d'intimité", type: "Émergent", tension: "low", description: "Sécurisation tournages scènes intimes" },
-                    { name: "Game Designer", type: "Émergent", tension: "medium", description: "Conception de jeux vidéo" },
-                    { name: "Architecte", type: "Traditionnel", tension: "low", description: "Conception d'espaces et bâtiments" },
-                    { name: "Graphiste", type: "Traditionnel", tension: "low", description: "Création visuelle et communication" },
-                    { name: "Photographe", type: "Traditionnel", tension: "low", description: "Capture d'images artistiques/commerciales" },
-                    { name: "Musicien", type: "Traditionnel", tension: "low", description: "Composition et interprétation musicale" }
-                ]
-            },
-            S: {
-                name: "Social",
-                description: "Vous aimez aider les autres et travailler en équipe. Le bien-être des gens et les relations humaines sont importants pour vous.",
-                careers: [
-                    { name: "Coach bien-être digital", type: "Émergent", tension: "medium", description: "Accompagnement santé mentale en ligne" },
-                    { name: "Médiateur numérique", type: "Émergent", tension: "medium", description: "Formation aux outils numériques" },
-                    { name: "Infirmier", type: "Traditionnel", tension: "high", description: "Soins et accompagnement patients" },
-                    { name: "Aide-soignant", type: "Traditionnel", tension: "high", description: "Assistance quotidienne aux personnes" },
-                    { name: "Professeur", type: "Traditionnel", tension: "medium", description: "Transmission des connaissances" },
-                    { name: "Travailleur social", type: "Traditionnel", tension: "high", description: "Accompagnement social et familial" },
-                    { name: "Psychologue", type: "Traditionnel", tension: "medium", description: "Soutien psychologique et thérapie" },
-                    { name: "Éducateur spécialisé", type: "Traditionnel", tension: "high", description: "Accompagnement personnes en difficulté" }
-                ]
-            },
-            E: {
-                name: "Entreprenant",
-                description: "Vous aimez diriger, convaincre et relever des défis. Vous êtes motivé par le succès et vous n'avez pas peur de prendre des initiatives.",
-                careers: [
-                    { name: "Growth Hacker", type: "Émergent", tension: "high", description: "Développement rapide d'entreprises" },
-                    { name: "Chief Happiness Officer", type: "Émergent", tension: "medium", description: "Bien-être et culture d'entreprise" },
-                    { name: "Entrepreneur tech", type: "Émergent", tension: "medium", description: "Création de startups technologiques" },
-                    { name: "Influenceur digital", type: "Émergent", tension: "low", description: "Marketing d'influence sur réseaux" },
-                    { name: "Commercial B2B", type: "Traditionnel", tension: "high", description: "Vente aux entreprises" },
-                    { name: "Manager", type: "Traditionnel", tension: "medium", description: "Direction d'équipes et projets" },
-                    { name: "Consultant", type: "Traditionnel", tension: "low", description: "Conseil stratégique aux entreprises" },
-                    { name: "Agent immobilier", type: "Traditionnel", tension: "medium", description: "Transaction et conseil immobilier" }
-                ]
-            },
-            C: {
-                name: "Conventionnel",
-                description: "Vous aimez l'ordre, la précision et la planification. Vous êtes fiable et vous préférez des environnements structurés.",
-                careers: [
-                    { name: "Analyste cybersécurité", type: "Émergent", tension: "high", description: "Surveillance et protection données" },
-                    { name: "Gestionnaire données", type: "Émergent", tension: "high", description: "Organisation et conformité RGPD" },
-                    { name: "Assistant virtuel IA", type: "Émergent", tension: "medium", description: "Support administratif automatisé" },
-                    { name: "Clerc de notaire", type: "Traditionnel", tension: "medium", description: "Assistance juridique et administrative" },
-                    { name: "Comptable", type: "Traditionnel", tension: "low", description: "Gestion financière et fiscale" },
-                    { name: "Contrôleur de gestion", type: "Traditionnel", tension: "low", description: "Pilotage performance économique" },
-                    { name: "Assistant administratif", type: "Traditionnel", tension: "low", description: "Support organisationnel" },
-                    { name: "Gestionnaire de paie", type: "Traditionnel", tension: "medium", description: "Administration salaires et charges" }
-                ]
-            }
-        };
-
-        // Variables globales
-        let userAge = null;
-        let currentQuestions = [];
-        let currentQuestion = 0;
-        let answers = { R: 0, I: 0, A: 0, S: 0, E: 0, C: 0 };
-        let userAnswers = [];
-        let testResults = null;
-
-        function setAgeAndContinue() {
-            const ageInput = document.getElementById('user-age');
-            const age = parseInt(ageInput.value);
-            
-            if (!age || age < 13 || age > 35) {
-                alert('Merci de saisir un âge entre 13 et 35 ans');
-                return;
-            }
-            
-            userAge = age;
-            setupTestForAge(age);
-            
-            document.getElementById('age-screen').style.display = 'none';
-            document.getElementById('intro').style.display = 'block';
-        }
-
-        function setupTestForAge(age) {
-            let ageGroup, questionsText, timeText, startText;
-            
-            if (age >= 15 && age <= 21) {
-                ageGroup = "15-21 ans";
-                currentQuestions = shuffleArray([...questionsYoung]);
-                questionsText = "60 questions";
-                timeText = "10 minutes";
-                startText = "C'est parti ! 🚀";
-            } else {
-                ageGroup = age < 15 ? "13-14 ans (version adaptée)" : 
-                          age >= 22 && age <= 28 ? "22-28 ans" : 
-                          "28+ ans (version complète)";
-                          
-                currentQuestions = shuffleArray([...questionsAdult]);
-                questionsText = "80 questions";
-                timeText = "12 minutes";
-                startText = "Commencer le test 🎯";
-            }
-            
-            document.getElementById('age-indicator').textContent = `Version ${ageGroup}`;
-            document.getElementById('questions-count').textContent = questionsText;
-            document.getElementById('time-estimate').textContent = timeText;
-            document.getElementById('start-btn-text').textContent = startText;
-        }
-
-        function shuffleArray(array) {
-            const shuffled = [...array];
-            for (let i = shuffled.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-            }
-            return shuffled;
-        }
-
-        function startTest() {
-            document.getElementById('intro').style.display = 'none';
-            document.getElementById('progress-section').style.display = 'block';
-            document.getElementById('questions-section').style.display = 'block';
-            document.getElementById('total-questions').textContent = currentQuestions.length;
-            showQuestion();
-        }
-
-        function showQuestion() {
-            const questionContainer = document.getElementById('question-container');
-            const question = currentQuestions[currentQuestion];
-            
-            let optionsHtml = '';
-            question.answers.forEach((answer, index) => {
-                optionsHtml += `
-                    <div class="option" onclick="selectAnswer(${index + 1})">
-                        <div class="option-number">${index + 1}</div>
-                        <div>${answer}</div>
-                    </div>
-                `;
-            });
-            
-            questionContainer.innerHTML = `
-                <div class="question">${question.text}</div>
-                <div class="options">
-                    ${optionsHtml}
-                </div>
-            `;
-
-            document.getElementById('current-question').textContent = currentQuestion + 1;
-            updateProgressBar();
-            
-            if (userAnswers[currentQuestion]) {
-                selectAnswer(userAnswers[currentQuestion], false);
-            }
-            
-            updateNavigationButtons();
-        }
-
-        function selectAnswer(value, saveAnswer = true) {
-            document.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
-            document.querySelectorAll('.option')[value - 1].classList.add('selected');
-            
-            if (saveAnswer) {
-                const question = currentQuestions[currentQuestion];
-                
-                if (userAnswers[currentQuestion]) {
-                    // Retirer l'ancienne réponse (en tenant compte de l'inversion)
-                    const oldValue = userAnswers[currentQuestion];
-                    const oldScoreValue = question.inverted ? (6 - oldValue) : oldValue;
-                    answers[question.type] -= oldScoreValue;
-                }
-                
-                userAnswers[currentQuestion] = value;
-                
-                // Appliquer l'inversion si nécessaire
-                const scoreValue = question.inverted ? (6 - value) : value;
-                answers[question.type] += scoreValue;
-            }
-            
-            document.getElementById('next-btn').disabled = false;
-        }
-
-        function nextQuestion() {
-            if (!userAnswers[currentQuestion]) return;
-            
-            if (currentQuestion < currentQuestions.length - 1) {
-                currentQuestion++;
-                showQuestion();
-            } else {
-                showResults();
-            }
-        }
-
-        function previousQuestion() {
-            if (currentQuestion > 0) {
-                currentQuestion--;
-                showQuestion();
-            }
-        }
-
-        function updateProgressBar() {
-            const progress = ((currentQuestion + 1) / currentQuestions.length) * 100;
-            document.getElementById('progress-bar').style.width = progress + '%';
-        }
-
-        function updateNavigationButtons() {
-            document.getElementById('prev-btn').disabled = currentQuestion === 0;
-            document.getElementById('next-btn').disabled = !userAnswers[currentQuestion];
-            
-            if (currentQuestion === currentQuestions.length - 1) {
-                document.getElementById('next-btn').textContent = 'Voir mes résultats 🎉';
-            } else {
-                document.getElementById('next-btn').textContent = 'Suivant →';
-            }
-        }
-
-        function showResults() {
-            document.getElementById('progress-section').style.display = 'none';
-            document.getElementById('questions-section').style.display = 'none';
-            document.getElementById('results').classList.add('active');
-            
-            generateResults();
-        }
-
-        function generateResults() {
-            // Calcul adaptatif selon l'âge
-            let questionsPerType;
-            if (userAge >= 15 && userAge <= 21) {
-                questionsPerType = 10; // 60 questions / 6 profils = 10 par profil
-            } else {
-                // Pour les 22-28+ ans : 80 questions réparties inégalement
-                // R=13, I=13, A=14, S=14, E=13, C=13
-                questionsPerType = {
-                    R: 13, I: 13, A: 14, S: 14, E: 13, C: 13
-                };
-            }
-            
-            const percentages = {};
-            
-            Object.keys(answers).forEach(key => {
-                const maxScore = (typeof questionsPerType === 'object') ? 
-                    questionsPerType[key] * 5 : questionsPerType * 5;
-                percentages[key] = Math.round((answers[key] / maxScore) * 100);
-            });
-            
-            const sortedResults = Object.entries(percentages)
-                .sort(([,a], [,b]) => b - a);
-            
-            testResults = {
-                age: userAge,
-                ageGroup: userAge >= 15 && userAge <= 21 ? "15-21" : "22-28+",
-                scores: percentages,
-                dominantProfiles: sortedResults.slice(0, 2),
-                timestamp: new Date().toISOString(),
-                answers: userAnswers,
-                totalQuestions: currentQuestions.length,
-                questionsPerType: questionsPerType
-            };
-            
-            generateChart(sortedResults);
-            generateProfileSummary(sortedResults);
-            generateCareerSuggestions(sortedResults);
-        }
-
-        function generateChart(sortedResults) {
-            const chartContainer = document.getElementById('riasec-chart');
-            chartContainer.innerHTML = '';
-            
-            sortedResults.forEach(([type, percentage], index) => {
-                const profile = riasecProfiles[type];
-                const isDominant = index < 2;
-                
-                const item = document.createElement('div');
-                item.className = `riasec-item ${isDominant ? 'dominant' : ''}`;
-                item.innerHTML = `
-                    <div class="riasec-letter">${type}</div>
-                    <div class="riasec-name">${profile.name}</div>
-                    <div class="riasec-score">${percentage}%</div>
-                    <div class="riasec-bar">
-                        <div class="riasec-fill" style="width: ${percentage}%"></div>
-                    </div>
-                `;
-                
-                chartContainer.appendChild(item);
-            });
-        }
-
-        function generateProfileSummary(sortedResults) {
-            const summaryContainer = document.getElementById('profile-summary');
-            const dominantTypes = sortedResults.slice(0, 2);
-            
-            let summaryText = `<h3>Votre profil : ${dominantTypes.map(([type]) => riasecProfiles[type].name).join(' + ')}</h3>`;
-            summaryText += `<p>Vos deux profils dominants sont <strong>${riasecProfiles[dominantTypes[0][0]].name}</strong> (${dominantTypes[0][1]}%) et <strong>${riasecProfiles[dominantTypes[1][0]].name}</strong> (${dominantTypes[1][1]}%).</p>`;
-            summaryText += `<p><strong>${riasecProfiles[dominantTypes[0][0]].name} :</strong> ${riasecProfiles[dominantTypes[0][0]].description}</p>`;
-            summaryText += `<p><strong>${riasecProfiles[dominantTypes[1][0]].name} :</strong> ${riasecProfiles[dominantTypes[1][0]].description}</p>`;
-            
-            summaryContainer.innerHTML = summaryText;
-        }
-
-        function generateCareerSuggestions(sortedResults) {
-            const careersContainer = document.getElementById('careers-grid');
-            const dominantTypes = sortedResults.slice(0, 2);
-            
-            let allCareers = [];
-            dominantTypes.forEach(([type]) => {
-                allCareers = allCareers.concat(riasecProfiles[type].careers);
-            });
-            
-            const shuffledCareers = allCareers.sort(() => 0.5 - Math.random()).slice(0, 8);
-            
-            careersContainer.innerHTML = '';
-            shuffledCareers.forEach(career => {
-                const tensionColor = career.tension === 'high' ? 'tension-high' : 
-                                   career.tension === 'medium' ? 'tension-medium' : 'tension-low';
-                const tensionHeight = career.tension === 'high' ? '80%' : 
-                                     career.tension === 'medium' ? '50%' : '20%';
-                const tensionText = career.tension === 'high' ? 'Forte demande' : 
-                                   career.tension === 'medium' ? 'Demande modérée' : 'Demande faible';
-                
-                const careerItem = document.createElement('div');
-                careerItem.className = 'career-item';
-                careerItem.innerHTML = `
-                    <div class="career-title">
-                        ${career.name}
-                        <span class="career-type">${career.type}</span>
-                    </div>
-                    <div class="career-description">${career.description}</div>
-                    <div class="tension-meter">
-                        <div class="thermometer">
-                            <div class="thermometer-fill ${tensionColor}" style="height: ${tensionHeight}"></div>
-                        </div>
-                        <div class="tension-label">${tensionText}</div>
-                    </div>
-                `;
-                careersContainer.appendChild(careerItem);
-            });
-        }
-
-        function sendResultsByEmail() {
-            if (!testResults) return;
-            
-            // Demander les informations à l'utilisateur
-            const userName = prompt("Votre nom complet :") || "Non renseigné";
-            const userEmail = prompt("Votre email :") || "non-renseigné@exemple.com";
-            
-            if (!userName || userName === "Non renseigné") {
-                alert("Merci de renseigner votre nom pour envoyer les résultats.");
-                return;
-            }
-            
-            // Préparer les données formatées pour l'email
-            const dominantProfile1 = riasecProfiles[testResults.dominantProfiles[0][0]].name;
-            const dominantProfile2 = riasecProfiles[testResults.dominantProfiles[1][0]].name;
-            const currentDate = new Date().toLocaleDateString('fr-FR');
-            
-            // Créer le contenu de l'email
-            const emailContent = `
-=== RÉSULTATS TEST RIASEC AMÉLIORÉ ===
-
-👤 PARTICIPANT :
-- Nom : ${userName}
-- Email : ${userEmail}
-- Âge : ${testResults.age} ans
-- Version : ${testResults.ageGroup}
-- Date : ${currentDate}
-
-🎯 PROFIL DOMINANT :
-${dominantProfile1} + ${dominantProfile2}
-
-📊 SCORES DÉTAILLÉS :
-- Réaliste (R) : ${testResults.scores.R}%
-- Investigateur (I) : ${testResults.scores.I}%
-- Artistique (A) : ${testResults.scores.A}%
-- Social (S) : ${testResults.scores.S}%
-- Entreprenant (E) : ${testResults.scores.E}%
-- Conventionnel (C) : ${testResults.scores.C}%
-
-📋 INFORMATIONS TECHNIQUES :
-- Nombre de questions : ${testResults.totalQuestions}
-- Questions inversées : ${Math.round(testResults.totalQuestions * 0.2)}
-- Version questionnaire : Améliorée 2025
-- Timestamp : ${testResults.timestamp}
-
-💡 PROFILS PRINCIPAUX :
-1. ${dominantProfile1} (${testResults.dominantProfiles[0][1]}%) : ${riasecProfiles[testResults.dominantProfiles[0][0]].description}
-
-2. ${dominantProfile2} (${testResults.dominantProfiles[1][1]}%) : ${riasecProfiles[testResults.dominantProfiles[1][0]].description}
-            `.trim();
-            
-            // Préparer les données pour Formspree
-            const formData = new FormData();
-            formData.append('name', userName);
-            formData.append('email', userEmail);
-            formData.append('subject', `Résultats Test RIASEC Amélioré - ${userName} - ${dominantProfile1} + ${dominantProfile2}`);
-            formData.append('message', emailContent);
-            formData.append('age', testResults.age);
-            formData.append('version', testResults.ageGroup);
-            formData.append('profil_dominant', `${dominantProfile1} + ${dominantProfile2}`);
-            formData.append('score_R', testResults.scores.R);
-            formData.append('score_I', testResults.scores.I);
-            formData.append('score_A', testResults.scores.A);
-            formData.append('score_S', testResults.scores.S);
-            formData.append('score_E', testResults.scores.E);
-            formData.append('score_C', testResults.scores.C);
-            formData.append('nb_questions', testResults.totalQuestions);
-            formData.append('version_questionnaire', 'Améliorée 2025');
-            
-            // Afficher un message de chargement
-            const originalText = event.target.textContent;
-            event.target.textContent = "📧 Envoi en cours...";
-            event.target.disabled = true;
-            
-            // Envoyer via Formspree
-            fetch('https://formspree.io/f/xanjyzpj', {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'Accept': 'application/json'
-                }
-            })
-            .then(response => {
-                if (response.ok) {
-                    alert(`✅ Résultats envoyés avec succès !
-                    
-Vos résultats ont été transmis à l'Académie de l'Agentivité.
-Profil : ${dominantProfile1} + ${dominantProfile2}
-Version : Test RIASEC Amélioré 2025
-
-Vous pouvez fermer cette page.`);
-                } else {
-                    throw new Error('Erreur lors de l\'envoi');
-                }
-            })
-            .catch(error => {
-                alert(`❌ Erreur lors de l'envoi des résultats.
-                
-Veuillez utiliser le bouton "📊 Exporter en JSON" et envoyer le fichier par email à : contact@academie-agentivite.fr`);
-                console.error('Erreur:', error);
-            })
-            .finally(() => {
-                // Restaurer le bouton
-                event.target.textContent = originalText;
-                event.target.disabled = false;
-            });
-        }
-
-        function exportResults() {
-            if (!testResults) return;
-            
-            const userName = prompt("Votre nom :") || "Anonyme";
-            const userEmail = prompt("Votre email :") || "non-fourni@exemple.com";
-            
-            const exportData = {
-                nom: userName,
-                email: userEmail,
-                age: testResults.age,
-                version_test: testResults.ageGroup,
-                date: new Date().toISOString().split('T')[0],
-                profil_dominant: riasecProfiles[testResults.dominantProfiles[0][0]].name + " + " + riasecProfiles[testResults.dominantProfiles[1][0]].name,
-                score_R: testResults.scores.R,
-                score_I: testResults.scores.I,
-                score_A: testResults.scores.A,
-                score_S: testResults.scores.S,
-                score_E: testResults.scores.E,
-                score_C: testResults.scores.C,
-                nb_questions: testResults.totalQuestions,
-                questions_inversees: Math.round(testResults.totalQuestions * 0.2),
-                version_questionnaire: "Améliorée 2025",
-                timestamp: testResults.timestamp
-            };
-            
-            const dataStr = JSON.stringify(exportData, null, 2);
-            const dataBlob = new Blob([dataStr], {type: 'application/json'});
-            const url = URL.createObjectURL(dataBlob);
-            const link = document.createElement('a');
-            link.href = url;
-            link.download = `riasec_ameliore_${exportData.age}ans_${exportData.date}_${userName.replace(/\s+/g, '_')}.json`;
-            link.click();
-            
-            alert(`📊 Résultats exportés !
-
-Profil : ${exportData.profil_dominant}
-Âge : ${exportData.age} ans
-Questions : ${exportData.nb_questions}
-Version : Test RIASEC Amélioré 2025
-
-Le fichier JSON est prêt pour votre suivi !`);
-        }
-
-        function restartTest() {
-            userAge = null;
-            currentQuestions = [];
-            currentQuestion = 0;
-            answers = { R: 0, I: 0, A: 0, S: 0, E: 0, C: 0 };
-            userAnswers = [];
-            testResults = null;
-            
-            document.getElementById('results').classList.remove('active');
-            document.getElementById('age-screen').style.display = 'block';
-            document.getElementById('intro').style.display = 'none';
-            document.getElementById('progress-section').style.display = 'none';
-            document.getElementById('questions-section').style.display = 'none';
-            
-            document.getElementById('user-age').value = '';
-        }
-    </script>
-</body>
-</html>            { text: "Réussir un projet solo plutôt que d'aider quelqu'un avec le sien :", type: "S", inverted: true, answers: ["J'aide toujours en priorité", "J'aide puis je fais le mien", "Ça dépend de qui et de quoi", "Mon projet passe d'abord", "Chacun se débrouille"] },
-            { text: "Te concentrer uniquement sur tes résultats sans t'occuper des autres :", type: "S", inverted: true, answers: ["Je ne peux pas faire ça", "Ça me gênerait", "Si nécessaire, pourquoi pas", "Chacun sa route", "C'est la seule façon de réussir"] },
-
-            // ENTREPRENANT (10 questions - 2 inversées)
-            { text: "Quand ton groupe d'amis hésite sur le choix d'un resto :", type: "E", inverted: false, answers: ["Tu attends qu'ils se décident", "Tu donnes ton avis si on te le demande", "Tu participes à la discussion", "Tu proposes 2-3 options", "Tu tranches et tu réserves"] },
-            { text: "Dans les jeux vidéo ou les jeux de société :", type: "E", inverted: false, answers: ["Tu joues pour le plaisir", "Tu aimes bien gagner", "Ça dépend de ton humeur", "Tu joues pour gagner", "Tu détestes perdre"] },
-            { text: "Quand il faut organiser une sortie ou un événement :", type: "E", inverted: false, answers: ["Tu préfères qu'un autre s'en charge", "Tu aides mais sans coordonner", "Tu participes selon tes dispos", "Tu aimes bien prendre les rênes", "Tu te proposes spontanément"] },
-            { text: "Face à un désaccord dans ton groupe :", type: "E", inverted: false, answers: ["Tu évites le conflit", "Tu donnes discrètement ton avis", "Tu écoutes les différents points de vue", "Tu défends fermement ton opinion", "Tu convaincs les autres du bien-fondé de ta position"] },
-            { text: "Pour tes projets personnels :", type: "E", inverted: false, answers: ["Tu préfères suivre que diriger", "Tu aimes avoir un guide", "Ça dépend du projet", "Tu aimes avoir le contrôle", "Tu veux être le décideur"] },
-            { text: "Quand tu présentes quelque chose (exposé, projet...) :", type: "E", inverted: false, answers: ["Tu stresses à l'idée de parler", "Tu préfères rester en retrait", "Ça peut aller selon le contexte", "Tu es à l'aise devant le groupe", "Tu prends plaisir à convaincre"] },
-            { text: "Les risques et les défis :", type: "E", inverted: false, answers: ["Te font peur", "Tu préfères la sécurité", "Tu réfléchis avant de te lancer", "Te motivent", "Te dopent à l'adrénaline"] },
-            { text: "Pour ton avenir professionnel :", type: "E", inverted: false, answers: ["Tu veux un poste stable et tranquille", "Tu cherches la sécurité", "Tu veux équilibrer ambition et stabilité", "Tu vises des postes à responsabilités", "Tu rêves de créer ta propre boîte"] },
-            { text: "Éviter toute forme de compétition ou de concurrence :", type: "E", inverted: true, answers: ["J'ai besoin d'émulation", "Un peu de compét', ça stimule", "Ça dépend du contexte", "Je préfère la collaboration", "La compétition me stresse"] },
-            { text: "Laisser les autres prendre toutes les décisions importantes :", type: "E", inverted: true, answers: ["J'ai besoin d'avoir mon mot à dire", "Je veux au moins donner mon avis", "Ça dépend du sujet", "Je fais confiance aux autres", "C'est plus simple comme ça"] },
-
-            // CONVENTIONNEL (10 questions - 2 inversées)
-            { text: "Pour organiser tes révisions ou tes projets :", type: "C", inverted: false, answers: ["Tu improvises au dernier moment", "Tu planifies vaguement", "Tu fais un planning de base", "Tu organises tout méticuleusement", "Tu détailles chaque étape à l'avance"] },
-            { text: "Dans ton espace de travail (bureau, chambre) :", type: "C", inverted: false, answers: ["C'est le bordel créatif", "C'est un peu en désordre", "Ça oscille entre ordre et désordre", "Tout a sa place", "C'est nickel et organisé"] },
-            { text: "Les règlements et les consignes :", type: "C", inverted: false, answers: ["Te donnent envie de faire l'inverse", "T'agacent souvent", "Tu t'y conformes sans réfléchir", "Te rassurent", "Sont nécessaires pour bien fonctionner"] },
-            { text: "Dans tes matières préférées :", type: "C", inverted: false, answers: ["Arts, langues, philo", "Littérature, histoire", "Un peu de tout", "Maths, sciences", "Comptabilité, gestion, éco"] },
-            { text: "Tes amis te décrivent comme quelqu'un :", type: "C", inverted: false, answers: ["D'imprévisible et spontané", "Qui suit son instinct", "D'équilibré", "De fiable et ponctuel", "Sur qui on peut toujours compter"] },
-            { text: "Pour prendre une décision importante :", type: "C", inverted: false, answers: ["Tu suis ton instinct", "Tu écoutes ton ressenti", "Tu mixes logique et intuition", "Tu listes les pour et les contre", "Tu analyses tous les critères"] },
-            { text: "Les activités avec des chiffres, des stats, des tableaux :", type: "C", inverted: false, answers: ["T'ennuient profondément", "Ne sont pas ton fort", "Ça peut aller selon le contexte", "Te plaisent bien", "Te passionnent"] },
-            { text: "Pour ton futur job :", type: "C", inverted: false, answers: ["Tu veux de la variété et de l'imprévu", "Tu cherches de la nouveauté", "Tu veux un équilibre", "Tu préfères des tâches claires", "Tu veux de la stabilité et des procédures"] },
-            { text: "Travailler sans planning précis et en improvisant au fur et à mesure :", type: "C", inverted: true, answers: ["Ça me stresse énormément", "J'ai besoin d'un minimum de cadre", "Ça peut marcher selon le contexte", "J'aime cette liberté", "C'est comme ça que je fonctionne le mieux"] },
-            { text: "Changer constamment de méthode et remettre en question les façons de faire :", type: "C", inverted: true, answers: ["Il faut garder ce qui marche", "Trop de changements, ça déstabilise", "Un peu de nouveauté, c'est bien", "Il faut savoir évoluer", "C'est essentiel pour progresser"] }
-        ];
-
-        // Questions RIASEC pour 22-28+ ans (80 questions équilibrées)
-        const questionsAdult = [
-            // RÉALISTE (13 questions - 3 inversées)
-            { text: "Pour votre premier poste, vous préférez un environnement :", type: "R", inverted: false, answers: ["Bureau en open space avec écrans", "Bureau fermé climatisé", "Ça dépend des missions", "Atelier, laboratoire ou terrain", "Principalement à l'extérieur"] },
-            { text: "Dans vos stages, vous avez préféré :", type: "R", inverted: false, answers: ["Analyser des données et faire des rapports", "Participer aux réunions et présentations", "Un mix de tâches variées", "Utiliser des outils et équipements", "Manipuler, construire, réparer"] },
-            { text: "Quand votre ordi ou smartphone bugge :", type: "R", inverted: false, answers: ["Vous demandez de l'aide immédiatement", "Vous redémarrez et espérez que ça marche", "Vous cherchez la solution sur Google", "Vous testez plusieurs manipulations", "Vous voulez comprendre d'où vient le problème"] },
-            { text: "Pour apprendre quelque chose de nouveau :", type: "R", inverted: false, answers: ["Cours magistral puis exercices", "Lecture de documentation", "Formation mixte théorie/pratique", "Vidéos et démonstrations", "Apprentissage par la manipulation directe"] },
-            { text: "Vos matières préférées à l'université/école étaient :", type: "R", inverted: false, answers: ["Sciences humaines, littérature", "Économie, gestion, marketing", "Un peu de tout selon les profs", "Sciences, informatique, ingénierie", "Travaux pratiques, projets techniques"] },
-            { text: "Dans les projets de groupe à l'école :", type: "R", inverted: false, answers: ["Vous vous occupiez de la présentation", "Vous faisiez la recherche documentaire", "Vous preniez ce qu'on vous donnait", "Vous gériez la partie technique", "Vous réalisiez les prototypes/maquettes"] },
-            { text: "Pour votre mémoire/projet de fin d'études :", type: "R", inverted: false, answers: ["Étude théorique et analyse conceptuelle", "Enquête et traitement de données", "Recherche appliquée", "Expérimentation et tests", "Conception et réalisation d'un prototype"] },
-            { text: "Ce qui vous donne le plus de satisfaction :", type: "R", inverted: false, answers: ["Réussir vos examens écrits", "Réussir un exposé ou une présentation", "Valider vos cours", "Voir fonctionner ce que vous avez créé", "Construire quelque chose de vos mains"] },
-            { text: "Dans vos loisirs, vous préférez :", type: "R", inverted: false, answers: ["Lecture, cinéma, musées", "Sorties entre amis, réseaux sociaux", "Ça dépend de votre humeur", "Sport, randonnée, activités outdoor", "Bricolage, jardinage, cuisine"] },
-            { text: "Face à un défi pratique (monter un meuble, réparer quelque chose) :", type: "R", inverted: false, answers: ["Vous payez quelqu'un pour le faire", "Vous demandez de l'aide à votre entourage", "Vous tentez avec des tutos", "Vous aimez relever le défi", "C'est votre domaine de prédilection"] },
-            { text: "Passer vos journées à analyser des concepts abstraits sans application concrète :", type: "R", inverted: true, answers: ["Vous avez besoin de voir du concret", "Vous préférez l'application pratique", "Vous pourriez vous y habituer", "Cela vous convient", "C'est parfait pour vous"] },
-            { text: "Travailler uniquement sur ordinateur sans jamais manipuler d'objets physiques :", type: "R", inverted: true, answers: ["Vous avez besoin d'activité manuelle", "Cela vous manquerait", "Vous pourriez vous adapter", "Cela vous va bien", "C'est votre préférence"] },
-            { text: "Exercer un métier où vous ne voyez jamais le résultat concret de votre travail :", type: "R", inverted: true, answers: ["Vous avez besoin de résultats tangibles", "Cela vous frustrerait", "L'important est le sens du travail", "L'impact indirect vous suffit", "Vous cherchez autre chose dans le travail"] },
-
-            // INVESTIGATEUR (13 questions - 3 inversées)
-            { text: "Face à un nouveau logiciel ou application :", type: "I", inverted: false, answers: ["Vous utilisez juste les fonctions de base", "Vous suivez un tutoriel rapide", "Vous explorez progressivement", "Vous testez toutes les fonctionnalités", "Vous voulez comprendre comment c'est conçu"] },
-            { text: "Quand vous ne comprenez pas quelque chose en cours :", type: "I", inverted: false, answers: ["Vous laissez passer", "Vous demandez à un camarade", "Vous posez une question au prof", "Vous faites des recherches approfondies", "Vous ne lâchez pas tant que vous n'avez pas compris"] },
-            { text: "Pour vos révisions d'examens :", type: "I", inverted: false, answers: ["Vous apprenez par cœur", "Vous refaites les exercices types", "Vous relisez vos cours", "Vous creusez les liens entre concepts", "Vous cherchez à comprendre la logique profonde"] },
-            { text: "Pour vos projets étudiants :", type: "I", inverted: false, answers: ["Vous préférez travailler en groupe", "Vous aimez avoir des retours réguliers", "Ça dépend de la complexité", "Vous travaillez mieux en autonomie", "Vous avez besoin de calme pour réfléchir"] },
-            { text: "Quand vous cherchez des infos pour un dossier :", type: "I", inverted: false, answers: ["Vous prenez ce que vous trouvez en premier", "Vous consultez Wikipedia et quelques sites", "Vous vérifiez 2-3 sources", "Vous recoupez plusieurs sources fiables", "Vous remontez aux sources académiques"] },
-            { text: "Les matières scientifiques (maths, physique, bio, informatique) :", type: "I", inverted: false, answers: ["Vous ont toujours rebuté", "N'étaient pas votre fort", "Ça pouvait aller selon les profs", "Vous ont toujours intéressé", "Ont toujours été votre passion"] },
-            { text: "Dans les débats ou discussions :", type: "I", inverted: false, answers: ["Vous évitez de vous exprimer", "Vous donnez votre opinion", "Vous participez selon le sujet", "Vous posez des questions précises", "Vous voulez analyser tous les aspects"] },
-            { text: "Pour choisir votre orientation :", type: "I", inverted: false, answers: ["Vous avez suivi les conseils de votre entourage", "Vous avez choisi ce qui a l'air facile", "Vous avez pesé plusieurs critères", "Vous avez analysé les secteurs d'avenir", "Vous avez étudié les tendances technologiques"] },
-            { text: "Vous préférez les cours :", type: "I", inverted: false, answers: ["Magistraux avec prise de notes", "Interactifs avec beaucoup d'échanges", "Ça dépend de la matière", "Avec beaucoup de temps pour les questions", "Qui permettent d'approfondir et de débattre"] },
-            { text: "Face aux nouvelles technologies :", type: "I", inverted: false, answers: ["Vous attendez qu'elles soient bien établies", "Vous les adoptez quand nécessaire", "Vous suivez les évolutions", "Vous aimez tester les nouveautés", "Vous voulez comprendre leur fonctionnement"] },
-            { text: "Appliquer des méthodes sans chercher à comprendre pourquoi elles fonctionnent :", type: "I", inverted: true, answers: ["Vous devez comprendre le principe", "Vous posez au moins quelques questions", "Si ça marche, ça vous va", "Vous appliquez ce qu'on vous enseigne", "C'est plus efficace comme ça"] },
-            { text: "Prendre des décisions rapidement sur la base de votre première impression :", type: "I", inverted: true, answers: ["Vous devez analyser avant de décider", "Vous avez besoin d'un minimum d'infos", "Ça dépend de l'importance de la décision", "Votre intuition est souvent bonne", "Il faut savoir trancher vite"] },
-            { text: "Vous contenter d'explications superficielles sans creuser davantage :", type: "I", inverted: true, answers: ["Vous voulez toujours aller au fond", "Vous posez des questions complémentaires", "Ça dépend de votre niveau d'intérêt", "Si c'est suffisant pour comprendre", "Vous n'avez pas besoin de tout savoir"] },
-
-            // ARTISTIQUE (14 questions - 2 inversées)
-            { text: "Dans l'aménagement de votre espace de travail :", type: "A", inverted: false, answers: ["Vous gardez l'aménagement standard", "Vous vous adaptez à l'existant", "Vous faites quelques ajustements", "Vous personnalisez selon vos goûts", "Vous créez une ambiance unique"] },
-            { text: "Pour personnaliser votre chambre/appartement étudiant :", type: "A", inverted: false, answers: ["Vous laissez tel quel", "Vous ajoutez juste quelques objets", "Vous faites quelques changements", "Vous créez votre propre ambiance", "Vous réinventez complètement l'espace"] },
-            { text: "Pour vos présentations d'école :", type: "A", inverted: false, answers: ["Template PowerPoint standard", "Mise en page basique mais claire", "Quelques éléments visuels", "Design soigné et original", "Création graphique unique"] },
-            { text: "Dans les travaux créatifs (projets, exposés, mémoire) :", type: "A", inverted: false, answers: ["Vous préférez un cadre très précis", "Vous aimez avoir des consignes claires", "Un équilibre liberté/contraintes", "Vous préférez développer votre vision", "Vous voulez une liberté créative totale"] },
-            { text: "Votre style vestimentaire :", type: "A", inverted: false, answers: ["Basique et passe-partout", "Vous suivez les tendances", "Mix tendance et goûts personnels", "Vous affirmez votre personnalité", "Vous créez votre propre style"] },
-            { text: "Pour exprimer vos idées (rapports, projets, réseaux sociaux) :", type: "A", inverted: false, answers: ["Texte structuré et clair", "Présentation soignée standard", "Quelques visuels pour illustrer", "Supports visuels créatifs", "Création multimédia originale"] },
-            { text: "L'esthétique de votre environnement d'études :", type: "A", inverted: false, answers: ["N'a aucune importance", "Passe après l'efficacité", "Contribue à votre bien-être", "Influence votre concentration", "Est essentielle à votre productivité"] },
-            { text: "Vos activités de temps libre préférées :", type: "A", inverted: false, answers: ["Sport, associations étudiantes", "Sorties, voyages, festivals", "Un mix selon vos envies", "Ateliers créatifs, culture", "Création artistique personnelle"] },
-            { text: "Ce qui vous motive le plus dans la recherche d'emploi :", type: "A", inverted: false, answers: ["Sécurité financière et stabilité", "Prestige et évolution de carrière", "Équilibre entre plusieurs facteurs", "Épanouissement et expression personnelle", "Possibilité de créer et innover"] },
-            { text: "Face aux contraintes académiques (formats, normes, délais) :", type: "A", inverted: false, answers: ["Vous les respectez scrupuleusement", "Vous vous y conformez", "Vous les acceptez pragmatiquement", "Vous cherchez des marges de manœuvre", "Vous les trouvez trop rigides"] },
-            { text: "Vos sources d'inspiration :", type: "A", inverted: false, answers: ["Manuels scolaires et cours", "Internet et réseaux sociaux", "Mix de sources variées", "Art, design, culture", "Créations personnelles et expérimentation"] },
-            { text: "Dans vos projets de groupe :", type: "A", inverted: false, answers: ["Vous vous occupez de la logistique", "Vous gérez la recherche d'infos", "Vous participez à tout", "Vous vous chargez de la partie créative", "Vous portez la vision artistique du projet"] },
-            { text: "Pour votre premier emploi, vous souhaitez :", type: "A", inverted: false, answers: ["Des tâches bien définies et répétitives", "Un cadre structuré avec des objectifs clairs", "Un équilibre routine/nouveauté", "De la variété et des projets différents", "Liberté créative et innovation"] },
-            { text: "Respecter toujours les mêmes formats et méthodes sans jamais innover :", type: "A", inverted: true, answers: ["Vous avez besoin de créativité", "Vous préférez adapter", "Ça dépend du contexte", "C'est important de respecter les codes", "Il faut suivre ce qui marche"] },
-            { text: "Faire exactement les mêmes tâches tous les jours dans votre futur emploi :", type: "A", inverted: true, answers: ["Vous avez besoin de variété", "Cela vous ennuierait rapidement", "Vous pourriez vous y habituer", "Cela vous rassurerait", "C'est parfait pour vous"] },
-
-            // SOCIAL (14 questions - 3 inversées)
-            { text: "Quand vous devez choisir entre deux activités :", type: "S", inverted: false, answers: ["Une compétition où vous pouvez vous démarquer", "Un défi personnel", "Ça dépend de votre humeur", "Un projet collaboratif", "Aider quelqu'un dans son projet"] },
-            { text: "Quand un ami traverse une période difficile :", type: "S", inverted: false, answers: ["Vous attendez qu'il vous en parle", "Vous lui demandez comment ça va", "Vous restez disponible", "Vous allez vers lui pour l'aider", "Vous vous libérez pour être là"] },
-            { text: "Dans votre recherche d'emploi, ce qui vous motive le plus :", type: "S", inverted: false, answers: ["Gravir rapidement les échelons", "Développer votre expertise technique", "Un équilibre entre plusieurs facteurs", "L'ambiance et l'esprit d'équipe", "Avoir un impact positif sur les gens"] },
-            { text: "En cours, quand quelqu'un galère avec un exercice :", type: "S", inverted: false, answers: ["Vous vous concentrez sur votre travail", "Vous continuez ce que vous faites", "Vous aidez si on vous le demande", "Vous proposez spontanément votre aide", "Vous prenez le temps de lui expliquer"] },
-            { text: "Dans vos loisirs, vous préférez :", type: "S", inverted: false, answers: ["Activités solo ou performances individuelles", "Vous dépasser personnellement", "Un mix selon vos envies", "Activités de groupe ou collectives", "Actions bénévoles ou solidaires"] },
-            { text: "Vos amis :", type: "S", inverted: false, answers: ["Vous parlent rarement de leurs problèmes", "Gardent leurs soucis pour eux", "Se confient de temps en temps", "Viennent souvent vous demander conseil", "Vous considèrent comme leur confident"] },
-            { text: "Dans un conflit entre amis :", type: "S", inverted: false, answers: ["Vous restez en dehors", "Vous choisissez votre camp", "Vous évitez de vous en mêler", "Vous essayez de les faire discuter", "Vous jouez les médiateurs"] },
-            { text: "Ce qui vous donne le plus de satisfaction :", type: "S", inverted: false, answers: ["Réussir un défi personnel", "Atteindre vos objectifs", "Les deux selon les moments", "Voir les autres progresser", "Savoir que vous avez aidé quelqu'un"] },
-            { text: "Dans les projets de groupe :", type: "S", inverted: false, answers: ["Vous vous concentrez sur votre partie", "Vous faites ce qu'on vous demande", "Vous participez normalement", "Vous vous assurez que tout le monde suit", "Vous aidez ceux qui ont des difficultés"] },
-            { text: "Pour votre futur métier :", type: "S", inverted: false, answers: ["L'important est votre épanouissement personnel", "Vous cherchez surtout votre réussite", "Vous voulez équilibrer les deux", "Vous voulez contribuer au bien-être d'autrui", "Vous voulez améliorer la vie des gens"] },
-            { text: "Dans les situations de groupe (cours, soirées, événements) :", type: "S", inverted: false, answers: ["Vous restez avec vos proches", "Vous socialisez avec ceux que vous connaissez", "Vous participez sans plus", "Vous intégrez ceux qui sont seuls", "Vous veillez à ce que personne ne soit exclu"] },
-            { text: "Réussir votre projet personnel plutôt que d'aider quelqu'un avec le sien :", type: "S", inverted: true, answers: ["Vous aidez toujours en priorité", "Vous aidez puis vous vous occupez du vôtre", "Ça dépend de la personne et du contexte", "Votre projet passe d'abord", "Chacun se débrouille"] },
-            { text: "Vous concentrer uniquement sur vos résultats sans vous préoccuper des autres :", type: "S", inverted: true, answers: ["Vous ne pouvez pas faire ça", "Ça vous gênerait", "Si nécessaire, pourquoi pas", "Chacun sa route", "C'est la seule façon de réussir"] },
-            { text: "Éviter de vous impliquer dans les problèmes des autres :", type: "S", inverted: true, answers: ["Vous ne pouvez pas rester indifférent", "Vous aidez naturellement", "Ça dépend de votre relation avec la personne", "Vous préférez garder vos distances", "Chacun gère ses affaires"] },
-
-            // ENTREPRENANT (13 questions - 3 inversées)
-            { text: "Quand votre groupe d'amis hésite sur le choix d'un resto :", type: "E", inverted: false, answers: ["Vous attendez qu'ils se décident", "Vous donnez votre avis si on vous le demande", "Vous participez à la discussion", "Vous proposez 2-3 options", "Vous tranchez et vous réservez"] },
-            { text: "Dans les jeux (vidéo, société, sport) :", type: "E", inverted: false, answers: ["Vous jouez pour passer le temps", "Vous aimez bien gagner", "Ça dépend de votre humeur", "Vous jouez pour gagner", "Vous détestez perdre"] },
-            { text: "Quand il faut organiser une sortie ou un événement :", type: "E", inverted: false, answers: ["Vous préférez qu'un autre s'en charge", "Vous aidez mais sans coordonner", "Vous participez selon vos disponibilités", "Vous aimez bien prendre les devants", "Vous vous proposez spontanément"] },
-            { text: "Face à un désaccord dans votre groupe :", type: "E", inverted: false, answers: ["Vous évitez le conflit", "Vous donnez discrètement votre avis", "Vous écoutez les différents points de vue", "Vous défendez fermement votre opinion", "Vous convainquez les autres du bien-fondé de votre position"] },
-            { text: "Pour vos projets personnels :", type: "E", inverted: false, answers: ["Vous préférez suivre que diriger", "Vous aimez avoir un guide", "Ça dépend du projet", "Vous aimez avoir le contrôle", "Vous voulez être le décideur"] },
-            { text: "Quand vous présentez quelque chose (exposé, projet, idée) :", type: "E", inverted: false, answers: ["Vous stressez à l'idée de parler", "Vous préférez rester en retrait", "Ça peut aller selon le contexte", "Vous êtes à l'aise devant le groupe", "Vous prenez plaisir à convaincre"] },
-            { text: "Les risques et les défis :", type: "E", inverted: false, answers: ["Vous font peur", "Vous préférez la sécurité", "Vous réfléchissez avant de vous lancer", "Vous motivent", "Vous dopent à l'adrénaline"] },
-            { text: "Pour votre avenir professionnel :", type: "E", inverted: false, answers: ["Vous voulez un poste stable et tranquille", "Vous cherchez la sécurité", "Vous voulez équilibrer ambition et stabilité", "Vous visez des postes à responsabilités", "Vous rêvez de créer votre propre boîte"] },
-            { text: "Dans les négociations (prix, conditions, désaccords) :", type: "E", inverted: false, answers: ["Vous acceptez ce qu'on vous propose", "Vous vous adaptez facilement", "Vous tentez quelques ajustements", "Vous défendez vos intérêts", "Vous négociez jusqu'à obtenir satisfaction"] },
-            { text: "Votre attitude face à la compétition :", type: "E", inverted: false, answers: ["Vous l'évitez autant que possible", "Vous préférez la collaboration", "Ça dépend du contexte", "Elle vous stimule", "Elle révèle le meilleur de vous-même"] },
-            { text: "Laisser les autres prendre toutes les décisions importantes :", type: "E", inverted: true, answers: ["Vous avez besoin d'avoir votre mot à dire", "Vous voulez au moins donner votre avis", "Ça dépend du sujet", "<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test RIASEC - Découvre ton profil professionnel</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Test RIASEC - Découvre ton profil professionnel</title>
+<style>
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
 
-        body {
-            font-family: 'Montserrat', 'Playfair Display', sans-serif;
-            background: linear-gradient(135deg, #0C2234 0%, #31555B 50%, #E4E2DD 100%);
-            min-height: 100vh;
-            color: #0C2234;
-        }
+body {
+font-family: 'Montserrat', 'Playfair Display', sans-serif;
+background: linear-gradient(135deg, #0C2234 0%, #31555B 50%, #E4E2DD 100%);
+min-height: 100vh;
+color: #0C2234;
+}
 
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 20px;
-        }
+.container {
+max-width: 900px;
+margin: 0 auto;
+padding: 20px;
+}
 
-        .card {
-            background: white;
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
-            transition: all 0.3s ease;
-        }
+.card {
+background: white;
+border-radius: 20px;
+padding: 30px;
+box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+margin-bottom: 20px;
+transition: all 0.3s ease;
+}
 
-        .header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
+.header {
+text-align: center;
+margin-bottom: 30px;
+}
 
-        .header h1 {
-            color: #0C2234;
-            font-family: 'Playfair Display', serif;
-            font-size: 2.5em;
-            margin-bottom: 10px;
-        }
+.header h1 {
+color: #0C2234;
+font-family: 'Playfair Display', serif;
+font-size: 2.5em;
+margin-bottom: 10px;
+}
 
-        .header p {
-            font-size: 1.2em;
-            color: #0C2234;
-            line-height: 1.6;
-        }
+.header p {
+font-size: 1.2em;
+color: #0C2234;
+line-height: 1.6;
+}
 
-        .age-selection {
-            text-align: center;
-            margin: 30px 0;
-        }
+.age-selection {
+text-align: center;
+margin: 30px 0;
+}
 
-        .age-input {
-            font-size: 1.2em;
-            padding: 15px 20px;
-            border: 3px solid #31555B;
-            border-radius: 15px;
-            width: 120px;
-            text-align: center;
-            margin: 0 10px;
-            background: #E4E2DD;
-            color: #0C2234;
-            font-weight: bold;
-        }
+.age-input {
+font-size: 1.2em;
+padding: 15px 20px;
+border: 3px solid #31555B;
+border-radius: 15px;
+width: 120px;
+text-align: center;
+margin: 0 10px;
+background: #E4E2DD;
+color: #0C2234;
+font-weight: bold;
+}
 
-        .age-label {
-            font-size: 1.3em;
-            font-weight: 600;
-            color: #0C2234;
-            margin-bottom: 15px;
-        }
+.age-label {
+font-size: 1.3em;
+font-weight: 600;
+color: #0C2234;
+margin-bottom: 15px;
+}
 
-        .age-note {
-            font-size: 0.9em;
-            color: #666;
-            margin-top: 10px;
-            font-style: italic;
-        }
+.age-note {
+font-size: 0.9em;
+color: #666;
+margin-top: 10px;
+font-style: italic;
+}
 
-        .btn {
-            padding: 15px 30px;
-            border: none;
-            border-radius: 10px;
-            font-size: 1.1em;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            background: linear-gradient(45deg, #0C2234, #31555B);
-            color: white;
-            border: 2px solid #E3CB7D;
-        }
+.btn {
+padding: 15px 30px;
+border: none;
+border-radius: 10px;
+font-size: 1.1em;
+font-weight: 600;
+cursor: pointer;
+transition: all 0.3s ease;
+background: linear-gradient(45deg, #0C2234, #31555B);
+color: white;
+border: 2px solid #E3CB7D;
+}
 
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(12, 34, 52, 0.4);
-        }
+.btn:hover {
+transform: translateY(-2px);
+box-shadow: 0 5px 15px rgba(12, 34, 52, 0.4);
+}
 
-        .intro-screen {
-            text-align: center;
-        }
+.intro-screen {
+text-align: center;
+}
 
-        .intro-screen h2 {
-            color: #0C2234;
-            font-size: 2em;
-            margin-bottom: 20px;
-        }
+.intro-screen h2 {
+color: #0C2234;
+font-size: 2em;
+margin-bottom: 20px;
+}
 
-        .intro-features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin: 30px 0;
-        }
+.intro-features {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+gap: 20px;
+margin: 30px 0;
+}
 
-        .feature {
-            padding: 20px;
-            background: #E4E2DD;
-            border-radius: 10px;
-            text-align: center;
-            border: 2px solid #31555B;
-        }
+.feature {
+padding: 20px;
+background: #E4E2DD;
+border-radius: 10px;
+text-align: center;
+border: 2px solid #31555B;
+}
 
-        .feature-icon {
-            font-size: 2em;
-            margin-bottom: 10px;
-        }
+.feature-icon {
+font-size: 2em;
+margin-bottom: 10px;
+}
 
-        .age-group-indicator {
-            background: #E3CB7D;
-            color: #0C2234;
-            padding: 8px 15px;
-            border-radius: 20px;
-            font-size: 0.9em;
-            font-weight: bold;
-            margin-bottom: 20px;
-            display: inline-block;
-        }
+.age-group-indicator {
+background: #E3CB7D;
+color: #0C2234;
+padding: 8px 15px;
+border-radius: 20px;
+font-size: 0.9em;
+font-weight: bold;
+margin-bottom: 20px;
+display: inline-block;
+}
 
-        .progress-container {
-            background: #f0f0f0;
-            border-radius: 15px;
-            height: 10px;
-            margin-bottom: 30px;
-            overflow: hidden;
-        }
+.progress-container {
+background: #f0f0f0;
+border-radius: 15px;
+height: 10px;
+margin-bottom: 30px;
+overflow: hidden;
+}
 
-        .progress-bar {
-            background: linear-gradient(90deg, #E3CB7D, #0C2234);
-            height: 100%;
-            border-radius: 15px;
-            transition: width 0.3s ease;
-            width: 0%;
-        }
+.progress-bar {
+background: linear-gradient(90deg, #E3CB7D, #0C2234);
+height: 100%;
+border-radius: 15px;
+transition: width 0.3s ease;
+width: 0%;
+}
 
-        .question-counter {
-            text-align: center;
-            color: #666;
-            margin-bottom: 20px;
-            font-size: 1.1em;
-        }
+.question-counter {
+text-align: center;
+color: #666;
+margin-bottom: 20px;
+font-size: 1.1em;
+}
 
-        .question {
-            font-size: 1.3em;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 25px;
-            line-height: 1.5;
-        }
+.question {
+font-size: 1.3em;
+font-weight: 600;
+color: #333;
+margin-bottom: 25px;
+line-height: 1.5;
+}
 
-        .options {
-            display: grid;
-            gap: 15px;
-        }
+.options {
+display: grid;
+gap: 15px;
+}
 
-        .option {
-            background: #E4E2DD;
-            border: 2px solid transparent;
-            border-radius: 12px;
-            padding: 20px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 1.1em;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
+.option {
+background: #E4E2DD;
+border: 2px solid transparent;
+border-radius: 12px;
+padding: 20px;
+cursor: pointer;
+transition: all 0.3s ease;
+font-size: 1.1em;
+display: flex;
+align-items: center;
+gap: 15px;
+}
 
-        .option:hover {
-            background: #31555B;
-            color: white;
-            transform: translateX(5px);
-        }
+.option:hover {
+background: #31555B;
+color: white;
+transform: translateX(5px);
+}
 
-        .option.selected {
-            background: #0C2234;
-            color: white;
-            border-color: #E3CB7D;
-        }
+.option.selected {
+background: #0C2234;
+color: white;
+border-color: #E3CB7D;
+}
 
-        .option-number {
-            background: #0C2234;
-            color: white;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            flex-shrink: 0;
-        }
+.option-number {
+background: #0C2234;
+color: white;
+width: 30px;
+height: 30px;
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+font-weight: bold;
+flex-shrink: 0;
+}
 
-        .option.selected .option-number {
-            background: #E3CB7D;
-            color: #0C2234;
-        }
+.option.selected .option-number {
+background: #E3CB7D;
+color: #0C2234;
+}
 
-        .navigation {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 30px;
-            gap: 15px;
-        }
+.navigation {
+display: flex;
+justify-content: space-between;
+margin-top: 30px;
+gap: 15px;
+}
 
-        .btn-secondary {
-            background: #E4E2DD;
-            color: #0C2234;
-            border: 2px solid #31555B;
-        }
+.btn-secondary {
+background: #E4E2DD;
+color: #0C2234;
+border: 2px solid #31555B;
+}
 
-        .btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            transform: none !important;
-        }
+.btn:disabled {
+opacity: 0.5;
+cursor: not-allowed;
+transform: none !important;
+}
 
-        .results {
-            display: none;
-        }
+.results {
+display: none;
+}
 
-        .results.active {
-            display: block;
-        }
+.results.active {
+display: block;
+}
 
-        .riasec-chart {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin: 30px 0;
-        }
+.riasec-chart {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+gap: 20px;
+margin: 30px 0;
+}
 
-        .riasec-item {
-            background: white;
-            border-radius: 15px;
-            padding: 25px;
-            text-align: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-            border: 3px solid transparent;
-            transition: all 0.3s ease;
-        }
+.riasec-item {
+background: white;
+border-radius: 15px;
+padding: 25px;
+text-align: center;
+box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+border: 3px solid transparent;
+transition: all 0.3s ease;
+}
 
-        .riasec-item.dominant {
-            border-color: #E3CB7D;
-            background: linear-gradient(135deg, #E4E2DD, #31555B);
-            color: white;
-        }
+.riasec-item.dominant {
+border-color: #E3CB7D;
+background: linear-gradient(135deg, #E4E2DD, #31555B);
+color: white;
+}
 
-        .riasec-letter {
-            font-size: 2.5em;
-            font-weight: bold;
-            color: #E3CB7D;
-            margin-bottom: 10px;
-        }
+.riasec-letter {
+font-size: 2.5em;
+font-weight: bold;
+color: #E3CB7D;
+margin-bottom: 10px;
+}
 
-        .riasec-name {
-            font-size: 1.2em;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 8px;
-        }
+.riasec-name {
+font-size: 1.2em;
+font-weight: 600;
+color: #333;
+margin-bottom: 8px;
+}
 
-        .riasec-item.dominant .riasec-name {
-            color: white;
-        }
+.riasec-item.dominant .riasec-name {
+color: white;
+}
 
-        .riasec-score {
-            font-size: 1.5em;
-            font-weight: bold;
-            color: #E3CB7D;
-            margin-bottom: 15px;
-        }
+.riasec-score {
+font-size: 1.5em;
+font-weight: bold;
+color: #E3CB7D;
+margin-bottom: 15px;
+}
 
-        .riasec-bar {
-            background: #f0f0f0;
-            height: 8px;
-            border-radius: 4px;
-            overflow: hidden;
-            margin-bottom: 15px;
-        }
+.riasec-bar {
+background: #f0f0f0;
+height: 8px;
+border-radius: 4px;
+overflow: hidden;
+margin-bottom: 15px;
+}
 
-        .riasec-fill {
-            background: linear-gradient(90deg, #E3CB7D, #0C2234);
-            height: 100%;
-            border-radius: 4px;
-            transition: width 1s ease;
-        }
+.riasec-fill {
+background: linear-gradient(90deg, #E3CB7D, #0C2234);
+height: 100%;
+border-radius: 4px;
+transition: width 1s ease;
+}
 
-        .profile-summary {
-            background: linear-gradient(135deg, #0C2234, #31555B);
-            color: white;
-            padding: 30px;
-            border-radius: 15px;
-            margin: 30px 0;
-            border: 3px solid #E3CB7D;
-        }
+.profile-summary {
+background: linear-gradient(135deg, #0C2234, #31555B);
+color: white;
+padding: 30px;
+border-radius: 15px;
+margin: 30px 0;
+border: 3px solid #E3CB7D;
+}
 
-        .profile-summary h3 {
-            font-size: 1.8em;
-            margin-bottom: 15px;
-            color: #E3CB7D;
-        }
+.profile-summary h3 {
+font-size: 1.8em;
+margin-bottom: 15px;
+color: #E3CB7D;
+}
 
-        .careers-section {
-            margin-top: 30px;
-        }
+.careers-section {
+margin-top: 30px;
+}
 
-        .careers-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
+.careers-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+gap: 20px;
+margin-top: 20px;
+}
 
-        .career-item {
-            background: #E4E2DD;
-            padding: 25px;
-            border-radius: 15px;
-            border: 2px solid transparent;
-            transition: all 0.3s ease;
-        }
+.career-item {
+background: #E4E2DD;
+padding: 25px;
+border-radius: 15px;
+border: 2px solid transparent;
+transition: all 0.3s ease;
+}
 
-        .career-item:hover {
-            border-color: #E3CB7D;
-            background: #31555B;
-            color: white;
-            transform: translateY(-3px);
-        }
+.career-item:hover {
+border-color: #E3CB7D;
+background: #31555B;
+color: white;
+transform: translateY(-3px);
+}
 
-        .career-title {
-            font-size: 1.2em;
-            font-weight: bold;
-            color: #333;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+.career-title {
+font-size: 1.2em;
+font-weight: bold;
+color: #333;
+margin-bottom: 10px;
+display: flex;
+align-items: center;
+gap: 10px;
+}
 
-        .career-item:hover .career-title {
-            color: white;
-        }
+.career-item:hover .career-title {
+color: white;
+}
 
-        .career-type {
-            background: #E3CB7D;
-            color: #0C2234;
-            padding: 4px 8px;
-            border-radius: 15px;
-            font-size: 0.8em;
-            font-weight: bold;
-        }
+.career-type {
+background: #E3CB7D;
+color: #0C2234;
+padding: 4px 8px;
+border-radius: 15px;
+font-size: 0.8em;
+font-weight: bold;
+}
 
-        .career-description {
-            color: #666;
-            font-size: 0.9em;
-            margin-bottom: 15px;
-            line-height: 1.4;
-        }
+.career-description {
+color: #666;
+font-size: 0.9em;
+margin-bottom: 15px;
+line-height: 1.4;
+}
 
-        .career-item:hover .career-description {
-            color: #E4E2DD;
-        }
+.career-item:hover .career-description {
+color: #E4E2DD;
+}
 
-        .tension-meter {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-top: 15px;
-        }
+.tension-meter {
+display: flex;
+align-items: center;
+gap: 10px;
+margin-top: 15px;
+}
 
-        .thermometer {
-            width: 20px;
-            height: 60px;
-            background: #f0f0f0;
-            border-radius: 10px;
-            position: relative;
-            overflow: hidden;
-        }
+.thermometer {
+width: 20px;
+height: 60px;
+background: #f0f0f0;
+border-radius: 10px;
+position: relative;
+overflow: hidden;
+}
 
-        .thermometer-fill {
-            width: 100%;
-            border-radius: 10px;
-            position: absolute;
-            bottom: 0;
-            transition: height 0.8s ease;
-        }
+.thermometer-fill {
+width: 100%;
+border-radius: 10px;
+position: absolute;
+bottom: 0;
+transition: height 0.8s ease;
+}
 
-        .tension-low { background: #10b981; }
-        .tension-medium { background: #f59e0b; }
-        .tension-high { background: #ef4444; }
+.tension-low { background: #10b981; }
+.tension-medium { background: #f59e0b; }
+.tension-high { background: #ef4444; }
 
-        .tension-label {
-            font-size: 0.9em;
-            font-weight: 600;
-        }
+.tension-label {
+font-size: 0.9em;
+font-weight: 600;
+}
 
-        @media (max-width: 768px) {
-            .container { padding: 15px; }
-            .header h1 { font-size: 2em; }
-            .navigation { flex-direction: column; }
-            .careers-grid { grid-template-columns: 1fr; }
-        }
-    </style>
+@media (max-width: 768px) {
+.container { padding: 15px; }
+.header h1 { font-size: 2em; }
+.navigation { flex-direction: column; }
+.careers-grid { grid-template-columns: 1fr; }
+}
+</style>
 </head>
 <body>
-    <div class="container">
-        <div class="card">
-            <div class="header">
-                <h1>🎯 Test RIASEC</h1>
-                <p>Découvre ton profil professionnel et les métiers qui te correspondent !</p>
-            </div>
+<div class="container">
+<div class="card">
+<div class="header">
+<h1>🎯 Test RIASEC</h1>
+<p>Découvre ton profil professionnel et les métiers qui te correspondent !</p>
+</div>
 
-            <!-- Écran de saisie de l'âge -->
-            <div id="age-screen" class="intro-screen">
-                <h2>Pour commencer...</h2>
-                <div class="age-selection">
-                    <div class="age-label">Quel âge avez-vous ?</div>
-                    <input type="number" id="user-age" class="age-input" placeholder="25" min="13" max="35">
-                    <div class="age-note">Cela nous permet d'adapter les questions à votre profil</div>
-                </div>
-                <button class="btn" onclick="setAgeAndContinue()" style="width: 200px; margin-top: 20px;">
-                    Continuer 🚀
-                </button>
-            </div>
+<!-- Écran de saisie de l'âge -->
+<div id="age-screen" class="intro-screen">
+<h2>Pour commencer...</h2>
+<div class="age-selection">
+<div class="age-label">Quel âge as-tu ?</div>
+<input type="number" id="user-age" class="age-input" placeholder="18" min="13" max="35">
+<div class="age-note">Cela nous permet d'adapter les questions à ton profil</div>
+</div>
+<button class="btn" onclick="setAgeAndContinue()" style="width: 200px; margin-top: 20px;">
+Continuer 🚀
+</button>
+</div>
 
-            <!-- Écran d'introduction personnalisé -->
-            <div id="intro" class="intro-screen" style="display: none;">
-                <div id="age-indicator" class="age-group-indicator"></div>
-                <h2>Comment ça marche ?</h2>
-                <div class="intro-features">
-                    <div class="feature">
-                        <div class="feature-icon">📝</div>
-                        <h3 id="questions-count">60 questions</h3>
-                        <p>Des situations concrètes adaptées à votre profil</p>
-                    </div>
-                    <div class="feature">
-                        <div class="feature-icon">⚡</div>
-                        <h3 id="time-estimate">10 minutes</h3>
-                        <p>Rapide et facile à compléter</p>
-                    </div>
-                    <div class="feature">
-                        <div class="feature-icon">🎨</div>
-                        <h3>6 profils</h3>
-                        <p>Découvrez vos préférences professionnelles</p>
-                    </div>
-                    <div class="feature">
-                        <div class="feature-icon">💼</div>
-                        <h3>Métiers 2025</h3>
-                        <p>Métiers émergents et tension du marché</p>
-                    </div>
-                </div>
-                <p style="margin: 20px 0; color: #666; line-height: 1.6;">
-                    Le test RIASEC vous aide à identifier vos préférences professionnelles selon 6 profils : 
-                    <strong>Réaliste, Investigateur, Artistique, Social, Entreprenant, Conventionnel</strong>
-                </p>
-                <button class="btn" onclick="startTest()" style="width: 200px;">
-                    <span id="start-btn-text">Commencer le test 🚀</span>
-                </button>
-            </div>
+<!-- Écran d'introduction personnalisé -->
+<div id="intro" class="intro-screen" style="display: none;">
+<div id="age-indicator" class="age-group-indicator"></div>
+<h2>Comment ça marche ?</h2>
+<div class="intro-features">
+<div class="feature">
+<div class="feature-icon">📝</div>
+<h3 id="questions-count">60 questions</h3>
+<p>Des situations concrètes adaptées à ton âge</p>
+</div>
+<div class="feature">
+<div class="feature-icon">⚡</div>
+<h3 id="time-estimate">10 minutes</h3>
+<p>Rapide et facile à compléter</p>
+</div>
+<div class="feature">
+<div class="feature-icon">🎨</div>
+<h3>6 profils</h3>
+<p>Découvre tes préférences professionnelles</p>
+</div>
+<div class="feature">
+<div class="feature-icon">💼</div>
+<h3>Métiers 2025</h3>
+<p>Métiers émergents et tension du marché</p>
+</div>
+</div>
+<p style="margin: 20px 0; color: #666; line-height: 1.6;">
+Le test RIASEC t'aide à identifier tes préférences professionnelles selon 6 profils :
+<strong>Réaliste, Investigateur, Artistique, Social, Entreprenant, Conventionnel</strong>
+</p>
+<button class="btn" onclick="startTest()" style="width: 200px;">
+<span id="start-btn-text">Commencer le test 🚀</span>
+</button>
+</div>
 
-            <!-- Barre de progression -->
-            <div id="progress-section" style="display: none;">
-                <div class="question-counter">
-                    <span id="current-question">1</span> / <span id="total-questions">60</span>
-                </div>
-                <div class="progress-container">
-                    <div class="progress-bar" id="progress-bar"></div>
-                </div>
-            </div>
+<!-- Barre de progression -->
+<div id="progress-section" style="display: none;">
+<div class="question-counter">
+<span id="current-question">1</span> / <span id="total-questions">60</span>
+</div>
+<div class="progress-container">
+<div class="progress-bar" id="progress-bar"></div>
+</div>
+</div>
 
-            <!-- Questions -->
-            <div id="questions-section" style="display: none;">
-                <div id="question-container"></div>
-                
-                <div class="navigation">
-                    <button class="btn btn-secondary" id="prev-btn" onclick="previousQuestion()" disabled>
-                        ← Précédent
-                    </button>
-                    <button class="btn" id="next-btn" onclick="nextQuestion()" disabled>
-                        Suivant →
-                    </button>
-                </div>
-            </div>
+<!-- Questions -->
+<div id="questions-section" style="display: none;">
+<div id="question-container"></div>
+<div class="navigation">
+<button class="btn btn-secondary" id="prev-btn" onclick="previousQuestion()" disabled>
+← Précédent
+</button>
+<button class="btn" id="next-btn" onclick="nextQuestion()" disabled>
+Suivant →
+</button>
+</div>
+</div>
 
-            <!-- Résultats -->
-            <div id="results" class="results">
-                <div class="header">
-                    <h2>🎉 Vos résultats RIASEC</h2>
-                    <p>Voici votre profil professionnel personnalisé !</p>
-                </div>
-                
-                <div id="riasec-chart" class="riasec-chart"></div>
-                
-                <div id="profile-summary" class="profile-summary"></div>
-                
-                <div class="careers-section">
-                    <h3>💼 Métiers qui pourraient vous intéresser en 2025</h3>
-                    <p style="margin-bottom: 20px; color: #666;">
-                        Découvrez les métiers émergents et traditionnels avec leur niveau de tension sur le marché français
-                    </p>
-                    <div id="careers-grid" class="careers-grid"></div>
-                </div>
-                
-                <button class="btn" onclick="restartTest()" style="width: 100%; margin-top: 30px;">
-                    🔄 Refaire le test
-                </button>
-                
-                <button class="btn" onclick="sendResultsByEmail()" style="width: 100%; margin-top: 15px;">
-                    📧 Envoyer mes résultats
-                </button>
-                
-                <button class="btn btn-secondary" onclick="exportResults()" style="width: 100%; margin-top: 15px;">
-                    📊 Exporter en JSON (optionnel)
-                </button>
-            </div>
-        </div>
-    </div>
+<!-- Résultats -->
+<div id="results" class="results">
+<div class="header">
+<h2>🎉 Tes résultats RIASEC</h2>
+<p>Voici ton profil professionnel personnalisé !</p>
+</div>
+<div id="riasec-chart" class="riasec-chart"></div>
+<div id="profile-summary" class="profile-summary"></div>
+<div class="careers-section">
+<h3>💼 Métiers qui pourraient t'intéresser en 2025</h3>
+<p style="margin-bottom: 20px; color: #666;">
+Découvre les métiers émergents et traditionnels avec leur niveau de tension sur le marché français
+</p>
+<div id="careers-grid" class="careers-grid"></div>
+</div>
+<button class="btn" onclick="restartTest()" style="width: 100%; margin-top: 30px;">
+🔄 Refaire le test
+</button>
+<button class="btn" onclick="sendResultsByEmail()" style="width: 100%; margin-top: 15px;">
+📧 Envoyer mes résultats
+</button>
+<button class="btn btn-secondary" onclick="exportResults()" style="width: 100%; margin-top: 15px;">
+📊 Exporter en JSON (optionnel)
+</button>
+</div>
+</div>
+</div>
 
-    <script>
-        // Questions RIASEC pour 15-21 ans (60 questions équilibrées)
-        const questionsYoung = [
-            // RÉALISTE (10 questions - 2 inversées)
-            { text: "Un weekend libre, tu choisirais plutôt de :", type: "R", inverted: false, answers: ["Organiser tes photos numériques", "Lire un livre ou regarder une série", "Faire du shopping ou voir des amis", "Bricoler ou jardiner", "Construire ou réparer quelque chose"] },
-            { text: "Quand quelque chose se casse chez toi :", type: "R", inverted: false, answers: ["Tu appelles quelqu'un pour réparer", "Tu demandes de l'aide à tes parents", "Ça dépend de ce que c'est", "Tu regardes des tutos pour apprendre", "Tu démontes pour voir comment ça marche"] },
-            { text: "Pour apprendre quelque chose de nouveau :", type: "R", inverted: false, answers: ["Tu lis la théorie d'abord", "Tu regardes des explications", "Tu mixes théorie et pratique", "Tu essaies directement", "Tu apprends en manipulant"] },
-            { text: "Dans tes matières préférées au lycée :", type: "R", inverted: false, answers: ["Français, philo, langues", "Histoire, économie", "Un peu de tout", "Sciences, techno", "Travaux pratiques, sport"] },
-            { text: "Pour ton futur job, tu préfères :", type: "R", inverted: false, answers: ["Être dans un bureau climatisé", "Alterner bureau et extérieur", "Peu importe l'endroit", "Bouger, être sur le terrain", "Travailler dehors ou en atelier"] },
-            { text: "Tes amis te demandent souvent de :", type: "R", inverted: false, answers: ["Les conseiller sur leurs problèmes", "Les aider avec les devoirs", "Un peu de tout selon les cas", "Installer ou configurer leurs trucs", "Réparer ou monter quelque chose"] },
-            { text: "Dans un projet de groupe :", type: "R", inverted: false, answers: ["Tu t'occupes de la présentation", "Tu fais les recherches", "Tu prends ce qu'on te donne", "Tu t'occupes de la partie technique", "Tu fabriques ou construis le projet"] },
-            { text: "Ton environnement de travail idéal :", type: "R", inverted: false, answers: ["Un open space moderne", "Un bureau personnel", "Ça dépend du moment", "Un atelier ou labo", "Dehors ou en déplacement"] },
-            { text: "Passer des heures à analyser des théories ou des concepts abstraits :", type: "R", inverted: true, answers: ["Ça m'ennuie vraiment", "Je préfère du concret", "Ça dépend du sujet", "J'aime bien réfléchir", "Ça me passionne"] },
-            { text: "Travailler uniquement avec des concepts et des idées, sans jamais rien toucher :", type: "R", inverted: true, answers: ["Impossible, j'ai besoin de concret", "Ça me manquerait", "Je pourrais m'y habituer", "Ça me va bien", "C'est parfait pour moi"] },
+<script>
+// Questions RIASEC pour 15-21 ans (60 questions équilibrées)
+const questionsYoung = [
+// Réaliste (10 questions - 2 inversées)
+{ text: "Un weekend libre, tu choisirais plutôt de construire ou réparer quelque chose", type: "R", inverted: false },
+{ text: "Quand quelque chose se casse chez toi, tu démontes pour voir comment ça marche", type: "R", inverted: false },
+{ text: "Pour apprendre quelque chose de nouveau, tu apprends en manipulant", type: "R", inverted: false },
+{ text: "Dans tes matières préférées au lycée, tu préfères les travaux pratiques et le sport", type: "R", inverted: false },
+{ text: "Pour ton futur job, tu préfères travailler dehors ou en atelier", type: "R", inverted: false },
+{ text: "Tes amis te demandent souvent de réparer ou monter quelque chose", type: "R", inverted: false },
+{ text: "Dans un projet de groupe, tu fabriques ou construis le projet", type: "R", inverted: false },
+{ text: "Ton environnement de travail idéal serait dehors ou en déplacement", type: "R", inverted: false },
+{ text: "Passer des heures à analyser des théories ou des concepts abstraits t'ennuie vraiment", type: "R", inverted: true },
+{ text: "Travailler uniquement avec des concepts et des idées, sans jamais rien toucher, c'est impossible pour toi", type: "R", inverted: true },
 
-            // INVESTIGATEUR (10 questions - 2 inversées)
-            { text: "Face à un problème technique (wifi qui bugge, app qui plante) :", type: "I", inverted: false, answers: ["Tu demandes de l'aide immédiatement", "Tu cherches une solution rapide", "Ça dépend du temps que tu as", "Tu explores plusieurs hypothèses", "Tu veux comprendre pourquoi ça a planté"] },
-            { text: "Quand tu découvres une nouvelle technologie :", type: "I", inverted: false, answers: ["Tu l'utilises comme tout le monde", "Tu lis juste le mode d'emploi", "Tu testes les fonctions de base", "Tu explores toutes les possibilités", "Tu veux savoir comment c'est fait"] },
-            { text: "Dans tes loisirs, tu aimes :", type: "I", inverted: false, answers: ["Faire la fête et sortir", "Le sport ou les activités de groupe", "Un mix d'activités", "Les jeux de réflexion", "Résoudre des énigmes complexes"] },
-            { text: "Pour tes projets perso :", type: "I", inverted: false, answers: ["Tu préfères être accompagné", "Tu aimes avoir des retours", "Seul ou accompagné, ça dépend", "Tu travailles mieux en autonomie", "Tu as besoin de solitude pour réfléchir"] },
-            { text: "Devant un phénomène que tu ne comprends pas :", type: "I", inverted: false, answers: ["Tu l'acceptes comme ça", "Tu cherches une explication simple", "Ça dépend si ça t'intéresse", "Tu fais des recherches approfondies", "Tu ne lâches pas tant que tu n'as pas compris"] },
-            { text: "Les matières scientifiques (maths, physique, bio, chimie) :", type: "I", inverted: false, answers: ["Te rebutent complètement", "Ne sont pas ton fort", "Ça peut aller selon les profs", "T'intéressent vraiment", "Te passionnent"] },
-            { text: "Quand tu regardes un documentaire :", type: "I", inverted: false, answers: ["Tu zappes rapidement", "Tu regardes distraitement", "Ça dépend du sujet", "Tu prends des notes mentales", "Tu veux creuser le sujet après"] },
-            { text: "Pour ton orientation :", type: "I", inverted: false, answers: ["Tu suis les conseils des autres", "Tu choisis ce qui a l'air facile", "Tu hésites entre plusieurs options", "Tu analyses les secteurs d'avenir", "Tu recherches les domaines en pointe"] },
-            { text: "Suivre une procédure sans chercher à comprendre pourquoi elle fonctionne :", type: "I", inverted: true, answers: ["Impossible, j'ai besoin de comprendre", "Je pose au moins quelques questions", "Si ça marche, ça me va", "J'exécute ce qu'on me demande", "C'est plus simple comme ça"] },
-            { text: "Prendre des décisions rapidement sans analyser tous les aspects :", type: "I", inverted: true, answers: ["Je dois tout étudier avant", "J'ai besoin d'un minimum d'infos", "Ça dépend de l'importance", "L'intuition suffit souvent", "Il faut savoir trancher vite"] },
+// Investigateur (10 questions - 2 inversées)
+{ text: "Face à un problème technique, tu veux comprendre pourquoi ça a planté", type: "I", inverted: false },
+{ text: "Quand tu découvres une nouvelle technologie, tu veux savoir comment c'est fait", type: "I", inverted: false },
+{ text: "Dans tes loisirs, tu aimes résoudre des énigmes complexes", type: "I", inverted: false },
+{ text: "Pour tes projets perso, tu as besoin de solitude pour réfléchir", type: "I", inverted: false },
+{ text: "Devant un phénomène que tu ne comprends pas, tu ne lâches pas tant que tu n'as pas compris", type: "I", inverted: false },
+{ text: "Les matières scientifiques te passionnent", type: "I", inverted: false },
+{ text: "Quand tu regardes un documentaire, tu veux creuser le sujet après", type: "I", inverted: false },
+{ text: "Pour ton orientation, tu recherches les domaines en pointe", type: "I", inverted: false },
+{ text: "Suivre une procédure sans chercher à comprendre pourquoi elle fonctionne, c'est impossible pour toi", type: "I", inverted: true },
+{ text: "Prendre des décisions rapidement sans analyser tous les aspects, tu dois tout étudier avant", type: "I", inverted: true },
 
-            // ARTISTIQUE (10 questions - 2 inversées)
-            { text: "Pour décorer ta chambre/ton espace :", type: "A", inverted: false, answers: ["Tu laisses comme c'est", "Tu t'inspires de ce qui existe", "Tu mixes inspiration et création", "Tu crées ton propre style", "Tu inventes quelque chose d'unique"] },
-            { text: "Dans tes stories ou posts sur les réseaux :", type: "A", inverted: false, answers: ["Tu postes des trucs classiques", "Tu suis les tendances", "Tu alternes selon l'humeur", "Tu cherches ton style perso", "Tu créés des contenus originaux"] },
-            { text: "Quand tu as un projet créatif (vidéo, dessin, musique...) :", type: "A", inverted: false, answers: ["Tu préfères qu'on te donne les consignes", "Tu aimes avoir un cadre", "Libre ou cadré, ça marche", "Tu préfères inventer ton concept", "Tu détestes les contraintes imposées"] },
-            { text: "Dans ton style vestimentaire :", type: "A", inverted: false, answers: ["Tu portes ce que tout le monde porte", "Tu suis la mode du moment", "Tu mixes tendances et goûts perso", "Tu affirmes ta personnalité", "Tu assumes ton originalité"] },
-            { text: "Pour exprimer une idée ou un sentiment :", type: "A", inverted: false, answers: ["Tu écris un message direct", "Tu expliques clairement", "Ça dépend du contexte", "Tu utilises des métaphores", "Tu préfères créer (dessin, musique, vidéo...)"] },
-            { text: "Les cours d'arts plastiques, musique, théâtre :", type: "A", inverted: false, answers: ["T'ennuient profondément", "Ne sont pas ton truc", "Ça peut être sympa", "Te plaisent beaucoup", "Sont tes préférés"] },
-            { text: "Quand tu visites un musée, une expo ou un concert :", type: "A", inverted: false, answers: ["Tu t'ennuies rapidement", "Tu regardes distraitement", "Ça dépend de ce qui est exposé", "Tu es inspiré par ce que tu vois", "Tu ressors avec plein d'idées"] },
-            { text: "Dans tes projets (scolaires, perso, créatifs) :", type: "A", inverted: false, answers: ["Tu veux des résultats mesurables", "L'efficacité est prioritaire", "Tu équilibres les deux", "Le processus créatif compte autant", "L'expression artistique prime sur tout"] },
-            { text: "Faire toujours les mêmes tâches dans le même ordre, ça te rassure :", type: "A", inverted: true, answers: ["Ça m'ennuie profondément", "J'ai besoin de variété", "Ça dépend du contexte", "J'aime les habitudes", "J'ai besoin de routine"] },
-            { text: "Sur les réseaux sociaux, pour tes publications :", type: "A", inverted: true, answers: ["Tu postes ce qui marche chez les autres", "Tu suis les tendances du moment", "Tu alternes selon l'inspiration", "Tu développes ton style personnel", "Tu crées tes propres codes visuels"] },
+// Artistique (10 questions - 2 inversées)
+{ text: "Pour décorer ta chambre/ton espace, tu inventes quelque chose d'unique", type: "A", inverted: false },
+{ text: "Dans tes stories ou posts sur les réseaux, tu crées des contenus originaux", type: "A", inverted: false },
+{ text: "Quand tu as un projet créatif, tu détestes les contraintes imposées", type: "A", inverted: false },
+{ text: "Dans ton style vestimentaire, tu assumes ton originalité", type: "A", inverted: false },
+{ text: "Pour exprimer une idée ou un sentiment, tu préfères créer (dessin, musique, vidéo...)", type: "A", inverted: false },
+{ text: "Les cours d'arts plastiques, musique, théâtre sont tes préférés", type: "A", inverted: false },
+{ text: "Quand tu visites un musée, une expo ou un concert, tu ressors avec plein d'idées", type: "A", inverted: false },
+{ text: "Dans tes projets, l'expression artistique prime sur tout", type: "A", inverted: false },
+{ text: "Faire toujours les mêmes tâches dans le même ordre t'ennuie profondément", type: "A", inverted: true },
+{ text: "Sur les réseaux sociaux, tu crées tes propres codes visuels", type: "A", inverted: false },
 
-            // SOCIAL (10 questions - 2 inversées)
-            { text: "Quand tu dois choisir entre deux activités :", type: "S", inverted: false, answers: ["Une compétition solo où tu peux briller", "Un défi personnel", "Ça dépend de ton humeur", "Un projet collaboratif", "Aider quelqu'un dans son projet"] },
-            { text: "Quand un ami va mal :", type: "S", inverted: false, answers: ["Tu attends qu'il vienne te voir", "Tu lui demandes ce qui va pas", "Tu restes disponible", "Tu vas vers lui pour l'aider", "Tu lâches tout pour être là"] },
-            { text: "Ce qui te motiverait le plus dans un job étudiant :", type: "S", inverted: false, answers: ["Un bon salaire horaire", "Développer tes compétences", "Un mix des deux", "Travailler avec une équipe sympa", "Sentir que tu rends service aux gens"] },
-            { text: "En cours, quand quelqu'un n'a pas compris :", type: "S", inverted: false, answers: ["C'est son problème", "Tu te concentres sur tes notes", "Tu aides si on te le demande", "Tu proposes spontanément ton aide", "Tu prends le temps de lui expliquer"] },
-            { text: "Dans tes loisirs, tu préfères :", type: "S", inverted: false, answers: ["Sport individuel ou loisirs solo", "Activités centrées sur tes performances", "Un mix selon tes envies", "Activités de groupe ou collectives", "Actions bénévoles ou solidaires"] },
-            { text: "Tes amis :", type: "S", inverted: false, answers: ["Te parlent rarement de leurs problèmes", "Gardent leurs soucis pour eux", "Se confient de temps en temps", "Viennent souvent te demander conseil", "Te considèrent comme leur confident(e)"] },
-            { text: "Dans un conflit entre amis :", type: "S", inverted: false, answers: ["Tu restes en dehors", "Tu choisis ton camp", "Tu évites de t'en mêler", "Tu essaies de les faire discuter", "Tu joues les médiateurs"] },
-            { text: "Ce qui te donne le plus de satisfaction :", type: "S", inverted: false, answers: ["Réussir un défi personnel", "Atteindre tes objectifs", "Les deux selon les moments", "Voir les autres progresser", "Savoir que tu as aidé quelqu'un"] },
-            { text: "Réussir un projet solo plutôt que d'aider quelqu'un avec le sien :", type: "S", inverted: true, answers: ["J'aide toujours en priorité", "J'aide puis je fais le mien", "Ça dépend de
+// Social (10 questions - 2 inversées)
+{ text: "Quand tu dois choisir entre deux activités, tu préfères aider quelqu'un dans son projet", type: "S", inverted: false },
+{ text: "Quand un ami va mal, tu lâches tout pour être là", type: "S", inverted: false },
+{ text: "Ce qui te motiverait le plus dans un job étudiant, c'est sentir que tu rends service aux gens", type: "S", inverted: false },
+{ text: "En cours, quand quelqu'un n'a pas compris, tu prends le temps de lui expliquer", type: "S", inverted: false },
+{ text: "Pour tes activités extra-scolaires, tu choisis du bénévolat ou de l'entraide", type: "S", inverted: false },
+{ text: "Tes amis te considèrent comme leur confident(e)", type: "S", inverted: false },
+{ text: "Dans un conflit entre amis, tu joues les médiateurs", type: "S", inverted: false },
+{ text: "Ce qui te donne le plus de satisfaction, c'est savoir que tu as aidé quelqu'un", type: "S", inverted: false },
+{ text: "Réussir un projet solo plutôt que d'aider quelqu'un avec le sien, tu aides toujours en priorité", type: "S", inverted: true },
+{ text: "Te concentrer uniquement sur tes résultats sans t'occuper des autres, tu ne peux pas faire ça", type: "S", inverted: true },
+
+// Entreprenant (10 questions - 2 inversées)
+{ text: "Quand ton groupe d'amis hésite sur le choix d'un resto, tu tranches et tu réserves", type: "E", inverted: false },
+{ text: "Dans les jeux vidéo ou les jeux de société, tu détestes perdre", type: "E", inverted: false },
+{ text: "Quand il faut organiser une sortie ou un événement, tu te proposes spontanément", type: "E", inverted: false },
+{ text: "Face à un désaccord dans ton groupe, tu convaincs les autres du bien-fondé de ta position", type: "E", inverted: false },
+{ text: "Pour tes projets personnels, tu veux être le décideur", type: "E", inverted: false },
+{ text: "Quand tu présentes quelque chose, tu prends plaisir à convaincre", type: "E", inverted: false },
+{ text: "Les risques et les défis te dopent à l'adrénaline", type: "E", inverted: false },
+{ text: "Pour ton avenir professionnel, tu rêves de créer ta propre boîte", type: "E", inverted: false },
+{ text: "Éviter toute forme de compétition ou de concurrence, tu as besoin d'émulation", type: "E", inverted: true },
+{ text: "Laisser les autres prendre toutes les décisions importantes, tu as besoin d'avoir ton mot à dire", type: "E", inverted: true },
+
+// Conventionnel (10 questions - 2 inversées)
+{ text: "Pour organiser tes révisions ou tes projets, tu détailles chaque étape à l'avance", type: "C", inverted: false },
+{ text: "Dans ton espace de travail, c'est nickel et organisé", type: "C", inverted: false },
+{ text: "Les règlements et les consignes sont nécessaires pour bien fonctionner", type: "C", inverted: false },
+{ text: "Dans tes matières préférées, tu préfères comptabilité, gestion, éco", type: "C", inverted: false },
+{ text: "Tes amis te décrivent comme quelqu'un sur qui on peut toujours compter", type: "C", inverted: false },
+{ text: "Pour prendre une décision importante, tu analyses tous les critères", type: "C", inverted: false },
+{ text: "Les activités avec des chiffres, des stats, des tableaux te passionnent", type: "C", inverted: false },
+{ text: "Pour ton futur job, tu veux de la stabilité et des procédures", type: "C", inverted: false },
+{ text: "Travailler sans planning précis et en improvisant, ça te stresse énormément", type: "C", inverted: true },
+{ text: "Changer constamment de méthode et remettre en question les façons de faire, il faut garder ce qui marche", type: "C", inverted: true }
+];
+
+// Questions RIASEC pour 22-28+ ans (80 questions équilibrées)
+const questionsAdult = [
+// Réaliste (13 questions - 3 inversées)
+{ text: "Vous préférez travailler avec vos mains plutôt qu'avec des concepts abstraits", type: "R", inverted: false },
+{ text: "Vous êtes attiré(e) par les métiers techniques et manuels", type: "R", inverted: false },
+{ text: "Vous aimez voir des résultats tangibles dans votre travail", type: "R", inverted: false },
+{ text: "Vous vous sentez à l'aise avec les outils et les équipements techniques", type: "R", inverted: false },
+{ text: "Vous préférez les environnements pratiques aux bureaux classiques", type: "R", inverted: false },
+{ text: "Vous êtes doué(e) pour résoudre des problèmes techniques", type: "R", inverted: false },
+{ text: "Vous appréciez les procédures claires et les méthodes éprouvées", type: "R", inverted: false },
+{ text: "Les activités physiques ont une vraie place dans votre vie", type: "R", inverted: false },
+{ text: "Vous aimez améliorer ou réparer des choses concrètes", type: "R", inverted: false },
+{ text: "Vous préférez les défis pratiques aux problèmes théoriques", type: "R", inverted: false },
+{ text: "Travailler avec vos mains vous semble répétitif et peu stimulant", type: "R", inverted: true },
+{ text: "Vous préférez concevoir que fabriquer", type: "R", inverted: true },
+{ text: "Les tâches manuelles vous paraissent moins valorisantes", type: "R", inverted: true },
+
+// Investigateur (13 questions - 3 inversées)
+{ text: "Vous prenez plaisir à résoudre des problèmes complexes", type: "I", inverted: false },
+{ text: "Vous êtes curieux de comprendre comment les choses fonctionnent", type: "I", inverted: false },
+{ text: "Vous aimez faire des recherches approfondies", type: "I", inverted: false },
+{ text: "Les domaines scientifiques ou techniques vous attirent", type: "I", inverted: false },
+{ text: "Vous travaillez mieux en autonomie qu'en groupe", type: "I", inverted: false },
+{ text: "Vous préférez analyser avant de conclure", type: "I", inverted: false },
+{ text: "Les innovations technologiques vous enthousiasment", type: "I", inverted: false },
+{ text: "Vous voulez toujours comprendre le 'pourquoi'", type: "I", inverted: false },
+{ text: "Vous appréciez les défis intellectuels", type: "I", inverted: false },
+{ text: "Vous aimez expérimenter de nouvelles approches", type: "I", inverted: false },
+{ text: "Vous préférez suivre une méthode qu'explorer par vous-même", type: "I", inverted: true },
+{ text: "Les questions théoriques vous ennuient rapidement", type: "I", inverted: true },
+{ text: "Vous préférez appliquer que comprendre", type: "I", inverted: true },
+
+// Artistique (14 questions - 2 inversées)
+{ text: "Vous aimez lancer des projets créatifs dans votre domaine", type: "A", inverted: false },
+{ text: "L'esthétique influence vos choix pros ou perso", type: "A", inverted: false },
+{ text: "Vous aimez exprimer vos idées de façon originale", type: "A", inverted: false },
+{ text: "Vous préférez concevoir que reproduire", type: "A", inverted: false },
+{ text: "Vous revendiquez votre originalité dans votre manière de faire", type: "A", inverted: false },
+{ text: "Vous recherchez la diversité dans vos tâches", type: "A", inverted: false },
+{ text: "Vous personnalisez votre environnement de travail", type: "A", inverted: false },
+{ text: "Vous êtes sensible à l'harmonie visuelle ou sonore", type: "A", inverted: false },
+{ text: "Vous voulez que votre travail ait une touche personnelle", type: "A", inverted: false },
+{ text: "Vous vous épanouissez dans un environnement créatif et ouvert", type: "A", inverted: false },
+{ text: "Vous préférez l'innovation à la tradition", type: "A", inverted: false },
+{ text: "Vous avez besoin de liberté créative dans vos projets", type: "A", inverted: false },
+{ text: "Les contraintes créatives vous stimulent plutôt qu'elles ne vous limitent", type: "A", inverted: true },
+{ text: "Vous préférez suivre des modèles établis que créer du nouveau", type: "A", inverted: true },
+
+// Social (14 questions - 3 inversées)
+{ text: "Vous trouvez du sens à aider ou accompagner les autres", type: "S", inverted: false },
+{ text: "Vous êtes à l'aise dans les projets collaboratifs", type: "S", inverted: false },
+{ text: "Les gens viennent facilement se confier à vous", type: "S", inverted: false },
+{ text: "Vous privilégiez l'entraide à la compétition", type: "S", inverted: false },
+{ text: "Vous êtes motivé(e) par la progression des autres", type: "S", inverted: false },
+{ text: "Vous aimez transmettre ce que vous savez", type: "S", inverted: false },
+{ text: "Vous savez repérer quand quelqu'un a besoin d'aide", type: "S", inverted: false },
+{ text: "Vous voulez que votre travail ait un impact humain positif", type: "S", inverted: false },
+{ text: "Vous vous sentez bien dans des environnements bienveillants", type: "S", inverted: false },
+{ text: "Vous voulez faire une différence dans la vie des gens", type: "S", inverted: false },
+{ text: "Vous préférez collaborer plutôt que chercher à être meilleur que les autres", type: "S", inverted: false },
+{ text: "Vous vous épanouissez en aidant les autres à réussir", type: "S", inverted: false },
+{ text: "Réussir votre projet personnel plutôt que d'aider quelqu'un avec le sien", type: "S", inverted: true },
+{ text: "Vous concentrer uniquement sur vos résultats sans vous préoccuper des autres", type: "S", inverted: true },
+{ text: "Éviter de vous impliquer dans les problèmes des autres", type: "S", inverted: true },
+
+// Entreprenant (13 questions - 3 inversées)
+{ text: "Vous cherchez à avoir de l'impact dans les décisions", type: "E", inverted: false },
+{ text: "Vous êtes à l'aise avec les risques réfléchis", type: "E", inverted: false },
+{ text: "Vous aimez piloter des projets ou des équipes", type: "E", inverted: false },
+{ text: "La réussite professionnelle vous donne de l'énergie", type: "E", inverted: false },
+{ text: "Vous savez trouver des compromis et négocier", type: "E", inverted: false },
+{ text: "Vous vous intéressez à l'entrepreneuriat", type: "E", inverted: false },
+{ text: "Les défis et la compétition vous stimulent", type: "E", inverted: false },
+{ text: "Vous êtes convaincant(e) quand il faut défendre vos idées", type: "E", inverted: false },
+{ text: "Vous vous sentez bien dans un rôle de leader", type: "E", inverted: false },
+{ text: "Vous prenez des décisions avec assurance", type: "E", inverted: false },
+{ text: "Éviter toute forme de compétition ou de concurrence", type: "E", inverted: true },
+{ text: "Laisser les autres prendre toutes les décisions importantes", type: "E", inverted: true },
+{ text: "Rester toujours dans votre zone de confort sans prendre de risques", type: "E", inverted: true },
+
+// Conventionnel (13 questions - 4 inversées)
+{ text: "Vous appréciez organiser, planifier et structurer", type: "C", inverted: false },
+{ text: "Vous êtes à l'aise avec les chiffres ou les analyses", type: "C", inverted: false },
+{ text: "Vous préférez un environnement clair et bien organisé", type: "C", inverted: false },
+{ text: "Vous aimez les tâches précises et mesurables", type: "C", inverted: false },
+{ text: "Vous êtes méticuleux/se dans ce que vous faites", type: "C", inverted: false },
+{ text: "Vous recherchez la stabilité professionnelle", type: "C", inverted: false },
+{ text: "Vous aimez structurer l'information pour la rendre lisible", type: "C", inverted: false },
+{ text: "On peut vous faire confiance : vous êtes fiable", type: "C", inverted: false },
+{ text: "Vous préférez des consignes claires à des instructions floues", type: "C", inverted: false },
+{ text: "Travailler sans planning précis et en improvisant au fur et à mesure", type: "C", inverted: true },
+{ text: "Changer constamment de méthode et remettre en question les façons de faire", type: "C", inverted: true },
+{ text: "Accepter le désordre et l'imprévisibilité dans votre environnement de travail", type: "C", inverted: true },
+{ text: "Prendre des décisions importantes sur un coup de tête", type: "C", inverted: true }
+];
